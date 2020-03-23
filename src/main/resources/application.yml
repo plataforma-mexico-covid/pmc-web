@@ -1,0 +1,42 @@
+server:
+  port: 8090
+  session-timeout: 60
+
+security.basic.enabled: false
+endpoints.shutdown.enabled: true
+
+spring.profiles.active: localdb
+spring.profiles.include: security
+
+---
+spring:
+  profiles: security
+
+jwt:
+  header: X-Auth-Token
+  secret: mySecret
+  expiration: 604800
+
+---
+spring:
+  profiles: testdb
+  datasource:
+    url: jdbc:mariadb://server:3306/pmc-db
+    username: pmc-db-user
+    password: pass
+  jpa.hibernate.ddl-auto: validate
+server:
+  port: 8080
+
+---
+spring:
+  profiles: localdb
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password:
+  jpa.hibernate.ddl-auto: create-drop
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
