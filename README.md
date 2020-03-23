@@ -1,2 +1,1 @@
 # Plataforma Mexico Covid19
-
