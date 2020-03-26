@@ -27,8 +27,8 @@ public class GeoLocation {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "MUNICIPALITY_ID", nullable = false)
     private Municipality municipality;
-    @Column(name = "LONGITUDE")
-    private java.math.BigDecimal longitude;
-    @Column(name = "LATITUDE")
-    private java.math.BigDecimal latitude;
+    @Column(name = "LONGITUDE", precision=12, scale=8)
+    private Double longitude;
+    @Column(name = "LATITUDE", precision=12, scale=8)
+    private Double latitude;
 }

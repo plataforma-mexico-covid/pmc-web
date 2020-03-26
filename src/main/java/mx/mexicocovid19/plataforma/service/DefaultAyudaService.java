@@ -5,7 +5,6 @@ import mx.mexicocovid19.plataforma.model.repository.AyudaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -15,7 +14,7 @@ public class DefaultAyudaService implements AyudaService {
     private AyudaRepository ayudaRepository;
 
     @Override
-    public List<Ayuda> readAyudas(String origenAyuda, BigDecimal longitude, BigDecimal latitude, Integer kilometers) {
+    public List<Ayuda> readAyudas(String origenAyuda, Double longitude, Double latitude, Integer kilometers) {
         return ayudaRepository.findByAllInsideOfKilometers(latitude, longitude, kilometers);
     }
 }

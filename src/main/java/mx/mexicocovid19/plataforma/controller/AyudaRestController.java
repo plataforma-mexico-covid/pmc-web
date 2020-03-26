@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -27,8 +26,8 @@ public class AyudaRestController {
             value = { "/" },
             produces = {"application/json;charset=UTF-8"})
     public List<AyudaDTO> readAyudas(@RequestParam(value = "origenAyuda", defaultValue = "AMBOS") final String origenAyuda,
-                                     @RequestParam(value = "longitude") final BigDecimal longitude,
-                                     @RequestParam(value = "latitude") final BigDecimal latitude,
+                                     @RequestParam(value = "longitude") final Double longitude,
+                                     @RequestParam(value = "latitude") final Double latitude,
                                      @RequestParam(value = "kilometers") final Integer kilometers) {
         return AyudaMapper.from(ayudaService.readAyudas(origenAyuda, longitude, latitude, kilometers));
     }
