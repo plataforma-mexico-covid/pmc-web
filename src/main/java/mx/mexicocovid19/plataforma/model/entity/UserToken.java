@@ -22,5 +22,5 @@ public class UserToken {
 	@Column(name = "validated", nullable = false)
 	private boolean validated;
 	@Column(name = "expiration_date")
-	private LocalDateTime expiration_date;
+	private LocalDateTime expirationDate;
 }
