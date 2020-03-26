@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -25,4 +27,6 @@ public class Ciudadano {
     private User user;
     @Column(name = "ACTIVE")
     private Boolean active;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "ciudadano")
+    private Set<CiudadanoContacto> contactos = new HashSet<CiudadanoContacto>(0);
 }
