@@ -53,7 +53,7 @@ public class DefaultUserService implements UserService {
     private void sendMailToken(UserToken userToken, String context) throws MessagingException {
         Map<String, Object> props = new HashMap<>();
         props.put("action", "ACTIVAR USUARIO");
-        props.put("link", context + "api/v1/public/users/confirm?" + userToken.getToken());
+        props.put("link", context + "api/v1/public/users/confirm?token=" + userToken.getToken());
 
         mailService.sendValidTokenUser(userToken.getUser(), props);
     }
