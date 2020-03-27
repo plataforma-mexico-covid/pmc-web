@@ -13,7 +13,6 @@ public class CiudadanoMapper {
         ciudadanoDTO.setNombre(ciudadano.getNombre());
         ciudadanoDTO.setPaterno(ciudadano.getPaterno());
         ciudadanoDTO.setMaterno(ciudadano.getMaterno());
-        ciudadanoDTO.setContactos(CiudadanoContactoMapper.from(ciudadano.getContactos()));
         return ciudadanoDTO;
     }
 

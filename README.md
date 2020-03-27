@@ -15,3 +15,7 @@ gradlew.bat clean build
 
 ### Windows
 gradlew.bat bootRun
+
+### Swagger
+
+http://localhost:8090/swagger-ui.html

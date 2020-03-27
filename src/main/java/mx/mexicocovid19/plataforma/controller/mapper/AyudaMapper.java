@@ -12,7 +12,7 @@ public class AyudaMapper {
         final AyudaDTO ayudaDTO = new AyudaDTO();
         ayudaDTO.setId(ayuda.getId());
         ayudaDTO.setDescripcion(ayuda.getDescripcion());
-        ayudaDTO.setCiudadano(null);
+        ayudaDTO.setCiudadano(CiudadanoMapper.from(ayuda.getCiudadano()));
         ayudaDTO.setUbicacion(AddressMapper.from(ayuda.getUbicacion()));
         ayudaDTO.setTipoAyuda(TipoAyudaMapper.from(ayuda.getTipoAyuda()));
         ayudaDTO.setOrigenAyuda(ayuda.getOrigenAyuda());
