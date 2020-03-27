@@ -1,17 +1,13 @@
 package mx.mexicocovid19.plataforma.service;
 
 import mx.mexicocovid19.plataforma.controller.dto.UserDTO;
-import mx.mexicocovid19.plataforma.model.entity.Ciudadano;
-import mx.mexicocovid19.plataforma.model.entity.CiudadanoContacto;
-import mx.mexicocovid19.plataforma.model.entity.User;
-import mx.mexicocovid19.plataforma.model.entity.UserRole;
-import mx.mexicocovid19.plataforma.model.repository.CiudadanoContactoRepository;
-import mx.mexicocovid19.plataforma.model.repository.CiudadanoRepository;
-import mx.mexicocovid19.plataforma.model.repository.UserRepository;
-import mx.mexicocovid19.plataforma.model.repository.UserRoleRepository;
+import mx.mexicocovid19.plataforma.model.entity.*;
+import mx.mexicocovid19.plataforma.model.repository.*;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,15 +16,18 @@ public class DefaultUserService implements UserService {
     private UserRoleRepository userRoleRepository;
     private CiudadanoRepository ciudadanoRepository;
     private CiudadanoContactoRepository ciudadanoContactoRepository;
+    private UserTokenRepository userTokenRepository;
     private UserTokenService userTokenService;
 
     public DefaultUserService(final UserRepository userRepository, final UserRoleRepository userRoleRepository,
             final CiudadanoRepository ciudadanoRepository,
-            final CiudadanoContactoRepository ciudadanoContactoRepository, final UserTokenService userTokenService) {
+            final CiudadanoContactoRepository ciudadanoContactoRepository,
+            final UserTokenRepository userTokenRepository, final UserTokenService userTokenService) {
         this.userRepository = userRepository;
         this.userRoleRepository = userRoleRepository;
         this.ciudadanoRepository = ciudadanoRepository;
         this.ciudadanoContactoRepository = ciudadanoContactoRepository;
+        this.userTokenRepository = userTokenRepository;
         this.userTokenService = userTokenService;
     }
 
@@ -75,5 +74,22 @@ public class DefaultUserService implements UserService {
             ciudadanoContacto.setTipoContacto(userContactInfo.getTipoContacto());
             return ciudadanoContacto;
         }).collect(Collectors.toList());
+    }
+
+    @Override
+    public void confirmUser(final String token) {
+        final UserToken userToken = userTokenRepository.findByToken(token);
+        if(!isExpired(userToken.getExpirationDate())) {
+            userRepository.findById(userToken.getUsername()).ifPresent(user -> {
+                user.setValidated(true);
+                userRepository.save(user);
+                userToken.setValidated(true);
+                userTokenRepository.save(userToken);
+            });
+        }
+    }
+
+    private boolean isExpired(final LocalDateTime expirationDate) {
+        return LocalDateTime.now().isAfter(expirationDate);
     }
 }
