@@ -43,6 +43,13 @@ public class VelocityMailServiceImpl implements MailService {
         send(templateMessage, convertToVelocityContext(hTemplateVariables), "email/ayudaConfirm.vm");
     }
 
+    @Override
+    public void sendAyudaMatchConfirm(User user, User requester, Map<String, Object> hTemplateVariables) throws MessagingException {
+        templateMessage.setTo(user.getUsername());
+        templateMessage.setCc(requester.getUsername());
+        send(templateMessage, convertToVelocityContext(hTemplateVariables), "email/matchConfirm.vm");
+    }
+
     private VelocityContext convertToVelocityContext(final Map<String, Object> hTemplateVariables){
         VelocityContext context = new VelocityContext();
         for (Map.Entry<String, Object> row : hTemplateVariables.entrySet()) {

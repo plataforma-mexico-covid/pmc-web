@@ -2,9 +2,12 @@ package mx.mexicocovid19.plataforma.controller;
 
 import mx.mexicocovid19.plataforma.ApiController;
 import mx.mexicocovid19.plataforma.controller.dto.AyudaDTO;
+import mx.mexicocovid19.plataforma.controller.dto.MatchDTO;
 import mx.mexicocovid19.plataforma.controller.mapper.AyudaMapper;
 import mx.mexicocovid19.plataforma.service.AyudaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,5 +42,14 @@ public class AyudaRestController {
             produces = {"application/json;charset=UTF-8"})
     public AyudaDTO createAyuda(@RequestBody AyudaDTO ayudaDTO, HttpServletRequest request) throws MessagingException {
         return AyudaMapper.from(ayudaService.createAyuda(AyudaMapper.from(ayudaDTO), request.getContextPath()));
+    }
+
+    @ResponseBody
+    @PostMapping(
+            value = { ApiController.API_PATH_PRIVATE + "/ayuda/{ayuda}/match" },
+            produces = {"application/json;charset=UTF-8"})
+    public ResponseEntity<Void> matchAyuda(@PathVariable(value = "ayuda") Integer idAyuda, @RequestBody MatchDTO matchDTO, HttpServletRequest request) throws MessagingException {
+        ayudaService.matchAyuda(idAyuda, matchDTO.getUsername(), request.getContextPath());
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

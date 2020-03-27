@@ -1,8 +1,40 @@
-<html>
-    <body>
-        <font color="#122C09"><h3>Plataforma Mexico Covid19</h3></font>
-        <p>Gracias por tu ayuda <b>${nombre}</b> en momentos dificiles Mexico es unico y solidario,
-         nos pondremos de en contacto contigo cuando alguien solicite la ayuda que ofreces, nuevamente Gracias.</p>
-        <h6>Esta es una notificación automatica, no responda este correo, gracias.</h6>
-    </body>
-</html>
+<h1>Plataforma Mexico Covid19</h1>
+<p>Gracias por confiar en M&eacute;xico en estos momentos! Tu ayuda ha sido requerida por algui&eacute;n que ahora
+    requiere un poco de solidaridad.&nbsp;</p>
+<p><strong>Detalles de la Ayuda:</strong></p>
+<p><em>${ayuda}</em></p>
+<p><strong>Datos del Ayudante:</strong></p>
+<table style="height: 71px; width: 460px;">
+    <tbody>
+    <tr>
+        <td style="width: 67px; text-align: right;">Nombre:</td>
+        <td style="width: 379px;">${nombre-ofrece}</td>
+    </tr>
+    <tr>
+        <td style="width: 67px; text-align: right;">Email:</td>
+        <td style="width: 379px;">${email-ofrece}</td>
+    </tr>
+    <tr>
+        <td style="width: 67px; text-align: right;">Contacto:</td>
+        <td style="width: 379px;">${contacto-ofrece}</td>
+    </tr>
+    </tbody>
+</table>
+<p><strong>Datos del Solicitante:</strong></p>
+<table style="height: 71px; width: 460px;">
+    <tbody>
+    <tr>
+        <td style="width: 67px; text-align: right;">Nombre:</td>
+        <td style="width: 379px;">${nombre-solicita}</td>
+    </tr>
+    <tr>
+        <td style="width: 67px; text-align: right;">Email:</td>
+        <td style="width: 379px;">${email-solicita}</td>
+    </tr>
+    <tr>
+        <td style="width: 67px; text-align: right;">Contacto:</td>
+        <td style="width: 379px;">${contacto-solicita}</td>
+    </tr>
+    </tbody>
+</table>
+<h6>Esta es una notificaci&oacute;n automatica, no responda este correo, gracias.</h6>

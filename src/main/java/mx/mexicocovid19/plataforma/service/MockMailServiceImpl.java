@@ -19,4 +19,9 @@ public class MockMailServiceImpl implements MailService {
     public void sendAyudaConfirm(User user, Map<String, Object> hTemplateVariables) throws MessagingException {
 
     }
+
+    @Override
+    public void sendAyudaMatchConfirm(User user, User requester, Map<String, Object> hTemplateVariables) throws MessagingException {
+
+    }
 }
