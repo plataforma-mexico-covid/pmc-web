@@ -14,6 +14,13 @@ public class TipoAyudaMapper {
         return tipoAyudaDTO;
     }
 
+    public static TipoAyuda from(final TipoAyudaDTO tipoAyudaDTO) {
+        final TipoAyuda tipoAyuda = new TipoAyuda();
+        tipoAyuda.setId(tipoAyudaDTO.getId());
+        tipoAyuda.setNombre(tipoAyudaDTO.getNombre());
+        return tipoAyuda;
+    }
+
     public static List<TipoAyudaDTO> from(final List<TipoAyuda> ayudas) {
         return ayudas.stream().map(TipoAyudaMapper::from).collect(Collectors.toList());
     }

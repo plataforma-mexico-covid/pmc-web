@@ -16,6 +16,15 @@ public class CiudadanoMapper {
         return ciudadanoDTO;
     }
 
+    public static Ciudadano from(final CiudadanoDTO ciudadanoDTO) {
+        final Ciudadano ciudadano = new Ciudadano();
+        ciudadano.setId(ciudadanoDTO.getId());
+        ciudadano.setNombre(ciudadanoDTO.getNombre());
+        ciudadano.setPaterno(ciudadanoDTO.getPaterno());
+        ciudadano.setMaterno(ciudadanoDTO.getMaterno());
+        return ciudadano;
+    }
+
     public static List<CiudadanoDTO> from(final List<Ciudadano> ciudadanos) {
         return ciudadanos.stream().map(CiudadanoMapper::from).collect(Collectors.toList());
     }

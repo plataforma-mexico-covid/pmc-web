@@ -31,13 +31,24 @@ public class VelocityMailServiceImpl implements MailService {
 
     @Override
     public void sendValidTokenUser(User user, Map<String, Object> hTemplateVariables) throws MessagingException {
+        templateMessage.setTo(user.getUsername());
+        templateMessage.setCc(user.getUsername());
+        send(templateMessage, convertToVelocityContext(hTemplateVariables), "email/tokenConfirm.vm");
+    }
+
+    @Override
+    public void sendAyudaConfirm(User user, Map<String, Object> hTemplateVariables) throws MessagingException {
+        templateMessage.setTo(user.getUsername());
+        templateMessage.setCc(user.getUsername());
+        send(templateMessage, convertToVelocityContext(hTemplateVariables), "email/ayudaConfirm.vm");
+    }
+
+    private VelocityContext convertToVelocityContext(final Map<String, Object> hTemplateVariables){
         VelocityContext context = new VelocityContext();
         for (Map.Entry<String, Object> row : hTemplateVariables.entrySet()) {
             context.put(row.getKey(), row.getValue());
         }
-        templateMessage.setTo(user.getUsername());
-        templateMessage.setCc(user.getUsername());
-        send(templateMessage, context, "email/emailBody.vm");
+        return context;
     }
 
     private void send(final SimpleMailMessage msg, final VelocityContext context, String templateLocation) {

@@ -7,4 +7,5 @@ import java.util.Map;
 
 public interface MailService {
     void sendValidTokenUser(User user, Map<String, Object> hTemplateVariables) throws MessagingException;
+    void sendAyudaConfirm(User user, Map<String, Object> hTemplateVariables) throws MessagingException;
 }

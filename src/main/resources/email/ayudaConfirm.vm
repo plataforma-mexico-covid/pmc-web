@@ -1,0 +1,8 @@
+<html>
+    <body>
+        <font color="#122C09"><h3>Plataforma Mexico Covid19</h3></font>
+        <p>Gracias por tu ayuda <b>${nombre}</b> en momentos dificiles Mexico es unico y solidario,
+         nos pondremos de en contacto contigo cuando alguien solicite la ayuda que ofreces, nuevamente Gracias.</p>
+        <h6>Esta es una notificación automatica, no responda este correo, gracias.</h6>
+    </body>
+</html>

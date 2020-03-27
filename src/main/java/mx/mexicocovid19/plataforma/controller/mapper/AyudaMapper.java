@@ -20,6 +20,17 @@ public class AyudaMapper {
         return ayudaDTO;
     }
 
+    public static Ayuda from(final AyudaDTO ayudaDTO) {
+        final Ayuda ayuda = new Ayuda();
+        ayuda.setDescripcion(ayudaDTO.getDescripcion());
+        ayuda.setCiudadano(CiudadanoMapper.from(ayudaDTO.getCiudadano()));
+        ayuda.setUbicacion(AddressMapper.from(ayudaDTO.getUbicacion()));
+        ayuda.setTipoAyuda(TipoAyudaMapper.from(ayudaDTO.getTipoAyuda()));
+        ayuda.setOrigenAyuda(ayudaDTO.getOrigenAyuda());
+        ayuda.setFechaRegistro(DateUtil.parseDTO(ayudaDTO.getFechaRegistro()));
+        return ayuda;
+    }
+
     public static List<AyudaDTO> from(final List<Ayuda> ayudas) {
         return ayudas.stream().map(AyudaMapper::from).collect(Collectors.toList());
     }

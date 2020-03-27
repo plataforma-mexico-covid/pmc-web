@@ -29,4 +29,8 @@ public class Ciudadano {
     private Boolean active;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "ciudadano")
     private Set<CiudadanoContacto> contactos = new HashSet<CiudadanoContacto>(0);
+
+    public String getNombreCompleto() {
+        return this.nombre + " " + this.paterno + " " + this.materno;
+    }
 }
