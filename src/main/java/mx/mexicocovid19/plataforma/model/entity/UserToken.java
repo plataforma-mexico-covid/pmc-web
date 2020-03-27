@@ -4,9 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -14,13 +12,14 @@ import java.util.Set;
 @Table(name = "USER_TOKEN")
 public class UserToken {
 
- 	@Id
-	@Column(name = "username", unique = true, nullable = false, length = 45)
-	private String username;
-	@Column(name = "token", nullable = false, length = 60)
+	@Id
+	@Column(name = "token", nullable = false, length = 45)
 	private String token;
+	@ManyToOne
+	@JoinColumn(name = "username", nullable = false)
+	private User user;
 	@Column(name = "validated", nullable = false)
 	private boolean validated;
 	@Column(name = "expiration_date")
-	private LocalDateTime expiration_date;
+	private Date expirationDate;
 }

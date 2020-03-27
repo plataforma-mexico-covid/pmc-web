@@ -6,7 +6,7 @@ security.basic.enabled: false
 endpoints.shutdown.enabled: true
 
 spring.profiles.active: localdb
-spring.profiles.include: security
+spring.profiles.include: security, mailon
 
 ---
 spring:
@@ -42,3 +42,21 @@ spring:
     console:
       enabled: true
       path: /h2-console
+
+---
+spring:
+  profiles: mailon
+
+mail:
+  host: smtp.gmail.com
+  port: 587
+  username: betotsol@gmail.com
+  password: sssss
+  from.default: notificacion@pmc-servie.com
+  to.default: notificacion@pmc-servie.com
+  subject.default: Notificacion lupa
+  transport.protocol: smtp
+  debug: on
+  smtp:
+    auth: true
+    starttls.enable: true
