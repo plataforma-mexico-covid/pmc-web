@@ -65,14 +65,20 @@ public class DefaultAyudaService implements AyudaService {
     }
 
     private Map<String, Object> createInfoToEmail(Ayuda ayuda, Ciudadano ofrece, Ciudadano solicita){
+        String contactoOfrece = ofrece.getContactos().stream()
+                .map(contacto -> contacto.getTipoContacto() + " : " + contacto.getContacto() + " ")
+                .reduce("", (partialString, element) -> partialString + element);
+        String contactoSolicita = solicita.getContactos().stream()
+                .map(contacto -> contacto.getTipoContacto() + " : " + contacto.getContacto() + " ")
+                .reduce("", (partialString, element) -> partialString + element);
         Map<String, Object> props = new HashMap<>();
         props.put("ayuda", ayuda.getDescripcion());
         props.put("nombre-ofrece", ofrece.getNombreCompleto());
         props.put("email-ofrece", ofrece.getUser().getUsername());
-        props.put("contacto-ofrece", ofrece.getContactos());
+        props.put("contacto-ofrece", contactoOfrece);
         props.put("nombre-solicita", ofrece.getNombreCompleto());
         props.put("email-solicita", ofrece.getUser().getUsername());
-        props.put("contacto-solicita", ofrece.getContactos());
+        props.put("contacto-solicita", contactoSolicita);
         return props;
     }
 }

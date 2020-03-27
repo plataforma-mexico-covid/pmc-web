@@ -54,7 +54,7 @@ mail:
   password: sadasd
   from.default: notificacion@pmc-servie.com
   to.default: notificacion@pmc-servie.com
-  subject.default: Notificacion lupa
+  subject.default: Notificacion PMC
   transport.protocol: smtp
   debug: on
   smtp:
