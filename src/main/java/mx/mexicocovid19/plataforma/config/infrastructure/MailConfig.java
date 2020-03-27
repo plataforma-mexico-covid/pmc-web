@@ -48,7 +48,9 @@ public class MailConfig {
     public VelocityEngine velocityEngine() throws IOException {
         VelocityEngine velocityEngine = new VelocityEngine();
         Properties props = new Properties();
-        props.put("file.resource.loader.path", "classpath:/email");
+        props.setProperty("resource.loader", "class");
+        props.setProperty("class.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
+        props.setProperty("file.resource.loader.path", "classpath:/email");
         velocityEngine.init(props);
         return velocityEngine;
     }

@@ -3,6 +3,8 @@ package mx.mexicocovid19.plataforma.service;
 import mx.mexicocovid19.plataforma.controller.dto.UserDTO;
 import mx.mexicocovid19.plataforma.model.entity.*;
 import mx.mexicocovid19.plataforma.model.repository.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
@@ -20,6 +22,9 @@ public class DefaultUserService implements UserService {
     private UserTokenRepository userTokenRepository;
     private UserTokenService userTokenService;
     private MailService mailService;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     public DefaultUserService(final UserRepository userRepository, final UserRoleRepository userRoleRepository,
             final CiudadanoRepository ciudadanoRepository,
@@ -48,7 +53,7 @@ public class DefaultUserService implements UserService {
     private void sendMailToken(UserToken userToken, String context) throws MessagingException {
         Map<String, Object> props = new HashMap<>();
         props.put("action", "ACTIVAR USUARIO");
-        props.put("link", context + "#confirm/" + userToken.getToken());
+        props.put("link", context + "api/v1/public/users/confirm?" + userToken.getToken());
 
         mailService.sendValidTokenUser(userToken.getUser(), props);
     }
@@ -57,7 +62,7 @@ public class DefaultUserService implements UserService {
     private User getUser(final UserDTO userDTO) {
         final User user = new User();
         user.setEnabled(true);
-        user.setPassword(userDTO.getPassword());
+        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         user.setUsername(userDTO.getUsername());
         user.setValidated(false);
         return user;

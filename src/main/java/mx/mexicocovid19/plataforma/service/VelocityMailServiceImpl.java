@@ -37,7 +37,7 @@ public class VelocityMailServiceImpl implements MailService {
         }
         templateMessage.setTo(user.getUsername());
         templateMessage.setCc(user.getUsername());
-        send(templateMessage, context, "emailBody.vm");
+        send(templateMessage, context, "email/emailBody.vm");
     }
 
     private void send(final SimpleMailMessage msg, final VelocityContext context, String templateLocation) {
