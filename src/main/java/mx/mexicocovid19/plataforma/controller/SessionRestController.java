@@ -59,6 +59,9 @@ public class SessionRestController {
         if (usuario == null || !passwordEncoder.matches(user.getPassword(), usuario.getPassword())){
             throw new BadCredentialsException("Username or password incorrect.");
         }
+        if (!usuario.isValidated()){
+            throw new BadCredentialsException("Por favor valida tu usuario, abriendo el link que se te envio a tu email.");
+        }
         List<GrantedAuthority> roles = JwtUserFactory.mapToGrantedAuthorities(usuario.getUserRole());
         final String token = jwtTokenUtil.generateToken(usuario.getUsername(), device, roles);
 

@@ -22,7 +22,7 @@ public class UserRestController {
     }
 
     @PostMapping( produces = {"application/json;charset=UTF-8"}, headers = "Accept=" + MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> registerUser(final @RequestBody UserDTO userDTO, HttpServletRequest request) throws MessagingException {
+    public ResponseEntity<Void> registerUser(final @RequestBody UserDTO userDTO, HttpServletRequest request) throws Exception {
         userService.registerUser(userDTO, request.getContextPath());
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

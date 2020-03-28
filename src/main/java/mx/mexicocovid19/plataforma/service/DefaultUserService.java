@@ -41,7 +41,11 @@ public class DefaultUserService implements UserService {
     }
 
     @Override
-    public void registerUser(final UserDTO userDTO, final String context) throws MessagingException {
+    public void registerUser(final UserDTO userDTO, final String context) throws Exception {
+        User userTmp = userRepository.findByUsername(userDTO.getUsername());
+        if(userTmp != null) {
+            throw new Exception(String.format("Este correo '%s' ya fue utilizado por otra cuenta.", userDTO.getUsername()));
+        }
         final User user = userRepository.save(getUser(userDTO));
         final UserRole userRole = userRoleRepository.save(getUserRole(user));
         final Ciudadano ciudadano = ciudadanoRepository.save(getCiudadano(userDTO, user));
