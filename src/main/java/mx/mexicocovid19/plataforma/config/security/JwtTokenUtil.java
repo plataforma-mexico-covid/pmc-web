@@ -20,10 +20,11 @@ public class JwtTokenUtil implements Serializable {
 
     private static final long serialVersionUID = -3301605591108950415L;
 
-    private static final String CLAIM_KEY_USERNAME          = "sub";
-    private static final String CLAIM_KEY_AUDIENCE          = "audience";
-    private static final String CLAIM_KEY_CREATED           = "created";
-    private static final String CLAIM_KEY_ENTULIGA_ROLES    = "urn:entuliga.codigoartesanal:roles";
+    private static final String CLAIM_KEY_USERNAME                      = "sub";
+    private static final String CLAIM_KEY_AUDIENCE                      = "audience";
+    private static final String CLAIM_KEY_CREATED                       = "created";
+    private static final String CLAIM_KEY_PLATAFORMACOVID19_ROLES       = "urn:mx.plataformacovid19:roles";
+    private static final String CLAIM_KEY_PLATAFORMACOVID19_FULLNAME    = "urn:mx.plataformacovid19:fullname";
 
     private static final String AUDIENCE_UNKNOWN    = "unknown";
     private static final String AUDIENCE_WEB        = "web";
@@ -51,11 +52,22 @@ public class JwtTokenUtil implements Serializable {
         List<GrantedAuthority> roles;
         try {
             final Claims claims = getClaimsFromToken(token);
-            roles = (List<GrantedAuthority>) claims.get(CLAIM_KEY_ENTULIGA_ROLES);
+            roles = (List<GrantedAuthority>) claims.get(CLAIM_KEY_PLATAFORMACOVID19_ROLES);
         } catch (Exception e) {
             roles = null;
         }
         return roles;
+    }
+
+    public String getFullnameFromToken(String token) {
+        String fullname;
+        try {
+            final Claims claims = getClaimsFromToken(token);
+            fullname = (String) claims.get(CLAIM_KEY_PLATAFORMACOVID19_FULLNAME);
+        } catch (Exception e) {
+            fullname = null;
+        }
+        return fullname;
     }
 
     public Date getCreatedDateFromToken(String token) {
@@ -137,12 +149,13 @@ public class JwtTokenUtil implements Serializable {
         return (AUDIENCE_TABLET.equals(audience) || AUDIENCE_MOBILE.equals(audience));
     }
 
-    public String generateToken(String username, Device device, List<GrantedAuthority> roles) {
+    public String generateToken(String username, String fullname, Device device, List<GrantedAuthority> roles) {
         Map<String, Object> claims = new HashMap<>();
         claims.put(CLAIM_KEY_USERNAME, username);
         claims.put(CLAIM_KEY_AUDIENCE, generateAudience(device));
         claims.put(CLAIM_KEY_CREATED, new Date());
-        claims.put(CLAIM_KEY_ENTULIGA_ROLES, roles);
+        claims.put(CLAIM_KEY_PLATAFORMACOVID19_ROLES, roles);
+        claims.put(CLAIM_KEY_PLATAFORMACOVID19_FULLNAME, fullname);
 
         return generateToken(claims);
     }

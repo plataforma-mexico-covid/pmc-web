@@ -2,6 +2,8 @@ package mx.mexicocovid19.plataforma.controller;
 
 import mx.mexicocovid19.plataforma.controller.dto.LoginRequest;
 import mx.mexicocovid19.plataforma.controller.dto.LoginResponse;
+import mx.mexicocovid19.plataforma.model.entity.Ciudadano;
+import mx.mexicocovid19.plataforma.service.CiudadanoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mobile.device.Device;
@@ -34,6 +36,9 @@ public class SessionRestController {
     UserRepository userService;
 
     @Autowired
+    CiudadanoService ciudadanoService;
+
+    @Autowired
     PasswordEncoder passwordEncoder;
 
     @Autowired
@@ -63,9 +68,10 @@ public class SessionRestController {
             throw new BadCredentialsException("Por favor valida tu usuario, abriendo el link que se te envio a tu email.");
         }
         List<GrantedAuthority> roles = JwtUserFactory.mapToGrantedAuthorities(usuario.getUserRole());
-        final String token = jwtTokenUtil.generateToken(usuario.getUsername(), device, roles);
+        Ciudadano ciudadano = ciudadanoService.readCiudadano(usuario);
+        final String token = jwtTokenUtil.generateToken(usuario.getUsername(), ciudadano.getNombreCompleto(), device, roles);
 
-        return createSessionDTO(usuario.getUsername(), roles, token);
+        return createSessionDTO(usuario.getUsername(), ciudadano.getNombreCompleto(), roles, token);
     }
 
     @ResponseBody
@@ -75,15 +81,16 @@ public class SessionRestController {
             produces = {"application/json;charset=UTF-8"})
     public LoginResponse isValidToken(HttpServletRequest httpRequest) {
         String token = httpRequest.getHeader(this.tokenHeader);
-        return createSessionDTO(this.jwtTokenUtil.getUsernameFromToken(token),
+        return createSessionDTO(this.jwtTokenUtil.getUsernameFromToken(token), this.jwtTokenUtil.getFullnameFromToken(token),
                 this.jwtTokenUtil.getRolesFromToken(token), token);
     }
 
     private LoginResponse createSessionDTO(
-            final String username, final List<GrantedAuthority> roles, final String token){
+            final String username, final String fullname, final List<GrantedAuthority> roles, final String token){
         final LoginResponse sessionDTO = new LoginResponse();
         sessionDTO.setUsername(username);
         sessionDTO.setEmail(username);
+        sessionDTO.setFullname(fullname);
         sessionDTO.setRoles(roles);
         sessionDTO.setToken(token);
 
