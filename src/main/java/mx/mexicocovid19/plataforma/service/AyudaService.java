@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface AyudaService {
     List<Ayuda> readAyudas(final String origenAyuda, final Double longitude, final Double latitude, final Integer kilometers);
-    Ayuda createAyuda(final Ayuda ayuda, final String context) throws MessagingException;
+    Ayuda createAyuda(final Ayuda ayuda, final String username, final String context) throws MessagingException;
     void matchAyuda(final Integer idAyuda, final String username, final String context) throws MessagingException;
 }

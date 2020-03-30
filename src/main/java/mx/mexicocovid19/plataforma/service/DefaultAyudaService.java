@@ -32,19 +32,26 @@ public class DefaultAyudaService implements AyudaService {
 
     @Override
     public List<Ayuda> readAyudas(String origenAyuda, Double longitude, Double latitude, Integer kilometers) {
-        return ayudaRepository.findByAllInsideOfKilometers(latitude, longitude, kilometers);
+        try {
+            OrigenAyuda origenAyudaValid = OrigenAyuda.valueOf(origenAyuda);
+            return ayudaRepository.findByAllInsideOfKilometersByOrigenAyuda(latitude, longitude, kilometers, origenAyudaValid);
+        } catch (IllegalArgumentException ex) {
+            return ayudaRepository.findByAllInsideOfKilometers(latitude, longitude, kilometers);
+        }
     }
 
     @Override
-    public Ayuda createAyuda(final Ayuda ayuda, final String context) throws MessagingException {
+    public Ayuda createAyuda(final Ayuda ayuda, final String username, final String context) throws MessagingException {
+        User user = new User();
+        user.setUsername(username);
+        Ciudadano ciudadano = ciudadanoRepository.findByUser(user);
         GeoLocation ubicacion = geoLocationRepository.save(ayuda.getUbicacion());
         ayuda.setUbicacion(ubicacion);
+        ayuda.setCiudadano(ciudadano);
         Ayuda ayudaTmp = ayudaRepository.save(ayuda);
         Map<String, Object> props = new HashMap<>();
         props.put("nombre", ayuda.getCiudadano().getNombreCompleto());
-        Optional<Ciudadano> ciudadano = ciudadanoRepository.findById(ayudaTmp.getCiudadano().getId());
-        ayudaTmp.setCiudadano(ciudadano.get());
-        mailService.sendAyudaConfirm(ciudadano.get().getUser(), props);
+        mailService.sendAyudaConfirm(ciudadano.getUser(), props);
         return ayudaTmp;
     }
 
