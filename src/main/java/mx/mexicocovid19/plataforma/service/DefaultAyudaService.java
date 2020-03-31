@@ -24,7 +24,7 @@ import mx.mexicocovid19.plataforma.model.repository.CiudadanoRepository;
 import mx.mexicocovid19.plataforma.model.repository.GeoLocationRepository;
 import mx.mexicocovid19.plataforma.model.repository.PeticionRepository;
 import mx.mexicocovid19.plataforma.model.repository.UserRepository;
-import mx.mexicocovid19.plataforma.service.helpers.GroseriasHelper;
+import mx.mexicocovid19.plataforma.service.helper.GroseriasHelper;
 import mx.mexicocovid19.plataforma.util.ErrorEnum;
 
 @Log4j2

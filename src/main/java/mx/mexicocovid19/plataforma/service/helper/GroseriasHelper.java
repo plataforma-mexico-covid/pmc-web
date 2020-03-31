@@ -1,4 +1,4 @@
-package mx.mexicocovid19.plataforma.service.helpers;
+package mx.mexicocovid19.plataforma.service.helper;
 
 import java.util.Collection;
 
@@ -38,12 +38,7 @@ public final class GroseriasHelper {
 		/**
 		 * Realiza la validacion de coincidencias de palabras soeces vs texto a evaluar.
 		 */
-		if ( emits.isEmpty() ) {
-			return Boolean.FALSE;
-		} else {
-			return Boolean.TRUE;
-		}
-		
+		return !emits.isEmpty();
 	}
 	
 }
