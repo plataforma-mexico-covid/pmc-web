@@ -54,6 +54,9 @@ public class SessionRestController {
             produces = {"application/json;charset=UTF-8"})
     public LoginResponse login(
             @RequestBody LoginRequest user, HttpServletRequest httpRequest) {
+    	
+    	String token = "";
+    	
         Device device = DeviceUtils.getCurrentDevice(httpRequest);
 
         if (user.getUsername().isEmpty() || user.getPassword().isEmpty()){
@@ -68,10 +71,20 @@ public class SessionRestController {
             throw new BadCredentialsException("Por favor valida tu usuario, abriendo el link que se te envio a tu email.");
         }
         List<GrantedAuthority> roles = JwtUserFactory.mapToGrantedAuthorities(usuario.getUserRole());
-        Ciudadano ciudadano = ciudadanoService.readCiudadano(usuario);
-        final String token = jwtTokenUtil.generateToken(usuario.getUsername(), ciudadano.getNombreCompleto(), device, roles);
-
-        return createSessionDTO(usuario.getUsername(), ciudadano.getNombreCompleto(), roles, token);
+        
+        Ciudadano ciudadano = ciudadanoService.readCiudadano(usuario);        
+        
+        // El usuario no es ciudadano
+        if ( ciudadano == null ) {
+        	
+        	token = jwtTokenUtil.generateToken(usuario.getUsername(), "", device, roles);
+        	return createSessionDTO(usuario.getUsername(), "", roles, token);
+        	
+        } else {
+        	// ciudadano
+        	token = jwtTokenUtil.generateToken(usuario.getUsername(), ciudadano.getNombreCompleto(), device, roles);
+        	return createSessionDTO(usuario.getUsername(), ciudadano.getNombreCompleto(), roles, token);
+        }
     }
 
     @ResponseBody
