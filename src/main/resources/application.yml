@@ -6,7 +6,7 @@ security.basic.enabled: false
 endpoints.shutdown.enabled: true
 
 spring.profiles.active: localdb
-spring.profiles.include: security, mailoff
+spring.profiles.include: security, mailon
 
 ---
 spring:
@@ -50,10 +50,10 @@ spring:
 mail:
   host: smtp.gmail.com
   port: 587
-  username: correo@gmail.com
-  password: sadasd
-  from.default: notificacion@pmc-servie.com
-  to.default: notificacion@pmc-servie.com
+  username: ${SECRET_EMAIL_USERNAME}
+  password: ${SECRET_EMAIL_PASSWORD}
+  from.default: notificacion@plataformacovid19.mx
+  to.default: notificacion@plataformacovid19.mx
   subject.default: Notificacion PMC
   transport.protocol: smtp
   debug: on
