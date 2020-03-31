@@ -1,14 +1,33 @@
 package mx.mexicocovid19.plataforma.service;
 
-import mx.mexicocovid19.plataforma.model.entity.*;
-import mx.mexicocovid19.plataforma.model.repository.*;
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.mail.MessagingException;
-import java.time.LocalDateTime;
-import java.util.*;
+import lombok.extern.log4j.Log4j2;
+import mx.mexicocovid19.plataforma.exception.PMCException;
+import mx.mexicocovid19.plataforma.model.entity.Ayuda;
+import mx.mexicocovid19.plataforma.model.entity.Ciudadano;
+import mx.mexicocovid19.plataforma.model.entity.GeoLocation;
+import mx.mexicocovid19.plataforma.model.entity.OrigenAyuda;
+import mx.mexicocovid19.plataforma.model.entity.Peticion;
+import mx.mexicocovid19.plataforma.model.entity.User;
+import mx.mexicocovid19.plataforma.model.repository.AyudaRepository;
+import mx.mexicocovid19.plataforma.model.repository.CiudadanoRepository;
+import mx.mexicocovid19.plataforma.model.repository.GeoLocationRepository;
+import mx.mexicocovid19.plataforma.model.repository.PeticionRepository;
+import mx.mexicocovid19.plataforma.model.repository.UserRepository;
+import mx.mexicocovid19.plataforma.service.helpers.GroseriasHelper;
+import mx.mexicocovid19.plataforma.util.ErrorEnum;
 
+@Log4j2
 @Service
 public class DefaultAyudaService implements AyudaService {
 
@@ -41,18 +60,30 @@ public class DefaultAyudaService implements AyudaService {
     }
 
     @Override
-    public Ayuda createAyuda(final Ayuda ayuda, final String username, final String context) throws MessagingException {
-        User user = new User();
-        user.setUsername(username);
-        Ciudadano ciudadano = ciudadanoRepository.findByUser(user);
-        GeoLocation ubicacion = geoLocationRepository.save(ayuda.getUbicacion());
-        ayuda.setUbicacion(ubicacion);
-        ayuda.setCiudadano(ciudadano);
-        Ayuda ayudaTmp = ayudaRepository.save(ayuda);
-        Map<String, Object> props = new HashMap<>();
-        props.put("nombre", ayuda.getCiudadano().getNombreCompleto());
-        mailService.sendAyudaConfirm(ciudadano.getUser(), props);
-        return ayudaTmp;
+    public Ayuda createAyuda(final Ayuda ayuda, final String username, final String context) throws PMCException {
+        
+        try {
+        	User user = new User();
+        	user.setUsername(username);
+        	Ciudadano ciudadano = ciudadanoRepository.findByUser(user);
+        	GeoLocation ubicacion = geoLocationRepository.save(ayuda.getUbicacion());
+        	ayuda.setUbicacion(ubicacion);
+        	ayuda.setCiudadano(ciudadano);
+        	
+        	if ( !GroseriasHelper.evaluarTexto(ayuda.getDescripcion()) ) {
+        		Ayuda ayudaTmp = ayudaRepository.save(ayuda);
+        		Map<String, Object> props = new HashMap<>();
+        		props.put("nombre", ayuda.getCiudadano().getNombreCompleto());
+        		mailService.sendAyudaConfirm(ciudadano.getUser(), props);
+        		
+        		return ayudaTmp;	
+        	} else {        		
+        		throw new PMCException(ErrorEnum.ERR_LENGUAJE_SOEZ, "DefaultAyudaService", "Esta prohibido el uso de lenguaje soez o vulgar.");	
+        	}			
+		} catch (MessagingException e) {
+			log.info(e.getMessage());
+			throw new PMCException(ErrorEnum.ERR_GENERICO, "DefaultAyudaService", e.getMessage());
+		}
     }
 
     @Override
