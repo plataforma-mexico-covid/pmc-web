@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 import lombok.Getter;
 import lombok.Setter;
+import mx.mexicocovid19.plataforma.util.DateUtil;
 import mx.mexicocovid19.plataforma.util.ErrorEnum;
-import mx.mexicocovid19.plataforma.util.Utils;
 
 
 @Getter
@@ -38,7 +38,7 @@ public class Notification implements Serializable {
 		super();
 		this.code = error.getCode();
 		this.message = error.getMessage();
-		this.timestamp = Utils.getDateIso();
+		this.timestamp = DateUtil.getDateIso();
 		this.level = error.getLevel();
 	}
 
@@ -53,7 +53,7 @@ public class Notification implements Serializable {
 		super();
 		this.code = code;
 		this.message = message;
-		this.timestamp = Utils.getDateIso();
+		this.timestamp = DateUtil.getDateIso();
 		this.level = level;
 	}
 

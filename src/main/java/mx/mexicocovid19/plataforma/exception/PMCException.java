@@ -2,8 +2,8 @@ package mx.mexicocovid19.plataforma.exception;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import mx.mexicocovid19.plataforma.util.DateUtil;
 import mx.mexicocovid19.plataforma.util.ErrorEnum;
-import mx.mexicocovid19.plataforma.util.Utils;
 
 @Data
 @EqualsAndHashCode(callSuper=false)
@@ -53,7 +53,7 @@ public class PMCException extends Exception {
 		this.errorEnum = errorEnum;
 		this.code = errorEnum.getCode();
 		this.errorMessage = errorEnum.getMessage();
-		this.timeStamp = Utils.getDateIso();
+		this.timeStamp = DateUtil.getDateIso();
 		this.classError = classError;
 		this.errorDescripcion = errorEnum.getDescription();
 	}
@@ -70,7 +70,7 @@ public class PMCException extends Exception {
 		this.errorEnum = errorEnum;
 		this.code = errorEnum.getCode();
 		this.errorMessage = errorEnum.getMessage();
-		this.timeStamp = Utils.getDateIso();
+		this.timeStamp = DateUtil.getDateIso();
 		this.classError = classError;
 		this.errorDescripcion = errorEnum.getDescription();
 		this.addSuppressed(cause);
@@ -88,7 +88,7 @@ public class PMCException extends Exception {
 		this.errorEnum = errorEnum;
 		this.code = errorEnum.getCode();
 		this.errorMessage = errorEnum.getMessage() + ": " + errorIn;
-		this.timeStamp = Utils.getDateIso();
+		this.timeStamp = DateUtil.getDateIso();
 		this.classError = classError;
 		this.errorDescripcion = errorEnum.getDescription();
 	}
@@ -106,7 +106,7 @@ public class PMCException extends Exception {
 		this.errorEnum = errorEnum;
 		this.code = errorEnum.getCode();
 		this.errorMessage = errorEnum.getMessage() + ": " + errorIn;
-		this.timeStamp = Utils.getDateIso();
+		this.timeStamp = DateUtil.getDateIso();
 		this.classError = classError;
 		this.errorDescripcion = errorEnum.getDescription();
 		this.addSuppressed(cause);

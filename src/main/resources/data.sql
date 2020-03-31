@@ -1,7 +1,7 @@
 INSERT INTO USUARIO (USERNAME, PASSWORD, ENABLED, VALIDATED) VALUES
-('admin@pmc.mx', '$2a$10$Zah8wiwQ4lo9ZoGubLjQSOsPj7KTahQcTqJV0U6J/iLqOmmYfbG96', 1, 1),
-('citizen_uno@pmc.mx', '$2a$10$Zah8wiwQ4lo9ZoGubLjQSOsPj7KTahQcTqJV0U6J/iLqOmmYfbG96', 1, 1),
-('citizen_dos@pmc.mx', '$2a$10$Zah8wiwQ4lo9ZoGubLjQSOsPj7KTahQcTqJV0U6J/iLqOmmYfbG96', 1, 1),
+('admin@pmc.mx', '$2a$10$8hwBrlCh7LHRQbmYkAvT6.kgvdEoT3nvZUeC5rKNGXizgQu6HQdim', 1, 1),
+('citizen_uno@pmc.mx', '$2a$10$6JtYlfvDp0PzamCQ0gVY8.IxGF3qy8.6n/gTIpQI5OiUxk12oB90m', 1, 1),
+('citizen_dos@pmc.mx', '$2a$10$6JtYlfvDp0PzamCQ0gVY8.IxGF3qy8.6n/gTIpQI5OiUxk12oB90m', 1, 1),
 ('contacto@pmc.mx', 'p4Ssword', 0, 0);
 
 INSERT INTO USER_ROLE (ID, USERNAME, ROLE) VALUES
