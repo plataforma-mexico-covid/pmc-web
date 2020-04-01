@@ -6,6 +6,7 @@ import mx.mexicocovid19.plataforma.model.repository.UserRepository;
 import mx.mexicocovid19.plataforma.model.repository.UserTokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -18,6 +19,7 @@ public class DefaultUserTokenService implements UserTokenService {
     UserRepository userRepository;
 
     @Override
+    @Transactional
     public Map<String, Object> userTokenById(String token) throws Exception {
         Optional<UserToken> userToken = userTokenRepository.findById(token);
         if (!userToken.isPresent()) {

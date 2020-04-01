@@ -8,6 +8,7 @@ import mx.mexicocovid19.plataforma.util.ErrorEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.mail.MessagingException;
 import java.time.LocalDateTime;
@@ -44,6 +45,7 @@ public class DefaultUserService implements UserService {
     }
 
     @Override
+    @Transactional
     public void registerUser(final UserDTO userDTO, final String context) throws Exception {
         User userTmp = userRepository.findByUsername(userDTO.getUsername());
         if(userTmp != null) {
@@ -103,6 +105,7 @@ public class DefaultUserService implements UserService {
     }
 
     @Override
+    @Transactional
     public void confirmUser(final String token) throws Exception {
         final Optional<UserToken> userTokenOpt = userTokenRepository.findById(token);
         if (!userTokenOpt.isPresent()) {

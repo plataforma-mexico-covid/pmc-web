@@ -1,11 +1,13 @@
 package mx.mexicocovid19.plataforma.controller.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import mx.mexicocovid19.plataforma.model.entity.TipoContacto;
 
 @Getter
 @Setter
+@AllArgsConstructor
 public class UserContactInfo {
     private TipoContacto tipoContacto;
     private String contacto;
