@@ -44,14 +44,16 @@ http://localhost:8090/swagger-ui.html
 
 ## Pending
 Para salir a prod
-1. Instalar BD productiva 
+1. Instalar BD productiva (done!) 
 2. Trasaccion ayuda
-3. Logging in gCloud
+3. Logging in gCloud (done!)
 4. Modificar emails de notificacion
 5. Agregar validaciones
     1. Palabras altisonantes (done!)
     2. Validaciones para evitar registrar ayuda muchas veces
 6. Agregar test
+7. Envio de matchs por email
+8. Definir los tipos de ayuda (wip!)
 
 2do Alcance
 6. Feedback
