@@ -9,7 +9,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@Table(name = "USER_TOKEN")
+@Table(name = "user_token")
 public class UserToken {
 
 	@Id

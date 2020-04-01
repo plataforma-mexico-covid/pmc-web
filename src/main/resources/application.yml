@@ -5,7 +5,7 @@ server:
 security.basic.enabled: false
 endpoints.shutdown.enabled: true
 
-spring.profiles.active: localdb
+spring.profiles.active: proddb
 spring.profiles.include: security, mailon
 
 ---
@@ -19,14 +19,19 @@ jwt:
 
 ---
 spring:
-  profiles: testdb
+  profiles: proddb
   datasource:
-    url: jdbc:mariadb://server:3306/pmc-db
-    username: pmc-db-user
-    password: pass
-  jpa.hibernate.ddl-auto: validate
-server:
-  port: 8080
+    url: ${SECRET_DB_URL}
+    username: ${SECRET_DB_USERNAME}
+    password: ${SECRET_DB_PASSWORD}
+  jpa:
+    hibernate.ddl-auto: validate
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    properties:
+      hibernate:
+        default_schema: ${SECRET_DB_SCHEMA}
+        hibernate.show_sql: false
+        format_sql: false
 
 ---
 spring:
