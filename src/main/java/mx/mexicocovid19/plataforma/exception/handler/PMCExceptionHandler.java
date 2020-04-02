@@ -35,8 +35,13 @@ public class PMCExceptionHandler implements Serializable{
 	 */
 	@ExceptionHandler(PMCException.class)
 	ResponseEntity<DefaultErrorList> handleActivationException(PMCException ex) {
+		
 		Notification notification = new Notification(ex.getCode(), ex.getMessage(), "ERROR");
-		return new ResponseEntity<>(new DefaultErrorList(notification), HttpStatus.BAD_REQUEST);// prueba de codigo
+		if ( ex.getErrorEnum() == ErrorEnum.ERR_MAX_AYUDA ) {
+			return new ResponseEntity<>(new DefaultErrorList(notification), HttpStatus.TOO_MANY_REQUESTS);
+		} else {
+			return new ResponseEntity<>(new DefaultErrorList(notification), HttpStatus.BAD_REQUEST);
+		}
 	}
 
 

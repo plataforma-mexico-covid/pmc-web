@@ -18,5 +18,6 @@ class GroseriasHelperTest extends Specification {
         3 | "Vola de pendejos dejen de hacer esto"          				| true
         4 | "CABRONES ponganse a hacer algo"                				| true
 		5 | "Nomas quieren robar a la gente, pinches lacras!"				| true
+		6 | "Orale putos, prueben bien no sean irresponsables"				| true
     }
 }
