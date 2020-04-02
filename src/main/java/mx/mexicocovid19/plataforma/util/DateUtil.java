@@ -2,7 +2,9 @@ package mx.mexicocovid19.plataforma.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.TimeZone;
@@ -34,6 +36,12 @@ public final class DateUtil {
         DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         return LocalDateTime.parse(date, df);
     }
+
+	public static LocalDateTime convertToLocalDateTimeViaMilisecond(final Date dateToConvert) {
+    	return Instant.ofEpochMilli(dateToConvert.getTime())
+				.atZone(ZoneId.of(TIMEZONE_MEXICO))
+				.toLocalDateTime();
+	}
     
 	/**
 	 * This function allows get date in format ISO 8601.

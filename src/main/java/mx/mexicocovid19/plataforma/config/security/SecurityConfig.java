@@ -1,5 +1,6 @@
 package mx.mexicocovid19.plataforma.config.security;
 
+import mx.mexicocovid19.plataforma.ApiController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,14 +49,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/public/**").permitAll()
+                .antMatchers(HttpMethod.GET, ApiController.API_PATH_PUBLIC + "/**").permitAll()
                 .antMatchers(HttpMethod.GET,"/**").permitAll()
-                .antMatchers(HttpMethod.PUT, "/public/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/public/**").permitAll()
-                .antMatchers(HttpMethod.DELETE, "/public/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/private/**").authenticated()
-                .antMatchers(HttpMethod.PUT, "/private/**").authenticated()
-                .antMatchers(HttpMethod.DELETE, "/private/**").authenticated()
+                .antMatchers(HttpMethod.PUT, ApiController.API_PATH_PUBLIC + "/**").permitAll()
+                .antMatchers(HttpMethod.POST, ApiController.API_PATH_PUBLIC + "/**").permitAll()
+                .antMatchers(HttpMethod.DELETE, ApiController.API_PATH_PUBLIC + "/**").permitAll()
+                .antMatchers(HttpMethod.POST, ApiController.API_PATH_PRIVATE + "/**").authenticated()
+                .antMatchers(HttpMethod.PUT, ApiController.API_PATH_PRIVATE + "/**").authenticated()
+                .antMatchers(HttpMethod.DELETE, ApiController.API_PATH_PRIVATE + "/**").authenticated()
                 .antMatchers("/h2-console/**").permitAll()
                 .and()
             .csrf()

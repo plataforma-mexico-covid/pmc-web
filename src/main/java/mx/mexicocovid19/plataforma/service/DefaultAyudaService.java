@@ -27,6 +27,7 @@ import mx.mexicocovid19.plataforma.model.repository.UserRepository;
 import mx.mexicocovid19.plataforma.service.helper.AyudaRateRegisterEvaluationServiceHelper;
 import mx.mexicocovid19.plataforma.service.helper.GroseriasHelper;
 import mx.mexicocovid19.plataforma.util.ErrorEnum;
+import org.springframework.transaction.annotation.Transactional;
 
 @Log4j2
 @Service
@@ -65,6 +66,7 @@ public class DefaultAyudaService implements AyudaService {
     }
 
     @Override
+    @Transactional
     public Ayuda createAyuda(final Ayuda ayuda, final String username, final String context) throws PMCException {
         
         try {
@@ -103,6 +105,7 @@ public class DefaultAyudaService implements AyudaService {
     }
 
     @Override
+    @Transactional
     public void matchAyuda(Integer idAyuda, String username, String context) throws MessagingException {
         Ayuda ayuda = ayudaRepository.getOne(idAyuda);
         User user = new User();

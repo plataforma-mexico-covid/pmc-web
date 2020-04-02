@@ -4,7 +4,7 @@ package mx.mexicocovid19.plataforma.model.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(	name = "USER_ROLE",
+@Table(	name = "user_role",
 		uniqueConstraints = @UniqueConstraint(
 		columnNames = { "role", "username" }))
 public class UserRole{

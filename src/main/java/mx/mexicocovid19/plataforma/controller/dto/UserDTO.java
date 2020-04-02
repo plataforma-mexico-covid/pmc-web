@@ -1,5 +1,6 @@
 package mx.mexicocovid19.plataforma.controller.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,6 +8,7 @@ import java.util.Set;
 
 @Getter
 @Setter
+@AllArgsConstructor
 public class UserDTO {
     private String username;
     private String password;

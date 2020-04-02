@@ -1,17 +1,21 @@
 package mx.mexicocovid19.plataforma.service;
 
 import mx.mexicocovid19.plataforma.controller.dto.UserDTO;
+import mx.mexicocovid19.plataforma.exception.PMCException;
 import mx.mexicocovid19.plataforma.model.entity.*;
 import mx.mexicocovid19.plataforma.model.repository.*;
+import mx.mexicocovid19.plataforma.util.ErrorEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.mail.MessagingException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDateTime;
+import java.util.*;
 import java.util.stream.Collectors;
+
+import static mx.mexicocovid19.plataforma.util.DateUtil.convertToLocalDateTimeViaMilisecond;
 
 @Service
 public class DefaultUserService implements UserService {
@@ -41,6 +45,7 @@ public class DefaultUserService implements UserService {
     }
 
     @Override
+    @Transactional
     public void registerUser(final UserDTO userDTO, final String context) throws Exception {
         User userTmp = userRepository.findByUsername(userDTO.getUsername());
         if(userTmp != null) {
@@ -100,8 +105,24 @@ public class DefaultUserService implements UserService {
     }
 
     @Override
+    @Transactional
     public void confirmUser(final String token) throws Exception {
-        userTokenService.userTokenById(token);
+        final Optional<UserToken> userTokenOpt = userTokenRepository.findById(token);
+        if (!userTokenOpt.isPresent()) {
+            throw new PMCException(ErrorEnum.ERR_GENERICO, "DefaultUserService", "Token Invalido");
+        }
+        UserToken userToken = userTokenOpt.get();
+        if(isExpired(userToken.getExpirationDate())) {
+            throw new PMCException(ErrorEnum.ERR_GENERICO, "DefaultUserService", "Token expirado");
+        }
+        userToken.getUser().setValidated(true);
+        userRepository.save(userToken.getUser());
+        userToken.setValidated(true);
+        userTokenRepository.save(userToken);
+    }
+
+    private boolean isExpired(final Date expirationDate) {
+        return LocalDateTime.now().isAfter(convertToLocalDateTimeViaMilisecond(expirationDate));
     }
 
 }
