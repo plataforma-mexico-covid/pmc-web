@@ -16,12 +16,12 @@ public final class GroseriasHelper {
 	}
 
 	/** {@link String[] } GROSERIAS lista de groserias. */
-	
-	private final static String[] GROSERIAS = { "PUT0", "PUTO", "PUTA", "PUT4", "PENDEJO", "PENDEJA", "P3NDEJ0",
-			"P3NDEJA", "PENDEJOS", "PENDEJAS", "PENDEJ0S", "PEND3J0S", "P3ND3J0S", "P3ND3JOS", "C4BR0N", "CABR0N",
-			"CABRON", "CABRONA", "CABRONES", "CABRON3S", "VERGA", "VERG4", "PUTA", "PINCHE", "PINCHES", "MAMES",
-			"M4MES", "MAMAR", "JOTOS", "JOTO", "JOTA", "J0T0", "PITO", "PIT0", "PINGA", "PALO", "PIJA", "PANOCHA",
-			"MAMADAS", "CULOS", "CULO", "CUL0", "CUL0S" };
+
+	private final static String[] GROSERIAS = { "PUT0", "PUTO", "PUTOS", "PUT0S", "PUTA", "PUT4", "PENDEJO", "PENDEJA",
+			"P3NDEJ0", "P3NDEJA", "PENDEJOS", "PENDEJAS", "PENDEJ0S", "PEND3J0S", "P3ND3J0S", "P3ND3JOS", "C4BR0N",
+			"CABR0N", "CABRON", "CABRONA", "CABRONES", "CABRON3S", "VERGA", "VERG4", "PUTA", "PINCHE", "PINCHES",
+			"MAMES", "M4MES", "MAMAR", "JOTOS", "JOTO", "JOTA", "J0T0", "PITO", "PIT0", "PINGA", "PALO", "PIJA",
+			"PANOCHA", "MAMADAS", "CULOS", "CULO", "CUL0", "CUL0S" };
 	
 	/**
 	 * 
