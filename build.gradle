@@ -58,6 +58,9 @@ dependencies {
 
 	compile 'org.ahocorasick:ahocorasick:0.4.0'
 	compile 'org.owasp.encoder:encoder:1.2.2'
+	compile 'com.google.code.gson:gson:2.8.6'
+	
+
 	
 
 	testCompile('org.springframework.boot:spring-boot-starter-test')

@@ -8,6 +8,9 @@ public enum ErrorEnum {
 	/** Errores de servicio y logica de negocio */
 	ERR_LENGUAJE_SOEZ("ERR-001", "Uso de lengaje soez e inapropiado", "", ErrorConst.WARNING, ""),
 	
+	/** Errores de servicio y logica de negocio */
+	ERR_MAX_AYUDA("ERR-002", "Ha rebasado el numero maximo de ayuda, intenta pasada la hora.", "", ErrorConst.WARNING, ""),
+	
 	
 	/** Errores de autorizacion */	
 	ERR_AUTH_TOKEN_REQUERIDO("ERR-AUTH-001", "Token requerido", "", ErrorConst.ERROR, "");
