@@ -53,7 +53,8 @@ Para salir a prod
     2. Validaciones para evitar registrar ayuda muchas veces (done!)
 6. Agregar test (wip!)
 7. Envio de matchs por email
-8. Definir los tipos de ayuda (wip!)
+8. Validar email y password
+9. Definir los tipos de ayuda (wip!)
 
 2do Alcance
 6. Feedback
