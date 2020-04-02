@@ -56,12 +56,12 @@ public class DefaultUserService implements UserService {
         final Ciudadano ciudadano = ciudadanoRepository.save(getCiudadano(userDTO, user));
         ciudadanoContactoRepository.saveAll(getCiudadanoContactos(userDTO, ciudadano));
         UserToken token = userTokenService.createUserTokenByUser(user);
-        sendMailToken(token, context);
+        sendMailToken(token, context, ciudadano.getNombre());
     }
 
-    private void sendMailToken(UserToken userToken, String context) throws MessagingException {
+    private void sendMailToken(UserToken userToken, String context, String nombre) throws MessagingException {
         Map<String, Object> props = new HashMap<>();
-        props.put("action", "ACTIVAR USUARIO");
+        props.put("nombre", nombre);
         props.put("link", context + "api/v1/public/users/confirm?token=" + userToken.getToken());
 
         mailService.sendValidTokenUser(userToken.getUser(), props);
