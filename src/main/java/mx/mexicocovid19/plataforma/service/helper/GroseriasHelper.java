@@ -21,7 +21,7 @@ public final class GroseriasHelper {
 			"P3NDEJ0", "P3NDEJA", "PENDEJOS", "PENDEJAS", "PENDEJ0S", "PEND3J0S", "P3ND3J0S", "P3ND3JOS", "C4BR0N",
 			"CABR0N", "CABRON", "CABRONA", "CABRONES", "CABRON3S", "VERGA", "VERG4", "PUTA", "PINCHE", "PINCHES",
 			"MAMES", "M4MES", "MAMAR", "JOTOS", "JOTO", "JOTA", "J0T0", "PITO", "PIT0", "PINGA", "PALO", "PIJA",
-			"PANOCHA", "MAMADAS", "CULOS", "CULO", "CUL0", "CUL0S" };
+			"PANOCHA", "MAMADAS", "CULOS", "CULO", "CUL0", "CUL0S", "MIERDA", "MIERD4", "M1ERDA" };
 	
 	/**
 	 * 
@@ -33,7 +33,7 @@ public final class GroseriasHelper {
 	public static boolean evaluarTexto(String texto) { 
 		
 		
-		Trie trie = Trie.builder().onlyWholeWords().addKeywords(GROSERIAS).build();
+		Trie trie = Trie.builder().ignoreCase().onlyWholeWords().addKeywords(GROSERIAS).build();
 		
 		Collection<Emit> emits = trie.parseText(texto.toUpperCase());
 		

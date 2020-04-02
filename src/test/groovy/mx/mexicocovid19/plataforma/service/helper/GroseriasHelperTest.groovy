@@ -19,5 +19,6 @@ class GroseriasHelperTest extends Specification {
         4 | "CABRONES ponganse a hacer algo"                				| true
 		5 | "Nomas quieren robar a la gente, pinches lacras!"				| true
 		6 | "Orale putos, prueben bien no sean irresponsables"				| true
+		7 | "Esto que esta pasando es una mierda, ayudenos"					| true
     }
 }
