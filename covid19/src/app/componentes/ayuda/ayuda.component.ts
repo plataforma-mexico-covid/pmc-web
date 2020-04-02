@@ -34,7 +34,7 @@ export class AyudaComponent {
   constructor(
     private _servicio: ServiciosService,
     public globales: GlobalsComponent,
-    private _constantes: ConstantsService
+    public _constantes: ConstantsService
 
   ) {
     this.inicializaVariables();
