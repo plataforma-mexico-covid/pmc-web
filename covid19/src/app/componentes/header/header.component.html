@@ -1,0 +1,73 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark d-block d-sm-none">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item" [ngClass]="{'active': opcion=='OFRECE'}" (click)="actualizarTipoAyuda('OFRECE')"
+                data-toggle="collapse" data-target="#navbarNav">
+                <a class="nav-link">Ayuda </a>
+            </li>
+            <li class="nav-item" [ngClass]="{'active': opcion=='SOLICITA'}" (click)="actualizarTipoAyuda('SOLICITA')"
+                data-toggle="collapse" data-target="#navbarNav">
+                <a class="nav-link"> Necesidades</a>
+            </li>
+            <li class="nav-item" [ngClass]="{'active': opcion=='AMBOS'}" (click)="actualizarTipoAyuda('AMBOS')"
+                data-toggle="collapse" data-target="#navbarNav">
+                <a class="nav-link">Ambos</a>
+            </li>
+            <hr>
+            <li class="nav-item" data-toggle="collapse" data-target="#navbarNav">
+                <a class="nav-link">Mapa</a>
+            </li>
+            <li class="nav-item" data-toggle="collapse" data-target="#navbarNav">
+                <a class="nav-link">Lista</a>
+            </li>
+            <li class="nav-item" data-toggle="collapse" data-target="#navbarNav">
+                <a class="nav-link" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"
+                    aria-controls="collapseExample">Ambos</a>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+
+<div class="over-map d-none d-sm-block">
+    <div class="row">
+        <div class="col-sm-6 col-md-5 col-lg-4 col-xl-3 text-left">
+            <div class="row">
+                <div class="col-xs-12 col-sm-4">
+                    <button class='btn btn-primary btn-sm btn-block' [ngClass]="{'active': opcion=='OFRECE'}"
+                        (click)="actualizarTipoAyuda('OFRECE')">Ayuda</button>
+                </div>
+                <div class="col-xs-12 col-sm-4">
+                    <button class='btn btn-primary btn-sm btn-block' [ngClass]="{'active': opcion=='SOLICITA'}"
+                        (click)="actualizarTipoAyuda('SOLICITA')"> Necesidades </button>
+                </div>
+                <div class="col-xs-12 col-sm-4">
+                    <button class='btn btn-primary btn-sm btn-block' [ngClass]="{'active': opcion=='AMBOS'}"
+                        (click)="actualizarTipoAyuda('AMBOS')">Ambos
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-5 col-lg-4 col-xl-3 text-right ml-auto ">
+            <div class="row">
+                <div class="col-xs-12 col-sm-4">
+                    <button class='btn btn-primary btn-sm btn-block'>Mapa</button>
+                </div>
+                <div class="col-xs-12 col-sm-4">
+                    <button class='btn btn-primary btn-sm btn-block'>Lista</button>
+                </div>
+                <div class="col-xs-12 col-sm-4">
+                    <button class='btn btn-primary btn-sm btn-block' type="button" data-toggle="collapse"
+                        data-target="#collapseExample" aria-expanded="false"
+                        aria-controls="collapseExample">Ambos</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<app-lista-ayuda></app-lista-ayuda>

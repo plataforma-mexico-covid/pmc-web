@@ -1,0 +1,22 @@
+<ng-container *ngIf="validacion_correcta; else elseTemplate">
+    <div class="alert alert-success m-lg-5 my-5 max-width " role="alert">
+        <h4 class="alert-heading">¡Bienvenido!</h4>
+        <p>Su correo ha sido validado correctamente.</p>
+        <hr>
+        <p class="mb-0">Ahora puede iniciar sesión, para solicitar/ofrecer ayuda.</p>
+        <p class="mb-0">
+            <button [routerLink]="[ '/maps' ]" type="button" class="btn btn-outline-success my-3">Acceder</button>
+        </p>
+    </div>
+</ng-container>
+<ng-template #elseTemplate>
+    <div *ngIf="validacion_correcta !== null" class="alert alert-danger m-lg-5 my-5 max-width " role="alert">
+        <h4 class="alert-heading">¡Oops!</h4>
+        <p>No pudimos validar el correo.</p>
+        <hr>
+        <p class="mb-0">Por favor inténtalo de nuevo más tarde.</p>
+        <p class="mb-0">
+            <button [routerLink]="[ '/maps' ]" type="button" class="btn btn-outline-danger my-3">Inicio</button>
+        </p>
+    </div>
+</ng-template>

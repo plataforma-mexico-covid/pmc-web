@@ -1,0 +1,8 @@
+table.table.table-striped.table-hover {
+  position: absolute;
+  z-index: 9;
+  float: right !important;
+  right: 0;
+  background: aliceblue;
+  font-size: 0.8em;
+}

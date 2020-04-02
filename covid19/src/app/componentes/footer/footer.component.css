@@ -1,0 +1,10 @@
+.over-map-footer {
+    position: absolute;
+    top: 93%;
+    width: 98%;
+    z-index: 6;
+    margin: -30px 5px;
+    background: #00000059;
+    padding: 15px 0px;
+    border-radius: 5px;
+}

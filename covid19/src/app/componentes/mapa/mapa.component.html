@@ -1,0 +1,43 @@
+<ng-container *ngIf="true; else elseTemplate">
+    <div class="contenedor-map">
+        <agm-map #mapa [latitude]="initial_lat" [longitude]="initial_lng" [zoom]="zoom"
+            (zoomChange)="cambioZoom($event)" (centerChange)="cambioPosicion($event, mapa)"
+            (mapClick)="mapClicked($event)">
+
+            <agm-marker *ngFor="let ayuda of puntos_marcados; let i = index" (markerClick)='clickedMarker(ayuda)'
+                [latitude]="ayuda.ubicacion.latitude" [longitude]="ayuda.ubicacion.longitude"
+                [label]="{
+                  text: ayuda.tipoAyuda.nombre,
+                  color: 'black',
+                  fontFamily: 'Cantarell',
+                  fontSize: '14px',
+                  letterSpacing:'0.5px',
+                  fontWeight: 'bold'
+                }"
+                [iconUrl]="{
+                  url: icons[ayuda.tipoAyuda.id],
+                  scaledSize:
+                    { width: 50, height: 50, anchor : {x:5, y:10} }
+                    , labelOrigin:{x:30,y:57}
+                }"
+                (dragEnd)='markerDragEnd(ayuda, $event)'>
+                <agm-info-window>
+                    <p> <strong> Nombre: </strong> {{ ayuda.ciudadano.nombre }} {{ ayuda.ciudadano.paterno }}
+                        {{ ayuda.ciudadano.materno }} </p>
+                    <p> <strong> Origen: </strong> {{ ayuda.origenAyuda }} </p>
+                    <p> <strong> Descripción: </strong> {{ ayuda.descripcion }} </p>
+                    <p class="text-center">
+                        <button class="btn btn-outline-info mx-auto" (click)="contactarUsuario(ayuda.id)"> Contactar
+                        </button>
+                    </p>
+                </agm-info-window>
+            </agm-marker>
+            <agm-marker (markerClick)='clickedMarker("")' [latitude]="mi_posicion.latitud"
+                [longitude]="mi_posicion.longitud" [label]="'Mi Ubicación'" [iconUrl]="icons[6]">
+            </agm-marker>
+        </agm-map>
+    </div>
+</ng-container>
+<ng-template #elseTemplate>
+    <h1> {{ content }} </h1>
+</ng-template>

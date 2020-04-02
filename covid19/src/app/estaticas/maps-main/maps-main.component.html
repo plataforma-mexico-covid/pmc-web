@@ -1,0 +1,16 @@
+<ng-container *ngIf="soporta_geolocacion; else noSoporta">
+    <div class="background">
+        <app-header (tipoAyudaCambio)="actualizarTipoAyuda($event)" class="container"></app-header>
+        <app-mapa #mapaComponent></app-mapa>
+        <app-footer class="container"></app-footer>
+        <app-registro-inicio (cargaAyudas)='getTiposAyuda()'></app-registro-inicio>
+        <app-ayuda [tipoAyuda]='tipoAyuda' [provincias]='lista_provincias'
+        (actualizaMapa)='actualizaPosicion()'
+        ></app-ayuda>
+        <app-loading *ngIf="constantes.isLoading"></app-loading>
+    </div>
+</ng-container>
+<ng-template #noSoporta>
+    <h1>Este navegador no soporta geolocación, para una mejor experiencia utilice la ultima versión de Google Chrome.
+    </h1>
+</ng-template>

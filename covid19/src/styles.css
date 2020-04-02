@@ -1,0 +1,37 @@
+/* You can add global styles to this file, and also import other style files */
+html, body {
+    height: 100%;
+    font-family: Cantarell, Arial, Helvetica, sans-serif;
+}
+.contenedor-header {
+  margin: 0 15px;
+  padding: 10px 0;
+  background-color: #00000052;
+  border-radius: 5px;
+}
+
+.col-6{
+    display: inline-block;
+    width: 49%;
+}
+
+@media (min-width: 576px){
+  .modal-dialog {
+    max-width: 80% !important;
+  }
+}
+
+.modal-dialog {
+  max-width: 1200px !important;
+}
+
+
+button.btn.btn-primary.btn-sm.float-right {
+  bottom: 0px;
+  position: absolute;
+  right: 13px;
+}
+
+.gmnoprint{
+  display: none;
+}
