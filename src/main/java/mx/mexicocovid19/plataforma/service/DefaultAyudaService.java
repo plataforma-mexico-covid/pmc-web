@@ -24,6 +24,7 @@ import mx.mexicocovid19.plataforma.model.repository.CiudadanoRepository;
 import mx.mexicocovid19.plataforma.model.repository.GeoLocationRepository;
 import mx.mexicocovid19.plataforma.model.repository.PeticionRepository;
 import mx.mexicocovid19.plataforma.model.repository.UserRepository;
+import mx.mexicocovid19.plataforma.service.helper.AyudaRateRegisterEvaluationServiceHelper;
 import mx.mexicocovid19.plataforma.service.helper.GroseriasHelper;
 import mx.mexicocovid19.plataforma.util.ErrorEnum;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,6 +50,10 @@ public class DefaultAyudaService implements AyudaService {
 
     @Autowired
     private PeticionRepository peticionRepository;
+    
+    @Autowired
+    private AyudaRateRegisterEvaluationServiceHelper ayudaRateRegisterEvaluation;
+
 
     @Override
     public List<Ayuda> readAyudas(String origenAyuda, Double longitude, Double latitude, Integer kilometers) {
@@ -65,6 +70,13 @@ public class DefaultAyudaService implements AyudaService {
     public Ayuda createAyuda(final Ayuda ayuda, final String username, final String context) throws PMCException {
         
         try {
+        	
+    		// Valida el numero de ayudas que ha registrado el usuario firmado
+    		if ( ayudaRateRegisterEvaluation.isMaximumRequestsPerHourExceeded(username) ) {
+    			throw new PMCException(ErrorEnum.ERR_MAX_AYUDA, "DefaultAyudaService", ErrorEnum.ERR_MAX_AYUDA.getDescription());
+    		}
+    		
+    		
         	User user = new User();
         	user.setUsername(username);
         	Ciudadano ciudadano = ciudadanoRepository.findByUser(user);
@@ -73,14 +85,18 @@ public class DefaultAyudaService implements AyudaService {
         	ayuda.setCiudadano(ciudadano);
         	
         	if ( !GroseriasHelper.evaluarTexto(ayuda.getDescripcion()) ) {
+        		
         		Ayuda ayudaTmp = ayudaRepository.save(ayuda);
+        		
+        		
+        		// Envia notificacion por correo electronic
         		Map<String, Object> props = new HashMap<>();
         		props.put("nombre", ayuda.getCiudadano().getNombreCompleto());
         		mailService.sendAyudaConfirm(ciudadano.getUser(), props);
         		
         		return ayudaTmp;	
         	} else {        		
-        		throw new PMCException(ErrorEnum.ERR_LENGUAJE_SOEZ, "DefaultAyudaService", "Esta prohibido el uso de lenguaje soez o vulgar.");	
+        		throw new PMCException(ErrorEnum.ERR_LENGUAJE_SOEZ, "DefaultAyudaService", ErrorEnum.ERR_LENGUAJE_SOEZ.getDescription());	
         	}			
 		} catch (MessagingException e) {
 			log.info(e.getMessage());

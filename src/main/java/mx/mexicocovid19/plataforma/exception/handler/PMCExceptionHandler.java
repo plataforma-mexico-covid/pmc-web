@@ -12,11 +12,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.google.gson.Gson;
+
+import lombok.extern.log4j.Log4j2;
 import mx.mexicocovid19.plataforma.exception.PMCException;
 import mx.mexicocovid19.plataforma.model.exception.DefaultErrorList;
 import mx.mexicocovid19.plataforma.model.exception.Notification;
 import mx.mexicocovid19.plataforma.util.ErrorEnum;
 
+@Log4j2
 @ControllerAdvice
 public class PMCExceptionHandler implements Serializable{
 	
@@ -44,8 +48,11 @@ public class PMCExceptionHandler implements Serializable{
 	 */
 	@ExceptionHandler(Exception.class)
 	ResponseEntity<DefaultErrorList> handleGenericException(Exception ex) {
-		return new ResponseEntity<>(new DefaultErrorList(new Notification(ErrorEnum.ERR_GENERICO)),
-				HttpStatus.INTERNAL_SERVER_ERROR);
+		
+		Notification notification = new Notification(ErrorEnum.ERR_GENERICO.getCode(), ex.getMessage(), ErrorEnum.ERR_GENERICO.getLevel());
+		String jsonError = new Gson().toJson(notification);
+		log.error(jsonError);
+		return new ResponseEntity<>(new DefaultErrorList(notification), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 

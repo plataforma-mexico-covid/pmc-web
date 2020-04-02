@@ -65,3 +65,8 @@ mail:
   smtp:
     auth: true
     starttls.enable: true
+---
+plataforma:
+  ayuda-service:
+    hoursToWaitRegister: 1
+    registerAvailablePeruser: 2
