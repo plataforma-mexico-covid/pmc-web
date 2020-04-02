@@ -1,12 +1,12 @@
-## Table of contents
-* [General info](#general-info)
-* [Technologies](#technologies)
+## Tabla de contenido
+* [Información general](#general-info)
+* [Tecnologias](#technologies)
 * [Setup](#setup)
 
-## General info
+## Información general
 Covid19 México.
 	
-## Technologies
+## Tecnologias
 Proyecto creado con:
 * Angular 8
 * CSS
