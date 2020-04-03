@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static mx.mexicocovid19.plataforma.service.TipoEmailEnum.*;
 import static mx.mexicocovid19.plataforma.util.DateUtil.convertToLocalDateTimeViaMilisecond;
 
 @Service
@@ -64,7 +65,7 @@ public class DefaultUserService implements UserService {
         props.put("nombre", nombre);
         props.put("link", context + "api/v1/public/users/confirm?token=" + userToken.getToken());
 
-        mailService.sendValidTokenUser(userToken.getUser(), props);
+        mailService.send(userToken.getUser().getUsername(), userToken.getUser().getUsername(), props, REGISTRO_USUARIO);
     }
 
 

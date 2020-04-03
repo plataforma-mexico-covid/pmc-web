@@ -29,6 +29,8 @@ import mx.mexicocovid19.plataforma.service.helper.GroseriasHelper;
 import mx.mexicocovid19.plataforma.util.ErrorEnum;
 import org.springframework.transaction.annotation.Transactional;
 
+import static mx.mexicocovid19.plataforma.service.TipoEmailEnum.*;
+
 @Log4j2
 @Service
 public class DefaultAyudaService implements AyudaService {
@@ -91,12 +93,9 @@ public class DefaultAyudaService implements AyudaService {
         		// Envia notificacion por correo electronic
         		Map<String, Object> props = new HashMap<>();
         		props.put("nombre", ayuda.getCiudadano().getNombreCompleto());
-        		if (ayuda.getOrigenAyuda() == OrigenAyuda.SOLICITA) {
-                    mailService.sendAyudaSolicita(ciudadano.getUser(), props);
-                } else {
-                    mailService.sendAyudaOfrece(ciudadano.getUser(), props);
-                }
-        		
+        		TipoEmailEnum tipoEmail = ayuda.getOrigenAyuda() == OrigenAyuda.SOLICITA ? SOLICITA_AYUDA : OFRECE_AYUDA;
+                mailService.send(ciudadano.getUser().getUsername(), ciudadano.getUser().getUsername(), props, tipoEmail);
+
         		return ayudaTmp;	
         	} else {        		
         		throw new PMCException(ErrorEnum.ERR_LENGUAJE_SOEZ, "DefaultAyudaService", ErrorEnum.ERR_LENGUAJE_SOEZ.getDescription());	
@@ -121,7 +120,7 @@ public class DefaultAyudaService implements AyudaService {
         peticion.setFechaPeticion(LocalDateTime.now());
         peticionRepository.save(peticion);
         Map<String, Object> props = createInfoToEmail(ayuda, ciudadanoAyuda.get(), ciudadano);
-        mailService.sendAyudaMatch(ciudadanoAyuda.get().getUser(), user, props);
+        mailService.send(ciudadanoAyuda.get().getUser().getUsername(), user.getUsername(), props, MATCH_AYUDA);
     }
 
     private Map<String, Object> createInfoToEmail(Ayuda ayuda, Ciudadano ofrece, Ciudadano solicita){
