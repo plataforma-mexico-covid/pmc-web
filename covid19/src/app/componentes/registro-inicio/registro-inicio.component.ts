@@ -13,6 +13,10 @@ declare var $: any;
   styleUrls: ['./registro-inicio.component.css']
 })
 export class RegistroInicioComponent {
+
+  public usuario = new Usuario();
+  @Output() cargaAyudas = new EventEmitter();
+
   public formulario_crear_usuario = new FormGroup({
     username_n: new FormControl('', [Validators.required, Validators.email]),
     password2: new FormControl('', [Validators.required, this.validarContrasena]),
@@ -23,16 +27,14 @@ export class RegistroInicioComponent {
     tipoContacto: new FormControl('', Validators.required),
     contacto: new FormControl('', Validators.required)
   });
-  public usuario = new Usuario();
-  @Output() cargaAyudas = new EventEmitter();
   public fomulario_inicio_session = new FormGroup({
-    username: new FormControl('', [ Validators.required, Validators.email ]),
+    username: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', Validators.required)
   });
 
-  constructor( private _servicio: ServiciosService,
-               public constantes: ConstantsService,
-               private globales: GlobalsComponent ) {
+  constructor(private _servicio: ServiciosService,
+    public constantes: ConstantsService,
+    private globales: GlobalsComponent) {
     this.usuario.contactInfos.push(new ContactInfos());
     this.usuario.contactInfos[0].tipoContacto = '';
     this.usuario.email = 'citizen_uno@pmc.mx';
@@ -45,7 +47,7 @@ export class RegistroInicioComponent {
     this._servicio.iniciarSession(this.usuario).subscribe(
       (data: any) => {
         // localStorage.setItem('token', data.token);
-        if ( data.token ) {
+        if (data.token) {
           $('#exampleModal').modal('hide');
           this.constantes.isLoading = false;
           this.globales.usuario = data;
@@ -58,7 +60,7 @@ export class RegistroInicioComponent {
             title: 'Error!',
             text: 'Ocurrio un problema al iniciar sessión',
             icon: 'error',
-            confirmButtonText: 'Cool'
+            confirmButtonText: 'Entendido'
           });
         }
       },
@@ -68,7 +70,7 @@ export class RegistroInicioComponent {
           title: 'Error!',
           text: 'Ocurrio un problema al iniciar sessión',
           icon: 'error',
-          confirmButtonText: 'Cool'
+          confirmButtonText: 'Entendido'
         });
       }
     );
@@ -78,9 +80,9 @@ export class RegistroInicioComponent {
     this.constantes.isLoading = true;
     const aux = {
       contactInfos: [{
-          contacto: this.usuario.contactInfos[0].contacto,
-          tipoContacto: this.usuario.contactInfos[0].tipoContacto
-        }],
+        contacto: this.usuario.contactInfos[0].contacto,
+        tipoContacto: this.usuario.contactInfos[0].tipoContacto
+      }],
       materno: this.usuario.materno,
       nombre: this.usuario.nombre,
       password: this.usuario.password2,
@@ -103,14 +105,14 @@ export class RegistroInicioComponent {
             title: 'Error!',
             text: error.error.message,
             icon: 'error',
-            confirmButtonText: 'Cool'
+            confirmButtonText: 'Entendido'
           });
         } else {
           Swal.fire({
             title: 'Error!',
             text: 'Ocurrio un problema registrar el usuario',
             icon: 'error',
-            confirmButtonText: 'Cool'
+            confirmButtonText: 'Entendido'
           });
         }
 
