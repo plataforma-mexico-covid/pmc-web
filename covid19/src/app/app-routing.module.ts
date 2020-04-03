@@ -15,13 +15,8 @@ const routes: Routes = [
   { path: '**', redirectTo: 'maps', pathMatch: 'full' },
 ];
 
-const routerOptions: ExtraOptions = {
-  useHash: true,
-  anchorScrolling: 'enabled'
-};
-
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
