@@ -1,5 +1,5 @@
 function RUTAS() {
   return {
-    endpoint: 'http://localhost:8090'
+    endpoint: 'http://ayudando.me'
   }
 }
