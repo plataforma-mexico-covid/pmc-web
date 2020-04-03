@@ -19,7 +19,7 @@ export class AyudaComponent {
   public lista_municipios: any;
   public ayuda = new Ayuda();
   public formulario = new FormGroup({
-    nombre: new FormControl(this.globales.usuario.fullname,  Validators.required),
+    nombre: new FormControl(this.globales.usuario.fullname, Validators.required),
     descripcion: new FormControl(this.ayuda.descripcion, Validators.required),
     direccion: new FormControl('', Validators.required),
     estado: new FormControl('', Validators.required),
@@ -86,10 +86,10 @@ export class AyudaComponent {
 
 
   enviarAyuda() {
-    if ( this._constantes.latitud ) {
+    if (this._constantes.latitud) {
       this.ayuda.ubicacion.latitude = this._constantes.latitud;
     }
-    if ( this._constantes.longitud ) {
+    if (this._constantes.longitud) {
       this.ayuda.ubicacion.longitude = this._constantes.longitud;
     }
     this._constantes.isLoading = true;
@@ -110,11 +110,12 @@ export class AyudaComponent {
         $('#ayudaModal').modal('hide');
       },
       (error) => {
+        console.log(error);
         Swal.fire({
           title: 'Error!',
-          text: 'Ocurrio un error desconocido.',
+          text: error.error.notifications && error.error.notifications[0].message ? error.error.notifications[0].message : 'Ocurrio un error desconocido.',
           icon: 'error',
-          confirmButtonText: 'Cool'
+          confirmButtonText: 'Entendido'
         });
         this._constantes.isLoading = false;
       }

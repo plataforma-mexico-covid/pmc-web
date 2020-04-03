@@ -35,7 +35,7 @@ export class MapsMainComponent implements OnInit {
   }
 
   actualizaPosicion() {
-    // this.mapaComponent.ngOnInit();
+    this.mapaComponent.actualizarRegistros();
   }
 
   getTiposAyuda() {
