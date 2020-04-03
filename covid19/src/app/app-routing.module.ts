@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { MapaComponent } from './componentes/mapa/mapa.component';
+import { Routes, RouterModule, ExtraOptions } from '@angular/router';
 import { ConfirmacionComponent } from './estaticas/confirmacion/confirmacion.component';
 import { MapsMainComponent } from './estaticas/maps-main/maps-main.component';
 
@@ -15,6 +14,11 @@ const routes: Routes = [
   },
   { path: '**', redirectTo: 'maps', pathMatch: 'full' },
 ];
+
+const routerOptions: ExtraOptions = {
+  useHash: true,
+  anchorScrolling: 'enabled'
+};
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
