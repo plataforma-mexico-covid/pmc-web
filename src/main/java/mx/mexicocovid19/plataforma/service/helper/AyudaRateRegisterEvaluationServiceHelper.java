@@ -43,7 +43,7 @@ public class AyudaRateRegisterEvaluationServiceHelper implements InitializingBea
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		requestCountsPerUser = CacheBuilder.newBuilder().expireAfterWrite(hoursToWaitRegister, TimeUnit.MINUTES)
+		requestCountsPerUser = CacheBuilder.newBuilder().expireAfterWrite(hoursToWaitRegister, TimeUnit.HOURS)
 				
 		.build(new CacheLoader<String, Integer>() {
 			public Integer load(String key) {
