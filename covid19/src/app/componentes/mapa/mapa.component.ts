@@ -79,7 +79,7 @@ export class MapaComponent implements OnInit {
 
   actualizarRegistros(longitud?, latitud?, zoom?) {
     // ayuda
-    this._servicio.ayuda(this.tipo_ayuda, longitud ? longitud : this.mi_posicion.longitud, latitud ? latitud : this.mi_posicion.latitud, zoom).subscribe(
+    this._servicio.ayuda(this.tipo_ayuda, longitud ? longitud : this.mi_posicion.longitud, latitud ? latitud : this.mi_posicion.latitud, zoom ? zoom : this.zoom).subscribe(
       (data: any[]) => {
         this.puntos_marcados = data;
         this._constantes.puntos_marcados.length = 0;
