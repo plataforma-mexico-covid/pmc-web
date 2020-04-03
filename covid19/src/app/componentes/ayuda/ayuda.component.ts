@@ -49,7 +49,7 @@ export class AyudaComponent {
               title: 'Error!',
               text: 'No se ha permitido el acceso a la posición del usuario.',
               icon: 'error',
-              confirmButtonText: 'Cool'
+              confirmButtonText: 'Entendido'
             });
             break;
           case objPositionError.POSITION_UNAVAILABLE:
@@ -57,7 +57,7 @@ export class AyudaComponent {
               title: 'Error!',
               text: 'No se ha podido acceder a la información de su posición.',
               icon: 'error',
-              confirmButtonText: 'Cool'
+              confirmButtonText: 'Entendido'
             });
             break;
           case objPositionError.TIMEOUT:
@@ -65,7 +65,7 @@ export class AyudaComponent {
               title: 'Error!',
               text: 'El servicio ha tardado demasiado tiempo en responder.',
               icon: 'error',
-              confirmButtonText: 'Cool'
+              confirmButtonText: 'Entendido'
             });
             break;
           default:
@@ -73,7 +73,7 @@ export class AyudaComponent {
               title: 'Error!',
               text: 'Ocurrio un error desconocido.',
               icon: 'error',
-              confirmButtonText: 'Cool'
+              confirmButtonText: 'Entendido'
             });
         }
       }, {
