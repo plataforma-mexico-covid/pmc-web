@@ -1,5 +1,5 @@
 import { ConstantsService } from './../global/constants.service';
-import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ServiciosService } from '../servicios.service';
 import { Ayuda } from 'src/app/entidades';
 import Swal from 'sweetalert2';
@@ -11,6 +11,7 @@ declare var $: any;
   styleUrls: ['./mapa.component.css']
 })
 export class MapaComponent implements OnInit {
+  @Output() setOrigenContactar = new EventEmitter();
   @Input() tipo_ayuda: 'AMBOS' | 'OFRECE' | 'SOLICITA' = 'AMBOS';
   initial_lat: number = 19.421133;
   initial_lng: number = 99.134957;
@@ -20,6 +21,7 @@ export class MapaComponent implements OnInit {
   soporta_geolocacion = false;
   contador_movimiento: any;
   mi_posicion = { longitud: null, latitud: null };
+  ayuda_id: number;
 
   icons = {
     1: '/assets/imgs/comida_50_50.png',
@@ -136,7 +138,8 @@ export class MapaComponent implements OnInit {
     }, 500);
   }
 
-  contactarUsuario(ayuda_id) {
+  contactarUsuario(ayuda_id?) {
+    this.ayuda_id = ayuda_id ? ayuda_id : this.ayuda_id;
     if (this._globales.usuario.token) {
       Swal.fire({
         title: '¿Quieres contactar con este usuario?',
@@ -149,7 +152,7 @@ export class MapaComponent implements OnInit {
         cancelButtonText: 'No'
       }).then((result) => {
         if (result.value) {
-          this._servicio.contactarAyuda(ayuda_id, this._globales.usuario.username).subscribe((data: any) => {
+          this._servicio.contactarAyuda(this.ayuda_id, this._globales.usuario.username).subscribe((data: any) => {
             Swal.fire('¡Exito!', 'Se han enviado los datos del usuario al correo proporcionado en el registro.', 'success');
           }, error => {
             Swal.fire('!Error¡', 'No se pudo realizar la operación', 'error');
@@ -158,6 +161,7 @@ export class MapaComponent implements OnInit {
       });
 
     } else {
+      this.setOrigenContactar.emit(true);
       $('#exampleModal').modal('show');
     }
   }

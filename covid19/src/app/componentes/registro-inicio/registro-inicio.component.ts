@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { ServiciosService } from '../servicios.service';
 import { ContactInfos, Usuario } from 'src/app/entidades';
 import Swal from 'sweetalert2';
@@ -16,6 +16,8 @@ export class RegistroInicioComponent {
 
   public usuario = new Usuario();
   @Output() cargaAyudas = new EventEmitter();
+  @Output() loginCorrecto = new EventEmitter();
+  @Input() origen_contactar = false;
 
   public formulario_crear_usuario = new FormGroup({
     username_n: new FormControl('', [Validators.required, Validators.email]),
@@ -51,10 +53,12 @@ export class RegistroInicioComponent {
           $('#exampleModal').modal('hide');
           this.constantes.isLoading = false;
           this.globales.usuario = data;
-          console.log(this.globales.usuario);
-          // this.getTiposAyuda();
           this.cargaAyudas.emit();
-          $('#ayudaModal').modal('show');
+          if (!this.origen_contactar) {
+            $('#ayudaModal').modal('show');
+          } else {
+            this.loginCorrecto.emit();
+          }
         } else {
           Swal.fire({
             title: 'Error!',
@@ -63,6 +67,7 @@ export class RegistroInicioComponent {
             confirmButtonText: 'Entendido'
           });
         }
+        this.origen_contactar = false;
       },
       (error) => {
         this.constantes.isLoading = false;

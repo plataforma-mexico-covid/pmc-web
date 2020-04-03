@@ -16,6 +16,7 @@ export class MapsMainComponent implements OnInit {
   soporta_geolocacion = false;
   tipoAyuda: any;
   lista_provincias: any;
+  origen_contactar = false;
 
 
   constructor(
@@ -61,5 +62,13 @@ export class MapsMainComponent implements OnInit {
 
       }
     );
+  }
+
+  setOrigenContactar() {
+    this.origen_contactar = true;
+  }
+
+  loginCorrecto() {
+    this.mapaComponent.contactarUsuario();
   }
 }

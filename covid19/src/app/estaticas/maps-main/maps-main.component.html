@@ -1,12 +1,13 @@
 <ng-container *ngIf="soporta_geolocacion; else noSoporta">
     <div class="background">
         <app-header (tipoAyudaCambio)="actualizarTipoAyuda($event)" class="container"></app-header>
-        <app-mapa #mapaComponent></app-mapa>
+        <app-mapa #mapaComponent (setOrigenContactar)="setOrigenContactar($event)"></app-mapa>
         <app-footer class="container"></app-footer>
-        <app-registro-inicio (cargaAyudas)='getTiposAyuda()'></app-registro-inicio>
-        <app-ayuda [tipoAyuda]='tipoAyuda' [provincias]='lista_provincias'
-        (actualizaMapa)='actualizaPosicion()'
-        ></app-ayuda>
+        <app-registro-inicio [origen_contactar]="origen_contactar" (loginCorrecto)="loginCorrecto()"
+            (cargaAyudas)='getTiposAyuda()'>
+        </app-registro-inicio>
+        <app-ayuda [tipoAyuda]='tipoAyuda' [provincias]='lista_provincias' (actualizaMapa)='actualizaPosicion()'>
+        </app-ayuda>
         <app-loading *ngIf="constantes.isLoading"></app-loading>
     </div>
 </ng-container>
