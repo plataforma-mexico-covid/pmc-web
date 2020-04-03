@@ -16,12 +16,17 @@ public class MockMailServiceImpl implements MailService {
     }
 
     @Override
-    public void sendAyudaConfirm(User user, Map<String, Object> hTemplateVariables) throws MessagingException {
+    public void sendAyudaSolicita(User user, Map<String, Object> hTemplateVariables) throws MessagingException {
 
     }
 
     @Override
-    public void sendAyudaMatchConfirm(User user, User requester, Map<String, Object> hTemplateVariables) throws MessagingException {
+    public void sendAyudaOfrece(User user, Map<String, Object> hTemplateVariables) throws MessagingException {
+
+    }
+
+    @Override
+    public void sendAyudaMatch(User user, User requester, Map<String, Object> hTemplateVariables) throws MessagingException {
 
     }
 }

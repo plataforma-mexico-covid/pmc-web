@@ -87,12 +87,15 @@ public class DefaultAyudaService implements AyudaService {
         	if ( !GroseriasHelper.evaluarTexto(ayuda.getDescripcion()) ) {
         		
         		Ayuda ayudaTmp = ayudaRepository.save(ayuda);
-        		
-        		
+
         		// Envia notificacion por correo electronic
         		Map<String, Object> props = new HashMap<>();
         		props.put("nombre", ayuda.getCiudadano().getNombreCompleto());
-        		mailService.sendAyudaConfirm(ciudadano.getUser(), props);
+        		if (ayuda.getOrigenAyuda() == OrigenAyuda.SOLICITA) {
+                    mailService.sendAyudaSolicita(ciudadano.getUser(), props);
+                } else {
+                    mailService.sendAyudaOfrece(ciudadano.getUser(), props);
+                }
         		
         		return ayudaTmp;	
         	} else {        		
@@ -118,7 +121,7 @@ public class DefaultAyudaService implements AyudaService {
         peticion.setFechaPeticion(LocalDateTime.now());
         peticionRepository.save(peticion);
         Map<String, Object> props = createInfoToEmail(ayuda, ciudadanoAyuda.get(), ciudadano);
-        mailService.sendAyudaMatchConfirm(ciudadanoAyuda.get().getUser(), user, props);
+        mailService.sendAyudaMatch(ciudadanoAyuda.get().getUser(), user, props);
     }
 
     private Map<String, Object> createInfoToEmail(Ayuda ayuda, Ciudadano ofrece, Ciudadano solicita){
@@ -133,8 +136,8 @@ public class DefaultAyudaService implements AyudaService {
         props.put("nombre-ofrece", ofrece.getNombreCompleto());
         props.put("email-ofrece", ofrece.getUser().getUsername());
         props.put("contacto-ofrece", contactoOfrece);
-        props.put("nombre-solicita", ofrece.getNombreCompleto());
-        props.put("email-solicita", ofrece.getUser().getUsername());
+        props.put("nombre-solicita", solicita.getNombreCompleto());
+        props.put("email-solicita", solicita.getUser().getUsername());
         props.put("contacto-solicita", contactoSolicita);
         return props;
     }

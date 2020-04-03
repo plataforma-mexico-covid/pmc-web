@@ -33,21 +33,28 @@ public class VelocityMailServiceImpl implements MailService {
     public void sendValidTokenUser(User user, Map<String, Object> hTemplateVariables) throws MessagingException {
         templateMessage.setTo(user.getUsername());
         templateMessage.setCc(user.getUsername());
-        send(templateMessage, convertToVelocityContext(hTemplateVariables), "email/tokenConfirm.vm");
+        send(templateMessage, convertToVelocityContext(hTemplateVariables), "email/registroUsuario.vm");
     }
 
     @Override
-    public void sendAyudaConfirm(User user, Map<String, Object> hTemplateVariables) throws MessagingException {
+    public void sendAyudaOfrece(User user, Map<String, Object> hTemplateVariables) throws MessagingException {
         templateMessage.setTo(user.getUsername());
         templateMessage.setCc(user.getUsername());
-        send(templateMessage, convertToVelocityContext(hTemplateVariables), "email/ayudaConfirm.vm");
+        send(templateMessage, convertToVelocityContext(hTemplateVariables), "email/ofreceAyuda.vm");
     }
 
     @Override
-    public void sendAyudaMatchConfirm(User user, User requester, Map<String, Object> hTemplateVariables) throws MessagingException {
+    public void sendAyudaSolicita(User user, Map<String, Object> hTemplateVariables) throws MessagingException {
+        templateMessage.setTo(user.getUsername());
+        templateMessage.setCc(user.getUsername());
+        send(templateMessage, convertToVelocityContext(hTemplateVariables), "email/solicitaAyuda.vm.vm");
+    }
+
+    @Override
+    public void sendAyudaMatch(User user, User requester, Map<String, Object> hTemplateVariables) throws MessagingException {
         templateMessage.setTo(user.getUsername());
         templateMessage.setCc(requester.getUsername());
-        send(templateMessage, convertToVelocityContext(hTemplateVariables), "email/matchConfirm.vm");
+        send(templateMessage, convertToVelocityContext(hTemplateVariables), "email/matchAyuda.vm");
     }
 
     private VelocityContext convertToVelocityContext(final Map<String, Object> hTemplateVariables){
