@@ -69,7 +69,7 @@ public class DefaultAyudaService implements AyudaService {
 
     @Override
     @Transactional
-    public Ayuda createAyuda(final Ayuda ayuda, final String username, final String context) throws PMCException {
+    public Ayuda createAyuda(final Ayuda ayuda, final String username) throws PMCException {
         
         try {
         	
@@ -108,7 +108,7 @@ public class DefaultAyudaService implements AyudaService {
 
     @Override
     @Transactional
-    public void matchAyuda(Integer idAyuda, String username, String context) throws MessagingException {
+    public void matchAyuda(Integer idAyuda, String username) throws MessagingException {
         Ayuda ayuda = ayudaRepository.getOne(idAyuda);
         User user = new User();
         user.setUsername(username);

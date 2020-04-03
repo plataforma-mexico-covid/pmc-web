@@ -47,7 +47,7 @@ public class DefaultUserService implements UserService {
 
     @Override
     @Transactional
-    public void registerUser(final UserDTO userDTO, final String context) throws Exception {
+    public void registerUser(final UserDTO userDTO, final String urlConfirmToken) throws Exception {
         User userTmp = userRepository.findByUsername(userDTO.getUsername());
         if(userTmp != null) {
             throw new Exception(String.format("Este correo '%s' ya fue utilizado por otra cuenta.", userDTO.getUsername()));
@@ -57,13 +57,13 @@ public class DefaultUserService implements UserService {
         final Ciudadano ciudadano = ciudadanoRepository.save(getCiudadano(userDTO, user));
         ciudadanoContactoRepository.saveAll(getCiudadanoContactos(userDTO, ciudadano));
         UserToken token = userTokenService.createUserTokenByUser(user);
-        sendMailToken(token, context, ciudadano.getNombre());
+        sendMailToken(token, urlConfirmToken, ciudadano.getNombre());
     }
 
-    private void sendMailToken(UserToken userToken, String context, String nombre) throws MessagingException {
+    private void sendMailToken(UserToken userToken, String urlConfirmToken, String nombre) throws MessagingException {
         Map<String, Object> props = new HashMap<>();
         props.put("nombre", nombre);
-        props.put("link", context + "api/v1/public/users/confirm?token=" + userToken.getToken());
+        props.put("link", urlConfirmToken + "?token=" + userToken.getToken());
 
         mailService.send(userToken.getUser().getUsername(), userToken.getUser().getUsername(), props, REGISTRO_USUARIO);
     }

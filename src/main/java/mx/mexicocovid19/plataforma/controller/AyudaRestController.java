@@ -63,7 +63,7 @@ public class AyudaRestController {
         
         ResponseEntity<AyudaDTO> response = new ResponseEntity<AyudaDTO>(HttpStatus.BAD_REQUEST);
         
-		Ayuda createAyuda = ayudaService.createAyuda(AyudaMapper.from(ayudaDTO), username, request.getContextPath());
+		Ayuda createAyuda = ayudaService.createAyuda(AyudaMapper.from(ayudaDTO), username);
 		response = new ResponseEntity<AyudaDTO>(AyudaMapper.from(createAyuda), HttpStatus.OK);
         
         return response;
@@ -73,8 +73,8 @@ public class AyudaRestController {
     @PostMapping(
             value = { ApiController.API_PATH_PRIVATE + "/ayuda/{ayuda}/match" },
             produces = {"application/json;charset=UTF-8"})
-    public ResponseEntity<Void> matchAyuda(@PathVariable(value = "ayuda") Integer idAyuda, @RequestBody MatchDTO matchDTO, HttpServletRequest request) throws MessagingException {
-        ayudaService.matchAyuda(idAyuda, matchDTO.getUsername(), request.getContextPath());
+    public ResponseEntity<Void> matchAyuda(@PathVariable(value = "ayuda") Integer idAyuda, @RequestBody MatchDTO matchDTO) throws MessagingException {
+        ayudaService.matchAyuda(idAyuda, matchDTO.getUsername());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
