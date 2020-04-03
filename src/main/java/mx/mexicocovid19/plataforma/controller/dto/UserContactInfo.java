@@ -9,6 +9,9 @@ import mx.mexicocovid19.plataforma.model.entity.TipoContacto;
 @Setter
 @AllArgsConstructor
 public class UserContactInfo {
+	
+	public UserContactInfo(){}
+	
     private TipoContacto tipoContacto;
     private String contacto;
 

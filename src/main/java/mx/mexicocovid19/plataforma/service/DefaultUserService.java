@@ -1,22 +1,39 @@
 package mx.mexicocovid19.plataforma.service;
 
-import mx.mexicocovid19.plataforma.controller.dto.UserDTO;
-import mx.mexicocovid19.plataforma.exception.PMCException;
-import mx.mexicocovid19.plataforma.model.entity.*;
-import mx.mexicocovid19.plataforma.model.repository.*;
-import mx.mexicocovid19.plataforma.util.ErrorEnum;
+import static mx.mexicocovid19.plataforma.util.DateUtil.convertToLocalDateTimeViaMilisecond;
+
+import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.mail.MessagingException;
-import java.time.LocalDateTime;
-import java.util.*;
-import java.util.stream.Collectors;
-
-import static mx.mexicocovid19.plataforma.util.DateUtil.convertToLocalDateTimeViaMilisecond;
-
+import lombok.extern.log4j.Log4j2;
+import mx.mexicocovid19.plataforma.controller.dto.UserDTO;
+import mx.mexicocovid19.plataforma.exception.PMCException;
+import mx.mexicocovid19.plataforma.model.entity.Ciudadano;
+import mx.mexicocovid19.plataforma.model.entity.CiudadanoContacto;
+import mx.mexicocovid19.plataforma.model.entity.User;
+import mx.mexicocovid19.plataforma.model.entity.UserRole;
+import mx.mexicocovid19.plataforma.model.entity.UserToken;
+import mx.mexicocovid19.plataforma.model.repository.CiudadanoContactoRepository;
+import mx.mexicocovid19.plataforma.model.repository.CiudadanoRepository;
+import mx.mexicocovid19.plataforma.model.repository.UserRepository;
+import mx.mexicocovid19.plataforma.model.repository.UserRoleRepository;
+import mx.mexicocovid19.plataforma.model.repository.UserTokenRepository;
+import mx.mexicocovid19.plataforma.service.helper.DefaultUserServiceHelper;
+import mx.mexicocovid19.plataforma.service.helper.PasswordHelper;
+import mx.mexicocovid19.plataforma.util.ErrorEnum;
+@Log4j2
 @Service
 public class DefaultUserService implements UserService {
     private UserRepository userRepository;
@@ -29,6 +46,9 @@ public class DefaultUserService implements UserService {
 
     @Autowired
     PasswordEncoder passwordEncoder;
+    
+    @Autowired
+    private DefaultUserServiceHelper userServiceHelper;
 
     public DefaultUserService(final UserRepository userRepository, final UserRoleRepository userRoleRepository,
             final CiudadanoRepository ciudadanoRepository,
@@ -46,17 +66,26 @@ public class DefaultUserService implements UserService {
 
     @Override
     @Transactional
-    public void registerUser(final UserDTO userDTO, final String context) throws Exception {
-        User userTmp = userRepository.findByUsername(userDTO.getUsername());
-        if(userTmp != null) {
-            throw new Exception(String.format("Este correo '%s' ya fue utilizado por otra cuenta.", userDTO.getUsername()));
-        }
-        final User user = userRepository.save(getUser(userDTO));
-        final UserRole userRole = userRoleRepository.save(getUserRole(user));
-        final Ciudadano ciudadano = ciudadanoRepository.save(getCiudadano(userDTO, user));
-        ciudadanoContactoRepository.saveAll(getCiudadanoContactos(userDTO, ciudadano));
-        UserToken token = userTokenService.createUserTokenByUser(user);
-        sendMailToken(token, context, ciudadano.getNombre());
+    public void registerUser(final UserDTO userDTO, final String context) throws PMCException {
+    	
+    	// Ejecuta las validaciones del registro del usuario
+    	userServiceHelper.validaRegistroUsuario(userDTO);
+    	
+    	
+    	// Persiste la informacion del usuario en la base de datos        	
+    	final User user = userRepository.save(getUser(userDTO));
+    	final UserRole userRole = userRoleRepository.save(getUserRole(user));
+    	final Ciudadano ciudadano = ciudadanoRepository.save(getCiudadano(userDTO, user));
+    	ciudadanoContactoRepository.saveAll(getCiudadanoContactos(userDTO, ciudadano));
+    	UserToken token = userTokenService.createUserTokenByUser(user);
+    	
+        try {
+
+        	// Envia la notificacion por correo electronico
+        	sendMailToken(token, context, ciudadano.getNombre());
+		} catch (MessagingException e) {
+			throw new PMCException(ErrorEnum.ERR_GENERICO, getClass().getName(), e.getMessage());
+		}
     }
 
     private void sendMailToken(UserToken userToken, String context, String nombre) throws MessagingException {
@@ -109,11 +138,11 @@ public class DefaultUserService implements UserService {
     public void confirmUser(final String token) throws Exception {
         final Optional<UserToken> userTokenOpt = userTokenRepository.findById(token);
         if (!userTokenOpt.isPresent()) {
-            throw new PMCException(ErrorEnum.ERR_GENERICO, "DefaultUserService", "Token Invalido");
+            throw new PMCException(ErrorEnum.ERR_GENERICO, getClass().getName(), "Token Invalido");
         }
         UserToken userToken = userTokenOpt.get();
         if(isExpired(userToken.getExpirationDate())) {
-            throw new PMCException(ErrorEnum.ERR_GENERICO, "DefaultUserService", "Token expirado");
+            throw new PMCException(ErrorEnum.ERR_GENERICO, getClass().getName(), "Token expirado");
         }
         userToken.getUser().setValidated(true);
         userRepository.save(userToken.getUser());

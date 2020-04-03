@@ -10,6 +10,10 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 public class UserDTO {
+	
+	public UserDTO(){}
+	
+	
     private String username;
     private String password;
     private String nombre;
