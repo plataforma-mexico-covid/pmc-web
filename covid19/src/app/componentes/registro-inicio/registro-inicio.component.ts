@@ -39,9 +39,9 @@ export class RegistroInicioComponent {
     private globales: GlobalsComponent) {
     this.usuario.contactInfos.push(new ContactInfos());
     this.usuario.contactInfos[0].tipoContacto = '';
-    this.usuario.email = 'citizen_uno@pmc.mx';
-    this.usuario.username = 'citizen_uno@pmc.mx';
-    this.usuario.password = 'p4Ssword';
+    this.usuario.email = '';
+    this.usuario.username = '';
+    this.usuario.password = '';
   }
 
   iniciarSession() {
