@@ -4,7 +4,7 @@ import { ContactInfos, Usuario } from 'src/app/entidades';
 import Swal from 'sweetalert2';
 import { GlobalsComponent } from '../global/global.component';
 import { ConstantsService } from '../global/constants.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 
 declare var $: any;
 @Component({
@@ -13,23 +13,21 @@ declare var $: any;
   styleUrls: ['./registro-inicio.component.css']
 })
 export class RegistroInicioComponent {
-
-  public usuario = new Usuario();
-  @Output() cargaAyudas = new EventEmitter();
-  public fomulario_inicio_session = new FormGroup({
-    username: new FormControl('', [ Validators.required, Validators.email ]),
-    password: new FormControl('', Validators.required)
-  });
-
   public formulario_crear_usuario = new FormGroup({
     username_n: new FormControl('', [Validators.required, Validators.email]),
-    password2: new FormControl('', Validators.required),
-    password_confirm: new FormControl('', Validators.required),
+    password2: new FormControl('', [Validators.required, this.validarContrasena]),
+    password_confirm: new FormControl('', [Validators.required, this.validarContrasena]),
     nombre: new FormControl('', Validators.required),
     paterno: new FormControl('', Validators.required),
     materno: new FormControl('', Validators.required),
     tipoContacto: new FormControl('', Validators.required),
     contacto: new FormControl('', Validators.required)
+  });
+  public usuario = new Usuario();
+  @Output() cargaAyudas = new EventEmitter();
+  public fomulario_inicio_session = new FormGroup({
+    username: new FormControl('', [ Validators.required, Validators.email ]),
+    password: new FormControl('', Validators.required)
   });
 
   constructor( private _servicio: ServiciosService,
@@ -131,5 +129,16 @@ export class RegistroInicioComponent {
 
       }
     );
+  }
+
+  private validarContrasena(control: AbstractControl) {
+    const contrasena = control.value;
+    let error = null;
+    const regex = new RegExp(/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/);
+    if (!regex.test(contrasena)) {
+      error = 'La contraseña debe tener al entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula, al menos una mayúscula y al menos un caracter no alfanumérico';
+    }
+    console.log(error);
+    return error;
   }
 }

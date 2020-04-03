@@ -24,6 +24,9 @@ export class Usuario {
     this.tel = '';
     this.materno = '';
     this.contactInfos = new Array<ContactInfos>();
+    this.password2 = '';
+    this.username_n = '';
+    this.paterno = '';
   }
 }
 
