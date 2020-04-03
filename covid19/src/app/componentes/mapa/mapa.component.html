@@ -5,22 +5,19 @@
             (mapClick)="mapClicked($event)">
 
             <agm-marker *ngFor="let ayuda of puntos_marcados; let i = index" (markerClick)='clickedMarker(ayuda)'
-                [latitude]="ayuda.ubicacion.latitude" [longitude]="ayuda.ubicacion.longitude"
-                [label]="{
+                [latitude]="ayuda.ubicacion.latitude" [longitude]="ayuda.ubicacion.longitude" [label]="{
                   text: ayuda.tipoAyuda.nombre,
                   color: 'black',
                   fontFamily: 'Cantarell',
                   fontSize: '14px',
                   letterSpacing:'0.5px',
                   fontWeight: 'bold'
-                }"
-                [iconUrl]="{
+                }" [iconUrl]="{
                   url: icons[ayuda.tipoAyuda.id],
                   scaledSize:
                     { width: 50, height: 50, anchor : {x:5, y:10} }
                     , labelOrigin:{x:30,y:57}
-                }"
-                (dragEnd)='markerDragEnd(ayuda, $event)'>
+                }" (dragEnd)='markerDragEnd(ayuda, $event)'>
                 <agm-info-window>
                     <p> <strong> Nombre: </strong> {{ ayuda.ciudadano.nombre }} {{ ayuda.ciudadano.paterno }}
                         {{ ayuda.ciudadano.materno }} </p>
@@ -32,8 +29,9 @@
                     </p>
                 </agm-info-window>
             </agm-marker>
-            <agm-marker (markerClick)='clickedMarker("")' [latitude]="mi_posicion.latitud"
-                [longitude]="mi_posicion.longitud" [label]="'Mi Ubicación'" [iconUrl]="icons[6]">
+            <agm-marker *ngIf="mi_posicion.latitud && mi_posicion.longitud" (markerClick)='clickedMarker("")'
+                [latitude]="mi_posicion.latitud" [longitude]="mi_posicion.longitud" [label]="'Mi Ubicación'"
+                [iconUrl]="icons[6]">
             </agm-marker>
         </agm-map>
     </div>
