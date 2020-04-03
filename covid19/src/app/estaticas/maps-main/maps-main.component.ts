@@ -64,8 +64,8 @@ export class MapsMainComponent implements OnInit {
     );
   }
 
-  setOrigenContactar() {
-    this.origen_contactar = true;
+  setOrigenContactar(contactar) {
+    this.origen_contactar = contactar;
   }
 
   loginCorrecto() {

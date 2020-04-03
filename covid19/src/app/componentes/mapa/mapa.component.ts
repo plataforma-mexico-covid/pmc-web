@@ -154,6 +154,7 @@ export class MapaComponent implements OnInit {
         if (result.value) {
           this._servicio.contactarAyuda(this.ayuda_id, this._globales.usuario.username).subscribe((data: any) => {
             Swal.fire('¡Exito!', 'Se han enviado los datos del usuario al correo proporcionado en el registro.', 'success');
+            this.actualizarRegistros();
           }, error => {
             Swal.fire('!Error¡', 'No se pudo realizar la operación', 'error');
           });
