@@ -51,20 +51,21 @@
                   placeholder="Password" [(ngModel)]="usuario.password_confirm" name="password-confirma-r"
                   formControlName='password_confirm'>
               </div>
-              {{usuario| json}}
               <div class="col-md-12" *ngIf="usuario.password2 !==  usuario.password_confirm" >
                   <small>Las contraseñas no coinciden.</small>
               </div>
-              <p class="text-info text-left" *ngIf="( usuario.password.trim().length === 0 ) || ( !this.formulariocuenta.get('password2').valid && this.formulariocuenta.get('password2').touched ) "  >
+              <div class="col-md-12 text-warning"  *ngIf="( usuario.password.trim().length === 0 ) || ( !this.formulario_crear_usuario.get('password2').valid && this.formulario_crear_usuario.get('password2').touched ) "   >
+                <small id="format-pass">
                 La contraseña debe tener entre 8 y 16 caracteres, al menos
                 un dígito, al menos una minúscula, al menos una mayúscula y al menos un caracter no alfanumérico.
-              </p>
+                </small>
+              </div>
             </div>
 
             <div class="form-group row">
               <div class="col-md-6">
-                <label for="nombre">Nombres</label>
-                <input type="text" class="form-control form-control-sm" id="nombre" [(ngModel)]="usuario.nombre"
+                <label for="nombrea">Nombres</label>
+                <input type="text" class="form-control form-control-sm" id="nombrea" [(ngModel)]="usuario.nombre"
                   name="nombre-registro" formControlName='nombre' >
               </div>
               <div class="col-md-3">
