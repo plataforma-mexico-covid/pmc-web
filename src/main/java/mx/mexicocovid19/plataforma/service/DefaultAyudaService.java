@@ -75,7 +75,7 @@ public class DefaultAyudaService implements AyudaService {
         	
     		// Valida el numero de ayudas que ha registrado el usuario firmado
     		if ( ayudaRateRegisterEvaluation.isMaximumRequestsPerHourExceeded(username) ) {
-    			throw new PMCException(ErrorEnum.ERR_MAX_AYUDA, "DefaultAyudaService", ErrorEnum.ERR_MAX_AYUDA.getDescription());
+    			throw new PMCException(ErrorEnum.ERR_MAX_AYUDA, "DefaultAyudaService");
     		}
     		
     		
@@ -98,7 +98,7 @@ public class DefaultAyudaService implements AyudaService {
 
         		return ayudaTmp;	
         	} else {        		
-        		throw new PMCException(ErrorEnum.ERR_LENGUAJE_SOEZ, "DefaultAyudaService", ErrorEnum.ERR_LENGUAJE_SOEZ.getDescription());	
+        		throw new PMCException(ErrorEnum.ERR_LENGUAJE_SOEZ, "DefaultAyudaService");	
         	}			
 		} catch (MessagingException e) {
 			log.info(e.getMessage());

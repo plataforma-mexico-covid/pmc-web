@@ -7,10 +7,14 @@ public enum ErrorEnum {
 	
 	/** Errores de servicio y logica de negocio */
 	ERR_LENGUAJE_SOEZ("ERR-001", "Uso de lengaje soez e inapropiado", "", ErrorConst.WARNING, ""),
-	
-	/** Errores de servicio y logica de negocio */
 	ERR_MAX_AYUDA("ERR-002", "Ha rebasado el numero maximo de ayuda, intenta pasada la hora.", "", ErrorConst.WARNING, ""),
+	ERR_UNAVAILABLE_ACCOUNT("ERR-003", "", "Este correo '%s' ya fue utilizado por otra cuenta.", ErrorConst.WARNING, ""),
 	
+	ERR_INVALID_PASSWORD("ERR-004",
+			"Password inválido, mínimo 1 mayúscula, mínimo 1 número, mínimo 8 caracters y caracteres especiales -*_#@().!%&",
+			"", ErrorConst.ERROR, ""),
+	
+	ERR_REGISTRO_CIUDADANO("ERR-005", "Es necesario especificar .", "", ErrorConst.WARNING, ""),
 	
 	/** Errores de autorizacion */	
 	ERR_AUTH_TOKEN_REQUERIDO("ERR-AUTH-001", "Token requerido", "", ErrorConst.ERROR, "");
