@@ -31,3 +31,4 @@ plataforma:
   ayuda-service:
     hoursToWaitRegister: 1
     registerAvailablePeruser: 2
+  url.confirm.token: http://localhost:8090/confirm

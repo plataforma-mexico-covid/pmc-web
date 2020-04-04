@@ -11,6 +11,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.mail.MessagingException;
+import static mx.mexicocovid19.plataforma.service.TipoEmailEnum.*;
+import static mx.mexicocovid19.plataforma.util.DateUtil.convertToLocalDateTimeViaMilisecond;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -88,12 +90,12 @@ public class DefaultUserService implements UserService {
 		}
     }
 
-    private void sendMailToken(UserToken userToken, String context, String nombre) throws MessagingException {
+    private void sendMailToken(UserToken userToken, String urlConfirmToken, String nombre) throws MessagingException {
         Map<String, Object> props = new HashMap<>();
         props.put("nombre", nombre);
-        props.put("link", context + "api/v1/public/users/confirm?token=" + userToken.getToken());
+        props.put("link", urlConfirmToken + "?token=" + userToken.getToken());
 
-        mailService.sendValidTokenUser(userToken.getUser(), props);
+        mailService.send(userToken.getUser().getUsername(), userToken.getUser().getUsername(), props, REGISTRO_USUARIO);
     }
 
 

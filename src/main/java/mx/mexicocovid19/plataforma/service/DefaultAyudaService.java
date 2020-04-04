@@ -29,6 +29,8 @@ import mx.mexicocovid19.plataforma.service.helper.GroseriasHelper;
 import mx.mexicocovid19.plataforma.util.ErrorEnum;
 import org.springframework.transaction.annotation.Transactional;
 
+import static mx.mexicocovid19.plataforma.service.TipoEmailEnum.*;
+
 @Log4j2
 @Service
 public class DefaultAyudaService implements AyudaService {
@@ -67,7 +69,7 @@ public class DefaultAyudaService implements AyudaService {
 
     @Override
     @Transactional
-    public Ayuda createAyuda(final Ayuda ayuda, final String username, final String context) throws PMCException {
+    public Ayuda createAyuda(final Ayuda ayuda, final String username) throws PMCException {
         
         try {
         	
@@ -87,13 +89,13 @@ public class DefaultAyudaService implements AyudaService {
         	if ( !GroseriasHelper.evaluarTexto(ayuda.getDescripcion()) ) {
         		
         		Ayuda ayudaTmp = ayudaRepository.save(ayuda);
-        		
-        		
+
         		// Envia notificacion por correo electronic
         		Map<String, Object> props = new HashMap<>();
         		props.put("nombre", ayuda.getCiudadano().getNombreCompleto());
-        		mailService.sendAyudaConfirm(ciudadano.getUser(), props);
-        		
+        		TipoEmailEnum tipoEmail = ayuda.getOrigenAyuda() == OrigenAyuda.SOLICITA ? SOLICITA_AYUDA : OFRECE_AYUDA;
+                mailService.send(ciudadano.getUser().getUsername(), ciudadano.getUser().getUsername(), props, tipoEmail);
+
         		return ayudaTmp;	
         	} else {        		
         		throw new PMCException(ErrorEnum.ERR_LENGUAJE_SOEZ, "DefaultAyudaService");	
@@ -106,7 +108,7 @@ public class DefaultAyudaService implements AyudaService {
 
     @Override
     @Transactional
-    public void matchAyuda(Integer idAyuda, String username, String context) throws MessagingException {
+    public void matchAyuda(Integer idAyuda, String username) throws MessagingException {
         Ayuda ayuda = ayudaRepository.getOne(idAyuda);
         User user = new User();
         user.setUsername(username);
@@ -118,7 +120,7 @@ public class DefaultAyudaService implements AyudaService {
         peticion.setFechaPeticion(LocalDateTime.now());
         peticionRepository.save(peticion);
         Map<String, Object> props = createInfoToEmail(ayuda, ciudadanoAyuda.get(), ciudadano);
-        mailService.sendAyudaMatchConfirm(ciudadanoAyuda.get().getUser(), user, props);
+        mailService.send(ciudadanoAyuda.get().getUser().getUsername(), user.getUsername(), props, MATCH_AYUDA);
     }
 
     private Map<String, Object> createInfoToEmail(Ayuda ayuda, Ciudadano ofrece, Ciudadano solicita){
@@ -133,8 +135,8 @@ public class DefaultAyudaService implements AyudaService {
         props.put("nombre-ofrece", ofrece.getNombreCompleto());
         props.put("email-ofrece", ofrece.getUser().getUsername());
         props.put("contacto-ofrece", contactoOfrece);
-        props.put("nombre-solicita", ofrece.getNombreCompleto());
-        props.put("email-solicita", ofrece.getUser().getUsername());
+        props.put("nombre-solicita", solicita.getNombreCompleto());
+        props.put("email-solicita", solicita.getUser().getUsername());
         props.put("contacto-solicita", contactoSolicita);
         return props;
     }

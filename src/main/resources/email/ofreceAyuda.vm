@@ -774,6 +774,9 @@
             <tr>
                 <td>
                     <div role="banner">
+                        <div class="preheader"
+                            style="Margin: 0 auto;max-width: 560px;min-width: 280px; width: 280px;width: calc(28000% - 167440px);">
+                        </div>
                         <div class="header"
                             style="Margin: 0 auto;max-width: 600px;min-width: 320px; width: 320px;width: calc(28000% - 167400px);"
                             id="emb-email-header-container">
@@ -783,7 +786,7 @@
                                 align="center">
                                 <div class="logo-center" align="center" id="emb-email-header"><img
                                         style="display: block;height: auto;width: 100%;border: 0;max-width: 372px;"
-                                        src="https://i1.createsend1.com/ei/t/E0/F79/AD8/120717/csfinal/LogotipoCompleto.png"
+                                        src="https://i1.createsend1.com/ei/t/0A/23B/AE2/163927/csfinal/LogotipoCompleto.png"
                                         alt="" width="372"></div>
                             </div>
                             <!--[if (mso)|(IE)]></td></tr></table><![endif]-->
@@ -791,12 +794,12 @@
                     </div>
                     <div>
                         <div
-                            style="background-color: #4b54a4;background: 0px 0px/auto auto repeat url(https://i1.createsend1.com/ei/t/E0/F79/AD8/120717/csfinal/CMTemplate_GivingTuesBackground.png) #4b54a4;background-position: 0px 0px;background-image: url(https://i1.createsend1.com/ei/t/E0/F79/AD8/120717/csfinal/CMTemplate_GivingTuesBackground.png);background-repeat: repeat;background-size: auto auto;">
+                            style="background-color: #4b54a4;background: 0px 0px/auto auto repeat url(https://i1.createsend1.com/ei/t/0A/23B/AE2/163927/csfinal/CMTemplate_GivingTuesBackground.png) #4b54a4;background-position: 0px 0px;background-image: url(https://i1.createsend1.com/ei/t/0A/23B/AE2/163927/csfinal/CMTemplate_GivingTuesBackground.png);background-repeat: repeat;background-size: auto auto;">
                             <div class="layout one-col stack"
                                 style="Margin: 0 auto;max-width: 600px;min-width: 320px; width: 320px;width: calc(28000% - 167400px);overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;">
                                 <div class="layout__inner"
                                     style="border-collapse: collapse;display: table;width: 100%;">
-                                    <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" role="presentation"><tr class="layout-full-width" style="background: 0px 0px/auto auto repeat url(https://i1.createsend1.com/ei/t/E0/F79/AD8/120717/csfinal/CMTemplate_GivingTuesBackground.png) #4b54a4;background-position: 0px 0px;background-image: url(https://i1.createsend1.com/ei/t/E0/F79/AD8/120717/csfinal/CMTemplate_GivingTuesBackground.png);background-repeat: repeat;background-size: auto auto;background-color: #4b54a4;"><td class="layout__edges">&nbsp;</td><td style="width: 600px" class="w560"><![endif]-->
+                                    <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" role="presentation"><tr class="layout-full-width" style="background: 0px 0px/auto auto repeat url(https://i1.createsend1.com/ei/t/0A/23B/AE2/163927/csfinal/CMTemplate_GivingTuesBackground.png) #4b54a4;background-position: 0px 0px;background-image: url(https://i1.createsend1.com/ei/t/0A/23B/AE2/163927/csfinal/CMTemplate_GivingTuesBackground.png);background-repeat: repeat;background-size: auto auto;background-color: #4b54a4;"><td class="layout__edges">&nbsp;</td><td style="width: 600px" class="w560"><![endif]-->
                                     <div class="column"
                                         style="text-align: left;color: #565656;font-size: 17px;line-height: 26px;font-family: Montserrat,DejaVu Sans,Verdana,sans-serif;">
                                         <div style="font-size: 12px;font-style: normal;font-weight: normal;line-height: 19px;"
@@ -804,7 +807,7 @@
                                             <img class="gnd-corner-image gnd-corner-image-center gnd-corner-image-top gnd-corner-image-bottom"
                                                 style="border: 0;display: block;height: auto;width: 100%;max-width: 900px;"
                                                 alt="" width="600"
-                                                src="https://i1.createsend1.com/ei/t/E0/F79/AD8/120717/csfinal/CMTemplate_GivingTues_061-9900000000079e3c.png">
+                                                src="https://i1.createsend1.com/ei/t/0A/23B/AE2/163927/csfinal/CMTemplate_GivingTues_061-9900000000079e3c.png">
                                         </div>
                                     </div>
                                     <!--[if (mso)|(IE)]></td><td class="layout__edges">&nbsp;</td></tr></table><![endif]-->
@@ -854,7 +857,7 @@
                                                 <strong>${nombre}</strong> en momentos <em>dif&#237;ciles</em>
                                                 <strong>M&#233;</strong><strong>xico</strong> es
                                                 <strong><em>&#250;nico</em></strong> y
-                                                <strong><em>solidario</em></strong>, nos pondremos en contacto
+                                                <strong><em>solidario</em></strong>, nos pondremos de en contacto
                                                 contigo cuando alguien requiera la ayuda que ofreces.</p>
                                         </div>
                                     </div>
@@ -878,7 +881,7 @@
                                         align="center">
                                         <img style="border: 0;display: block;height: auto;width: 100%;max-width: 95px;"
                                             alt="" width="95"
-                                            src="https://i2.createsend1.com/ei/t/E0/F79/AD8/120717/csfinal/d3bcebe8421b4bd996788d8200893267-9904510b6d3cf03c.png">
+                                            src="https://i2.createsend1.com/ei/t/0A/23B/AE2/163927/csfinal/d3bcebe8421b4bd996788d8200893267-9904510b6d3cf03c.png">
                                     </div>
                                 </div>
                                 <!--[if (mso)|(IE)]></td></tr></table><![endif]-->
@@ -923,12 +926,12 @@
                             </div>
                         </div>
                         <div
-                            style="background-color: #2c3176;background: 0px 0px/auto auto repeat url(https://i2.createsend1.com/ei/t/E0/F79/AD8/120717/csfinal/hashtag3.png) #2c3176;background-position: 0px 0px;background-image: url(https://i2.createsend1.com/ei/t/E0/F79/AD8/120717/csfinal/hashtag3.png);background-repeat: repeat;background-size: auto auto;">
+                            style="background-color: #2c3176;background: 0px 0px/auto auto repeat url(https://i2.createsend1.com/ei/t/0A/23B/AE2/163927/csfinal/hashtag3.png) #2c3176;background-position: 0px 0px;background-image: url(https://i2.createsend1.com/ei/t/0A/23B/AE2/163927/csfinal/hashtag3.png);background-repeat: repeat;background-size: auto auto;">
                             <div class="layout one-col stack"
                                 style="Margin: 0 auto;max-width: 600px;min-width: 320px; width: 320px;width: calc(28000% - 167400px);overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;">
                                 <div class="layout__inner"
                                     style="border-collapse: collapse;display: table;width: 100%;">
-                                    <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" role="presentation"><tr class="layout-full-width" style="background: 0px 0px/auto auto repeat url(https://i2.createsend1.com/ei/t/E0/F79/AD8/120717/csfinal/hashtag3.png) #2c3176;background-position: 0px 0px;background-image: url(https://i2.createsend1.com/ei/t/E0/F79/AD8/120717/csfinal/hashtag3.png);background-repeat: repeat;background-size: auto auto;background-color: #2c3176;"><td class="layout__edges">&nbsp;</td><td style="width: 600px" class="w560"><![endif]-->
+                                    <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" role="presentation"><tr class="layout-full-width" style="background: 0px 0px/auto auto repeat url(https://i2.createsend1.com/ei/t/0A/23B/AE2/163927/csfinal/hashtag3.png) #2c3176;background-position: 0px 0px;background-image: url(https://i2.createsend1.com/ei/t/0A/23B/AE2/163927/csfinal/hashtag3.png);background-repeat: repeat;background-size: auto auto;background-color: #2c3176;"><td class="layout__edges">&nbsp;</td><td style="width: 600px" class="w560"><![endif]-->
                                     <div class="column"
                                         style="text-align: left;color: #565656;font-size: 17px;line-height: 26px;font-family: Montserrat,DejaVu Sans,Verdana,sans-serif;">
                                         <div style="Margin-left: 20px;Margin-right: 20px;">
@@ -948,7 +951,7 @@
                                                     style="Margin-top: 0;Margin-bottom: 20px;font-size: 18px;line-height: 26px;text-align: center;"
                                                     lang="x-size-22"><strong><span style="color:#ffffff">#</span><a
                                                             style="text-decoration: underline;transition: opacity 0.1s ease-in;color: #41637e;"
-                                                            href="https://no.createsend1.com/t/t-l-nkttidk-l-r/"><span
+                                                            href="https://no.createsend1.com/t/t-l-nktildl-l-r/"><span
                                                                 style="color:#ffffff">PlataformaMexicoCovid19</span></a><span
                                                             style="color:#ffffff"> </span></strong><br>
                                                     <span style="color:#ffffff">&#161;</span><span
@@ -967,50 +970,26 @@
                             </div>
                         </div>
                         <div style="mso-line-height-rule: exactly;line-height: 20px;font-size: 20px;">&nbsp;</div>
-                        <div role="contentinfo">
-                            <div class="layout email-footer stack"
-                                style="Margin: 0 auto;max-width: 600px;min-width: 320px; width: 320px;width: calc(28000% - 167400px);overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;">
-                                <div class="layout__inner"
-                                    style="border-collapse: collapse;display: table;width: 100%;">
-                                    <!--[if (mso)|(IE)]><table align="center" cellpadding="0" cellspacing="0" role="presentation"><tr class="layout-email-footer"><td style="width: 400px;" valign="top" class="w360"><![endif]-->
-                                    <div class="column wide"
-                                        style="text-align: left;font-size: 12px;line-height: 19px;color: #999;font-family: Montserrat,DejaVu Sans,Verdana,sans-serif;Float: left;max-width: 400px;min-width: 320px; width: 320px;width: calc(8000% - 47600px);">
+                        <div class="layout one-col fixed-width stack"
+                            style="Margin: 0 auto;max-width: 600px;min-width: 320px; width: 320px;width: calc(28000% - 167400px);overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;">
+                            <div class="layout__inner"
+                                style="border-collapse: collapse;display: table;width: 100%;background-color: #ffffff;">
+                                <!--[if (mso)|(IE)]><table align="center" cellpadding="0" cellspacing="0" role="presentation"><tr class="layout-fixed-width" style="background-color: #ffffff;"><td style="width: 600px" class="w560"><![endif]-->
+                                <div class="column"
+                                    style="text-align: left;color: #565656;font-size: 17px;line-height: 26px;font-family: Montserrat,DejaVu Sans,Verdana,sans-serif;">
+                                    <div style="Margin-left: 20px;Margin-right: 20px;">
                                         <div
-                                            style="Margin-left: 20px;Margin-right: 20px;Margin-top: 10px;Margin-bottom: 10px;">
-                                            <div style="font-size: 12px;line-height: 19px;">
-                                                <div>Esta es una notificaci&#243;n autom&#225;tica, no responda este
-                                                    correo.</div>
-                                            </div>
-                                            <div style="font-size: 12px;line-height: 19px;Margin-top: 18px;">
-                                            </div>
-                                            <!--[if mso]>&nbsp;<![endif]-->
+                                            style="mso-line-height-rule: exactly;mso-text-raise: 11px;vertical-align: middle;">
+                                            <p class="size-10"
+                                                style="Margin-top: 0;Margin-bottom: 0;font-size: 10px;line-height: 18px;text-align: center;"
+                                                lang="x-size-10">Esta es una notificaci&#243;n autom&#225;tica, no
+                                                responda este correo.</p>
                                         </div>
                                     </div>
-                                    <!--[if (mso)|(IE)]></td><td style="width: 200px;" valign="top" class="w160"><![endif]-->
-                                    <div class="column narrow"
-                                        style="text-align: left;font-size: 12px;line-height: 19px;color: #999;font-family: Montserrat,DejaVu Sans,Verdana,sans-serif;Float: left;max-width: 320px;min-width: 200px; width: 320px;width: calc(72200px - 12000%);">
-                                        <div
-                                            style="Margin-left: 20px;Margin-right: 20px;Margin-top: 10px;Margin-bottom: 10px;">
-                                            <div class="footer__share-button">
-                                                <div style="Margin-bottom: 6px;mso-line-height-rule: exactly;">
-                                                    <a style="text-decoration: none;transition: opacity 0.1s ease-in;color: #ffffff;border-radius: 2px;display: inline-block;font-size: 11px;font-weight: bold;line-height: 19px;text-align: left;border-style: solid;border-width: 4px 7px 3px 4px;mso-border-width-alt: 4px 8px 8px 8px;background-color: gray;border-color: gray;mso-border-color-alt: gray;"
-                                                        href="https://no.createsend1.com/t/t-tw-nkttidk-l-j/">
-                                                        &nbsp;<img
-                                                            style="border: 0;display: inline-block;margin-right: 2px;vertical-align: -3px;"
-                                                            src="https://i1.createsend1.com/static/eb/customise/13-the-blueprint-3/images/tweet-icon@2x.png"
-                                                            width="16" height="16" border="0" alt="">
-                                                        <span
-                                                            style="font-size: 11px;mso-text-raise: 3px;">Tweet&nbsp;</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--[if (mso)|(IE)]></td></tr></table><![endif]-->
                                 </div>
+                                <!--[if (mso)|(IE)]></td></tr></table><![endif]-->
                             </div>
                         </div>
-                        <div style="line-height:40px;font-size:40px;">&nbsp;</div>
                     </div>
                 </td>
             </tr>
