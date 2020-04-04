@@ -1,6 +1,10 @@
 package mx.mexicocovid19.plataforma.service;
 
-import mx.mexicocovid19.plataforma.model.entity.User;
+import java.io.StringWriter;
+import java.util.Map;
+
+import javax.mail.MessagingException;
+
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -11,10 +15,6 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
-
-import javax.mail.MessagingException;
-import java.io.StringWriter;
-import java.util.Map;
 
 @Service
 @Profile("mailon")
@@ -30,24 +30,11 @@ public class VelocityMailServiceImpl implements MailService {
     SimpleMailMessage templateMessage;
 
     @Override
-    public void sendValidTokenUser(User user, Map<String, Object> hTemplateVariables) throws MessagingException {
-        templateMessage.setTo(user.getUsername());
-        templateMessage.setCc(user.getUsername());
-        send(templateMessage, convertToVelocityContext(hTemplateVariables), "email/tokenConfirm.vm");
-    }
-
-    @Override
-    public void sendAyudaConfirm(User user, Map<String, Object> hTemplateVariables) throws MessagingException {
-        templateMessage.setTo(user.getUsername());
-        templateMessage.setCc(user.getUsername());
-        send(templateMessage, convertToVelocityContext(hTemplateVariables), "email/ayudaConfirm.vm");
-    }
-
-    @Override
-    public void sendAyudaMatchConfirm(User user, User requester, Map<String, Object> hTemplateVariables) throws MessagingException {
-        templateMessage.setTo(user.getUsername());
-        templateMessage.setCc(requester.getUsername());
-        send(templateMessage, convertToVelocityContext(hTemplateVariables), "email/matchConfirm.vm");
+    public void send(String to, String cc, Map<String, Object> variables, TipoEmailEnum tipoEmailEnum) throws MessagingException {
+        templateMessage.setTo(to);
+        templateMessage.setCc(cc);
+        templateMessage.setSubject(tipoEmailEnum.getSubject());
+        send(templateMessage, convertToVelocityContext(variables), tipoEmailEnum.getTemplate());
     }
 
     private VelocityContext convertToVelocityContext(final Map<String, Object> hTemplateVariables){
@@ -77,12 +64,4 @@ public class VelocityMailServiceImpl implements MailService {
 
         mailSender.send(preparator);
     }
-
-	@Override
-	public void sendRecoveryPassword(User user, Map<String, Object> hTemplateVariables) throws MessagingException {
-        templateMessage.setTo(user.getUsername());
-        templateMessage.setCc(user.getUsername());
-        send(templateMessage, convertToVelocityContext(hTemplateVariables), "email/recoveryPassword.vm");
-	}
-
 }

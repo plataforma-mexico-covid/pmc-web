@@ -1,5 +1,8 @@
 package mx.mexicocovid19.plataforma.service;
 
+import static mx.mexicocovid19.plataforma.service.TipoEmailEnum.RECUPERACION_PASSWORD;
+import static mx.mexicocovid19.plataforma.service.TipoEmailEnum.REGISTRO_USUARIO;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -83,21 +86,21 @@ public class DefaultUserService implements UserService {
 			throw new PMCException(ErrorEnum.ERR_GENERICO, getClass().getName(), e.getMessage());
 		}
     }
-
     
-    private void sendMailRecoveryPasswordToken(UserToken userToken, String context, String nombre) throws MessagingException {
+    private void sendMailRecoveryPasswordToken(UserToken userToken, String urlConfirmToken, String nombre) throws MessagingException {
         Map<String, Object> props = new HashMap<>();
         props.put("nombre", nombre);
-        props.put("link", context + "api/v1/public/users/recovery?token=" + userToken.getToken());
-        mailService.sendRecoveryPassword(userToken.getUser(), props);
+        props.put("link", urlConfirmToken + "?token=" + userToken.getToken());
+        mailService.send(userToken.getUser().getUsername(), userToken.getUser().getUsername(), props, RECUPERACION_PASSWORD);
     }
     
     
-    private void sendMailToken(UserToken userToken, String context, String nombre) throws MessagingException {
+    private void sendMailToken(UserToken userToken, String urlConfirmToken, String nombre) throws MessagingException {
         Map<String, Object> props = new HashMap<>();
         props.put("nombre", nombre);
-        props.put("link", context + "api/v1/public/users/confirm?token=" + userToken.getToken());
-        mailService.sendValidTokenUser(userToken.getUser(), props);
+        props.put("link", urlConfirmToken + "?token=" + userToken.getToken());
+
+        mailService.send(userToken.getUser().getUsername(), userToken.getUser().getUsername(), props, REGISTRO_USUARIO);
     }
 
 
@@ -165,11 +168,11 @@ public class DefaultUserService implements UserService {
             	if ( ciudadano != null ) {
             		
                 	// Envia la notificacion por correo al ciudadano
-                	sendMailToken(token, context, ciudadano.getNombre());	
+                	sendMailRecoveryPasswordToken(token, context, ciudadano.getNombre());
             	} else {
             		
                 	// Envia la notificacion por correo a otros usuarios
-            		sendMailRecoveryPasswordToken(token, context, user.getUsername());
+            		sendMailRecoveryPasswordToken(token,  context, user.getUsername());
             	}
     		} catch (MessagingException e) {
     			throw new PMCException(ErrorEnum.ERR_GENERICO, getClass().getName(), e.getMessage());

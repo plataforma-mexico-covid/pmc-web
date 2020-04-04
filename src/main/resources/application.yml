@@ -8,6 +8,13 @@ endpoints.shutdown.enabled: true
 spring.profiles.active: proddb
 spring.profiles.include: security, mailon
 
+plataforma:
+  ayuda-service:
+    hoursToWaitRegister: 1
+    registerAvailablePeruser: 2
+  url.confirm.token: ${URL_CONFIRM_TOKEN}
+  url.change.password: ${URL_CHANGE_PASSWORD}
+
 ---
 spring:
   profiles: security
@@ -48,6 +55,8 @@ spring:
       enabled: true
       path: /h2-console
 
+plataforma.url.confirm.token: http://localhost:8090/confirm
+plataforma.url.change.password: http://localhost:8090/api/v1/public/users/change_password
 ---
 spring:
   profiles: mailon
@@ -65,8 +74,3 @@ mail:
   smtp:
     auth: true
     starttls.enable: true
----
-plataforma:
-  ayuda-service:
-    hoursToWaitRegister: 1
-    registerAvailablePeruser: 2

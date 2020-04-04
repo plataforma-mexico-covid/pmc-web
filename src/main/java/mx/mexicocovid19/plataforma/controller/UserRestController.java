@@ -1,21 +1,34 @@
 package mx.mexicocovid19.plataforma.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import mx.mexicocovid19.plataforma.ApiController;
 import mx.mexicocovid19.plataforma.controller.dto.ChangePasswordDTO;
 import mx.mexicocovid19.plataforma.controller.dto.UserDTO;
 import mx.mexicocovid19.plataforma.service.UserService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping(ApiController.API_PATH_PUBLIC + "/users")
 public class UserRestController {
 
+    @Autowired
     private UserService userService;
+
+    @Value("${plataforma.url.confirm.token}")
+    private String urlConfirmToken;
+    
+    @Value("${plataforma.url.change.token}")
+    private String urlChangePassword;
 
     public UserRestController(final UserService userService) {
         this.userService = userService;
@@ -23,8 +36,8 @@ public class UserRestController {
 
     
     @PostMapping( produces = {"application/json;charset=UTF-8"}, headers = "Accept=" + MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> registerUser(final @RequestBody UserDTO userDTO, HttpServletRequest request) throws Exception {
-        userService.registerUser(userDTO, request.getContextPath());
+    public ResponseEntity<Void> registerUser(final @RequestBody UserDTO userDTO) throws Exception {
+        userService.registerUser(userDTO, urlConfirmToken);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -39,9 +52,8 @@ public class UserRestController {
     
     @GetMapping( value = { "/recovery_password" }, produces = {"application/json;charset=UTF-8"},
             headers = "Accept=" + MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Void> recoveryPassword(@RequestParam(value = "username") final String username,
-			HttpServletRequest request) throws Exception {
-        userService.recoveryPassword(username, request.getContextPath());
+	public ResponseEntity<Void> recoveryPassword(@RequestParam(value = "username") final String username) throws Exception {
+        userService.recoveryPassword(username, urlChangePassword);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

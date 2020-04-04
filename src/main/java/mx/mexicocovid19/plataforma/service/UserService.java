@@ -5,7 +5,7 @@ import mx.mexicocovid19.plataforma.controller.dto.UserDTO;
 import mx.mexicocovid19.plataforma.model.entity.User;
 
 public interface UserService {
-    void registerUser(UserDTO userDTO, String context) throws Exception;
+    void registerUser(UserDTO userDTO, String urlConfirmToken) throws Exception;
     void confirmUser(String token) throws Exception;
     
     void recoveryPassword(String email, String context) throws Exception;
