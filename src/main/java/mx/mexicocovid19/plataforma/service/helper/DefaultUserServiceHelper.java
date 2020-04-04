@@ -46,7 +46,7 @@ public class DefaultUserServiceHelper {
     	}
     	
     	if ( userDTO.getContactInfos() == null || userDTO.getContactInfos().isEmpty() ) {
-			throw new PMCException(ErrorEnum.ERR_REGISTRO_CIUDADANO, getClass().getName(), "la Información de Contacto");        		
+			throw new PMCException(ErrorEnum.ERR_REGISTRO_CIUDADANO, getClass().getName(), "la Informacion de Contacto");
     	}
 	}
 

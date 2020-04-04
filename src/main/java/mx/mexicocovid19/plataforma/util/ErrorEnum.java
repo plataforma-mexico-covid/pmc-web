@@ -11,7 +11,7 @@ public enum ErrorEnum {
 	ERR_UNAVAILABLE_ACCOUNT("ERR-003", "", "Este correo '%s' ya fue utilizado por otra cuenta.", ErrorConst.WARNING, ""),
 	
 	ERR_INVALID_PASSWORD("ERR-004",
-			"Password inválido, mínimo 1 mayúscula, mínimo 1 número, mínimo 8 caracters y caracteres especiales -*_#@().!%&",
+			"Password invalido, minimo 1 mayuscula, minimo 1 numero, minimo 8 caracters y caracteres especiales -*_#@().!%&",
 			"", ErrorConst.ERROR, ""),
 	
 	ERR_REGISTRO_CIUDADANO("ERR-005", "Es necesario especificar .", "", ErrorConst.WARNING, ""),
