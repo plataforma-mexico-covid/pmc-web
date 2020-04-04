@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark d-block d-sm-none">
+<!--nav class="navbar navbar-expand-lg navbar-dark bg-dark d-block d-sm-none">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -31,9 +31,27 @@
 
         </ul>
     </div>
-</nav>
+</nav-->
 
-<div class="over-map d-none d-sm-block">
+<div class="row">
+    <div class="col-sm-5">
+        <div class="btn-group btn-block" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-secondary rounded-0" [ngClass]="{'active': opcion=='OFRECE'}" (click)="actualizarTipoAyuda('OFRECE')">Ayuda</button>
+            <button type="button" class="btn btn-secondary rounded-0" [ngClass]="{'active': opcion=='SOLICITA'}" (click)="actualizarTipoAyuda('SOLICITA')">Necesidades</button>
+            <button type="button" class="btn btn-secondary rounded-0" [ngClass]="{'active': opcion=='AMBOS'}" (click)="actualizarTipoAyuda('AMBOS')">Ambos</button>
+        </div>
+    </div>
+    <div class="col-sm-2"></div>
+    <div class="col-sm-5">
+        <div class="btn-group btn-block" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-secondary rounded-0">Mapa</button>
+            <button type="button" class="btn btn-secondary rounded-0">Lista</button>
+            <button type="button" class="btn btn-secondary rounded-0" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Ambos</button>
+        </div>
+    </div>
+</div>
+
+<!--div class="over-map d-none d-sm-block">
     <div class="row">
         <div class="col-sm-6 col-md-5 col-lg-4 col-xl-3 text-left">
             <div class="row">
@@ -69,5 +87,5 @@
             </div>
         </div>
     </div>
-</div>
+</div-->
 <app-lista-ayuda></app-lista-ayuda>

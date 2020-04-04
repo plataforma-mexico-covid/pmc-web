@@ -8,144 +8,144 @@ import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/fo
 
 declare var $: any;
 @Component({
-  selector: 'app-registro-inicio',
-  templateUrl: './registro-inicio.component.html',
-  styleUrls: ['./registro-inicio.component.css']
+	selector: 'app-registro-inicio',
+	templateUrl: './registro-inicio.component.html',
+	styleUrls: ['./registro-inicio.component.css']
 })
 export class RegistroInicioComponent {
 
-  public usuario = new Usuario();
-  @Output() cargaAyudas = new EventEmitter();
-  @Output() loginCorrecto = new EventEmitter();
-  @Input() origen_contactar = false;
+	public usuario = new Usuario();
+	@Output() cargaAyudas = new EventEmitter();
+	@Output() loginCorrecto = new EventEmitter();
+	@Input() origen_contactar = false;
 
-  public formulario_crear_usuario = new FormGroup({
-    username_n: new FormControl('', [Validators.required, Validators.email]),
-    password2: new FormControl('', [Validators.required, this.validarContrasena]),
-    password_confirm: new FormControl('', [Validators.required, this.validarContrasena]),
-    nombre: new FormControl('', Validators.required),
-    paterno: new FormControl('', Validators.required),
-    materno: new FormControl('', Validators.required),
-    tipoContacto: new FormControl('', Validators.required),
-    contacto: new FormControl('', Validators.required)
-  });
-  public fomulario_inicio_session = new FormGroup({
-    username: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', Validators.required)
-  });
+	public formulario_crear_usuario = new FormGroup({
+		username_n: new FormControl('', [Validators.required, Validators.email]),
+		password2: new FormControl('', [Validators.required, this.validarContrasena]),
+		password_confirm: new FormControl('', [Validators.required, this.validarContrasena]),
+		nombre: new FormControl('', Validators.required),
+		paterno: new FormControl('', Validators.required),
+		materno: new FormControl('', Validators.required),
+		tipoContacto: new FormControl('', Validators.required),
+		contacto: new FormControl('', Validators.required)
+	});
+	public fomulario_inicio_session = new FormGroup({
+		username: new FormControl('', [Validators.required, Validators.email]),
+		password: new FormControl('', Validators.required)
+	});
 
-  constructor(private _servicio: ServiciosService,
-    public constantes: ConstantsService,
-    private globales: GlobalsComponent) {
-    this.usuario.contactInfos.push(new ContactInfos());
-    this.usuario.contactInfos[0].tipoContacto = '';
-    this.usuario.email = '';
-    this.usuario.username = '';
-    this.usuario.password = '';
-  }
+	constructor(private _servicio: ServiciosService,
+		public constantes: ConstantsService,
+		private globales: GlobalsComponent) {
+		this.usuario.contactInfos.push(new ContactInfos());
+		this.usuario.contactInfos[0].tipoContacto = '';
+		this.usuario.email = '';
+		this.usuario.username = '';
+		this.usuario.password = '';
+	}
 
-  iniciarSession() {
-    this.constantes.isLoading = true;
-    this._servicio.iniciarSession(this.usuario).subscribe(
-      (data: any) => {
-        // localStorage.setItem('token', data.token);
-        if (data.token) {
-          $('#exampleModal').modal('hide');
-          this.constantes.isLoading = false;
-          this.globales.usuario = data;
-          this.cargaAyudas.emit();
-          if (!this.origen_contactar) {
-            $('#ayudaModal').modal('show');
-          } else {
-            this.loginCorrecto.emit();
-          }
-        } else {
-          Swal.fire({
-            title: 'Error!',
-            text: 'Ocurrio un problema al iniciar sessión',
-            icon: 'error',
-            confirmButtonText: 'Entendido'
-          });
-        }
-        this.origen_contactar = false;
-      },
-      (error) => {
-        this.constantes.isLoading = false;
-        Swal.fire({
-          title: 'Error!',
-          text: 'Ocurrio un problema al iniciar sessión',
-          icon: 'error',
-          confirmButtonText: 'Entendido'
-        });
-      }
-    );
-  }
+	iniciarSession() {
+		this.constantes.isLoading = true;
+		this._servicio.iniciarSession(this.usuario).subscribe(
+			(data: any) => {
+				// localStorage.setItem('token', data.token);
+				if (data.token) {
+					$('#exampleModal').modal('hide');
+					this.constantes.isLoading = false;
+					this.globales.usuario = data;
+					this.cargaAyudas.emit();
+					if (!this.origen_contactar) {
+						$('#ayudaModal').modal('show');
+					} else {
+						this.loginCorrecto.emit();
+					}
+				} else {
+					Swal.fire({
+						title: 'Error!',
+						text: 'Ocurrio un problema al iniciar sessión',
+						icon: 'error',
+						confirmButtonText: 'Entendido'
+					});
+				}
+				this.origen_contactar = false;
+			},
+			(error) => {
+				this.constantes.isLoading = false;
+				Swal.fire({
+					title: 'Error!',
+					text: 'Ocurrio un problema al iniciar sessión',
+					icon: 'error',
+					confirmButtonText: 'Entendido'
+				});
+			}
+		);
+	}
 
-  registro() {
-    this.constantes.isLoading = true;
-    const aux = {
-      contactInfos: [{
-        contacto: this.usuario.contactInfos[0].contacto,
-        tipoContacto: this.usuario.contactInfos[0].tipoContacto
-      }],
-      materno: this.usuario.materno,
-      nombre: this.usuario.nombre,
-      password: this.usuario.password2,
-      paterno: this.usuario.paterno,
-      username: this.usuario.username_n
-    };
-    this._servicio.registro(aux).subscribe(
-      (data: any) => {
-        Swal.fire(
-          '!Completado!',
-          'Te hemos enviado un correo eletrónico de confirmación.',
-          'success'
-        );
-        this.constantes.isLoading = false;
-        localStorage.setItem('token', data.token);
-      },
-      (error) => {
-        if (error.error.message) {
-          Swal.fire({
-            title: 'Error!',
-            text: error.error.message,
-            icon: 'error',
-            confirmButtonText: 'Entendido'
-          });
-        } else {
-          Swal.fire({
-            title: 'Error!',
-            text: 'Ocurrio un problema registrar el usuario',
-            icon: 'error',
-            confirmButtonText: 'Entendido'
-          });
-        }
+	registro() {
+		this.constantes.isLoading = true;
+		const aux = {
+			contactInfos: [{
+				contacto: this.usuario.contactInfos[0].contacto,
+				tipoContacto: this.usuario.contactInfos[0].tipoContacto
+			}],
+			materno: this.usuario.materno,
+			nombre: this.usuario.nombre,
+			password: this.usuario.password2,
+			paterno: this.usuario.paterno,
+			username: this.usuario.username_n
+		};
+		this._servicio.registro(aux).subscribe(
+			(data: any) => {
+				Swal.fire(
+					'!Completado!',
+					'Te hemos enviado un correo eletrónico de confirmación.',
+					'success'
+				);
+				this.constantes.isLoading = false;
+				localStorage.setItem('token', data.token);
+			},
+			(error) => {
+				if (error.error.message) {
+					Swal.fire({
+						title: 'Error!',
+						text: error.error.message,
+						icon: 'error',
+						confirmButtonText: 'Entendido'
+					});
+				} else {
+					Swal.fire({
+						title: 'Error!',
+						text: 'Ocurrio un problema registrar el usuario',
+						icon: 'error',
+						confirmButtonText: 'Entendido'
+					});
+				}
 
-        this.constantes.isLoading = false;
-        console.log(error);
-      }
-    );
-  }
+				this.constantes.isLoading = false;
+				console.log(error);
+			}
+		);
+	}
 
-  getTiposAyuda() {
-    this._servicio.getTiposAyuda().subscribe(
-      (data) => {
-        console.log(data);
-      },
-      (error) => {
+	getTiposAyuda() {
+		this._servicio.getTiposAyuda().subscribe(
+			(data) => {
+				console.log(data);
+			},
+			(error) => {
 
-      }
-    );
-  }
+			}
+		);
+	}
 
-  private validarContrasena(control: AbstractControl) {
-    const contrasena = control.value;
-    let error = null;
-    const regex = new RegExp(/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/);
-    if (!regex.test(contrasena)) {
-      error = 'La contraseña debe tener al entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula, al menos una mayúscula y al menos un caracter no alfanumérico';
-    }
-    console.log(error);
-    return error;
-  }
+	private validarContrasena(control: AbstractControl) {
+		const contrasena = control.value;
+		let error = null;
+		const regex = new RegExp(/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/);
+		if (!regex.test(contrasena)) {
+			error = 'La contraseña debe tener al entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula, al menos una mayúscula y al menos un caracter no alfanumérico';
+		}
+		console.log(error);
+		return error;
+	}
 }

@@ -1,10 +1,28 @@
-<div class=" over-map-footer">
+<!--div class=" over-map-footer">
     <div class="col-6 text-left">
-        <button type="button" class="btn btn-primary btn-sm " data-toggle="modal"
-            (click)="origenAyuda('OFRECE')">Ofrecer Ayuda</button>
+        <button type="button" class="btn btn-primary btn-sm " data-toggle="modal" (click)="origenAyuda('OFRECE')">Ofrecer Ayuda</button>
     </div>
     <div class="col-6 text-right">
-        <button type="button" class="btn btn-primary btn-sm " data-toggle="modal"
-            (click)="origenAyuda('SOLICITA')">Necesito Ayuda</button>
+        <button type="button" class="btn btn-primary btn-sm " data-toggle="modal" (click)="origenAyuda('SOLICITA')">Necesito Ayuda</button>
+    </div>
+</div-->
+
+<div class="row">
+    <div class="col-sm-5">
+        <div class="row">
+            <div class="col-sm-12">
+                <button type="button" class="btn btn-block btn-secondary rounded-0" data-toggle="modal" (click)="origenAyuda('OFRECE')">Ofrecer Ayuda</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-2"></div>
+    <div class="col-sm-5">
+        <div class="row">
+            <div class="col-sm-12">
+                <button type="button" class="btn btn-block btn-secondary rounded-0" data-toggle="modal" (click)="origenAyuda('SOLICITA')">Necesito Ayuda</button>
+            </div>
+        </div>
     </div>
 </div>
+
+<app-registro-inicio></app-registro-inicio>

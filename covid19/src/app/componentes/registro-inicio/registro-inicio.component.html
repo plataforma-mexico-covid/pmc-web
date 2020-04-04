@@ -1,114 +1,119 @@
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">
-          {{ constantes.origen_ayudar === 'SOLICITA' ?  'Necesito ayuda' : 'Ofrecer ayuda' }}</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body row">
-        <div class="col-md-6">
-          <form name="fomulario_inicio_session" [formGroup]='fomulario_inicio_session'>
-            <h4>Si ya tienes usuario</h4>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Email</label>
-              <input type="email" autocomplete="new-password" class="form-control form-control-sm"
-                id="exampleInputEmail1" name="username" aria-describedby="emailHelp" placeholder="Enter email"
-                [(ngModel)]="usuario.username" formControlName='username'>
-            </div>
-            <div class="form-group">
-              <label for="passnew">Password</label>
-              <input autocomplete="new-password" type="password" class="form-control form-control-sm" id="passnew"
-                placeholder="Password" name="password" [(ngModel)]="usuario.password" formControlName='password'>
-            </div>
-          </form>
-          <button type="submit" class="btn btn-primary btn-sm float-right" (click)="iniciarSession()"
-            [disabled]='(!fomulario_inicio_session.valid)'>Iniciar sesión</button>
-        </div>
+	aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header py-1">
+				<h4 class="modal-title" id="exampleModalLabel">
+					{{ constantes.origen_ayudar === 'SOLICITA' ?  'Necesito ayuda' : 'Ofrecer ayuda' }}
+				</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body row">
+				<div class="col-md-6 border-right">
+					<form name="fomulario_inicio_session" [formGroup]='fomulario_inicio_session'>
+						<h5>Si ya tienes usuario</h5>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Email</label>
+							<input type="email" autocomplete="new-password" class="form-control form-control-sm"
+								id="exampleInputEmail1" name="username" aria-describedby="emailHelp"
+								placeholder="Enter email" [(ngModel)]="usuario.username" formControlName='username'>
+						</div>
+						<div class="form-group">
+							<label for="passnew">Password</label>
+							<input autocomplete="new-password" type="password" class="form-control form-control-sm"
+								id="passnew" placeholder="Password" name="password" [(ngModel)]="usuario.password"
+								formControlName='password'>
+						</div>
+					</form>
+					<button type="submit" class="btn btn-primary btn-sm float-right" (click)="iniciarSession()"
+						[disabled]='(!fomulario_inicio_session.valid)'>Iniciar sesión</button>
+				</div>
 
-        <div class="col-md-6">
-          <form [formGroup]='formulario_crear_usuario'>
-            <h4>Crear usuario</h4>
-            <div class="form-group">
-              <label for="exampleInputEmail2">Email</label>
-              <input type="email" autocomplete="new-password" class="form-control form-control-sm"
-                id="exampleInputEmail2" name="email-registro" aria-describedby="emailHelp" placeholder="Email"
-                [(ngModel)]="usuario.username_n" formControlName='username_n'>
-            </div>
+				<div class="col-md-6">
+					<form [formGroup]='formulario_crear_usuario'>
+						<h4>Crear usuario</h4>
+						<div class="form-group">
+							<label for="exampleInputEmail2">Email</label>
+							<input type="email" autocomplete="new-password" class="form-control form-control-sm"
+								id="exampleInputEmail2" name="email-registro" aria-describedby="emailHelp"
+								placeholder="Email" [(ngModel)]="usuario.username_n" formControlName='username_n'>
+						</div>
 
-            <div class="form-group row">
-              <div class="col-md-6">
-                <label for="passnewc">Password</label>
-                <input type="password" autocomplete="new-password" class="form-control form-control-sm" id="passnewc"
-                  placeholder="Password" [(ngModel)]="usuario.password2" name="password-registro" formControlName='password2'>
-              </div>
-              <div class="col-md-6">
-                <label for="passnewc2">Confirma password</label>
-                <input type="password" autocomplete="new-password" class="form-control form-control-sm" id="passnewc2"
-                  placeholder="Password" [(ngModel)]="usuario.password_confirm" name="password-confirma-r"
-                  formControlName='password_confirm'>
-              </div>
-              <div class="col-md-12" *ngIf="usuario.password2 !==  usuario.password_confirm" >
-                  <small>Las contraseñas no coinciden.</small>
-              </div>
-              <div class="col-md-12 text-warning"  *ngIf="( usuario.password.trim().length === 0 ) || ( !this.formulario_crear_usuario.get('password2').valid && this.formulario_crear_usuario.get('password2').touched ) "   >
-                <small id="format-pass">
-                La contraseña debe tener entre 8 y 16 caracteres, al menos
-                un dígito, al menos una minúscula, al menos una mayúscula y al menos un caracter no alfanumérico.
-                </small>
-              </div>
-            </div>
+						<div class="form-group row">
+							<div class="col-md-6">
+								<label for="passnewc">Password</label>
+								<input type="password" autocomplete="new-password" class="form-control form-control-sm"
+									id="passnewc" placeholder="Password" [(ngModel)]="usuario.password2"
+									name="password-registro" formControlName='password2'>
+							</div>
+							<div class="col-md-6">
+								<label for="passnewc2">Confirma password</label>
+								<input type="password" autocomplete="new-password" class="form-control form-control-sm"
+									id="passnewc2" placeholder="Password" [(ngModel)]="usuario.password_confirm"
+									name="password-confirma-r" formControlName='password_confirm'>
+							</div>
+							<div class="col-md-12" *ngIf="usuario.password2 !==  usuario.password_confirm">
+								<small>Las contraseñas no coinciden.</small>
+							</div>
+							<div class="col-md-12 text-warning"
+								*ngIf="( usuario.password.trim().length === 0 ) || ( !this.formulario_crear_usuario.get('password2').valid && this.formulario_crear_usuario.get('password2').touched ) ">
+								<small id="format-pass">
+									La contraseña debe tener entre 8 y 16 caracteres, al menos
+									un dígito, al menos una minúscula, al menos una mayúscula y al menos un caracter no
+									alfanumérico.
+								</small>
+							</div>
+						</div>
 
-            <div class="form-group row">
-              <div class="col-md-6">
-                <label for="nombrea">Nombres</label>
-                <input type="text" class="form-control form-control-sm" id="nombrea" [(ngModel)]="usuario.nombre"
-                  name="nombre-registro" formControlName='nombre' >
-              </div>
-              <div class="col-md-3">
-                <label for="apellido-paterno">Paterno</label>
-                <input type="text" class="form-control form-control-sm" id="apellido-paterno"
-                  [(ngModel)]="usuario.paterno" name="paterno" formControlName='paterno' >
-              </div>
-              <div class="col-md-3">
-                <label for="apellido-materno">Materno</label>
-                <input type="text" class="form-control form-control-sm" id="apellido-materno"
-                  [(ngModel)]="usuario.materno" name="apellido-materon" formControlName='materno'>
-              </div>
-            </div>
+						<div class="form-group row">
+							<div class="col-md-6">
+								<label for="nombrea">Nombres</label>
+								<input type="text" class="form-control form-control-sm" id="nombrea"
+									[(ngModel)]="usuario.nombre" name="nombre-registro" formControlName='nombre'>
+							</div>
+							<div class="col-md-3">
+								<label for="apellido-paterno">Paterno</label>
+								<input type="text" class="form-control form-control-sm" id="apellido-paterno"
+									[(ngModel)]="usuario.paterno" name="paterno" formControlName='paterno'>
+							</div>
+							<div class="col-md-3">
+								<label for="apellido-materno">Materno</label>
+								<input type="text" class="form-control form-control-sm" id="apellido-materno"
+									[(ngModel)]="usuario.materno" name="apellido-materon" formControlName='materno'>
+							</div>
+						</div>
 
-            <div class="form-group row">
-              <div class="col-md-6">
-                <label for="medio-contacto">Medio de contacto</label>
-                <select class="form-control form-control-sm" [(ngModel)]="usuario.contactInfos[0].tipoContacto"
-                  name="medio-contacto" id="medio-contacto" formControlName='tipoContacto'>
-                  <option value="">Seleccione...</option>
-                  <option value="TELEFONO">Telefono</option>
-                  <option value="TWITTER">Twitter</option>
-                  <option value="SKYPE">Skype</option>
-                  <option value="FACEBOOK">Facebook</option>
-                  <option value="OTRO">Otro</option>
-                </select>
-              </div>
-              <div class="col-md-6">
-                <label for="tel">Contacto</label>
-                <input type="text" class="form-control form-control-sm" id="tel"
-                  [(ngModel)]="usuario.contactInfos[0].contacto" name="contacto" formControlName='contacto' >
-              </div>
-            </div>
-          </form>
-          <br>
-          <br>
-          <button type="submit" class="btn btn-primary btn-sm float-right" (click)="registro()"
-          [disabled]='(!formulario_crear_usuario.valid)
-          ||
-          (usuario.password2 !==  usuario.password_confirm)'
-          >Registrarme</button>
-        </div>
-      </div>
-    </div>
-  </div>
+						<div class="form-group row">
+							<div class="col-md-6">
+								<label for="medio-contacto">Medio de contacto</label>
+								<select class="form-control form-control-sm"
+									[(ngModel)]="usuario.contactInfos[0].tipoContacto" name="medio-contacto"
+									id="medio-contacto" formControlName='tipoContacto'>
+									<option value="">Seleccione...</option>
+									<option value="TELEFONO">Telefono</option>
+									<option value="TWITTER">Twitter</option>
+									<option value="SKYPE">Skype</option>
+									<option value="FACEBOOK">Facebook</option>
+									<option value="OTRO">Otro</option>
+								</select>
+							</div>
+							<div class="col-md-6">
+								<label for="tel">Contacto</label>
+								<input type="text" class="form-control form-control-sm" id="tel"
+									[(ngModel)]="usuario.contactInfos[0].contacto" name="contacto"
+									formControlName='contacto'>
+							</div>
+						</div>
+					</form>
+					<br>
+					<br>
+					<button type="submit" class="btn btn-primary btn-sm float-right" (click)="registro()" [disabled]='(!formulario_crear_usuario.valid)
+		  ||
+		  (usuario.password2 !==  usuario.password_confirm)'>Registrarme</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
