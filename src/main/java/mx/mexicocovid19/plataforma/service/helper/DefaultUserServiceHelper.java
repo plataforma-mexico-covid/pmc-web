@@ -58,11 +58,11 @@ public class DefaultUserServiceHelper {
     	}
     	
     	if ( confirmation == null || confirmation.isEmpty()) {
-    		throw new PMCException(ErrorEnum.ERR_RECUPERACION_PASSWORD, getClass().getName(), "Especificar la confirmación");
+    		throw new PMCException(ErrorEnum.ERR_RECUPERACION_PASSWORD, getClass().getName(), "Especificar la confirmacion");
     	}
 		
     	if ( !confirmation.equals(password) ) {
-    		throw new PMCException(ErrorEnum.ERR_RECUPERACION_PASSWORD, getClass().getName(), "Password y cofirmación deben ser identicos.");
+    		throw new PMCException(ErrorEnum.ERR_RECUPERACION_PASSWORD, getClass().getName(), "Password y cofirmacion deben ser identicos.");
     	}
     	
     	if ( !PasswordHelper.passwordIsValid(password) ) {
