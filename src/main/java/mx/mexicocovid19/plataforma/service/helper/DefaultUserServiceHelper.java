@@ -1,5 +1,11 @@
 package mx.mexicocovid19.plataforma.service.helper;
 
+import static mx.mexicocovid19.plataforma.util.DateUtil.convertToLocalDateTimeViaMilisecond;
+
+import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -7,7 +13,9 @@ import lombok.extern.log4j.Log4j2;
 import mx.mexicocovid19.plataforma.controller.dto.UserDTO;
 import mx.mexicocovid19.plataforma.exception.PMCException;
 import mx.mexicocovid19.plataforma.model.entity.User;
+import mx.mexicocovid19.plataforma.model.entity.UserToken;
 import mx.mexicocovid19.plataforma.model.repository.UserRepository;
+import mx.mexicocovid19.plataforma.model.repository.UserTokenRepository;
 import mx.mexicocovid19.plataforma.util.ErrorEnum;
 
 @Log4j2
@@ -17,6 +25,51 @@ public class DefaultUserServiceHelper {
 	@Autowired
 	private UserRepository userRepository;
 	
+	@Autowired
+	private UserTokenRepository userTokenRepository;
+	
+	public UserToken getUserToken(String token) throws PMCException {
+        final Optional<UserToken> userTokenOpt = userTokenRepository.findById(token);
+        if (!userTokenOpt.isPresent()) {
+            throw new PMCException(ErrorEnum.ERR_GENERICO, getClass().getName(), "Token Invalido");
+        }
+        
+        UserToken userToken = userTokenOpt.get();
+        if(isExpired(userToken.getExpirationDate())) {
+            throw new PMCException(ErrorEnum.ERR_GENERICO, getClass().getName(), "Token expirado");
+        }
+        
+        return userToken;
+	}
+	
+    private boolean isExpired(final Date expirationDate) {
+        return LocalDateTime.now().isAfter(convertToLocalDateTimeViaMilisecond(expirationDate));
+    }
+	
+	public void changePasswordValidation(User username, String password, String confirmation) throws PMCException {
+		
+    	// Ejecuta las validaciones del registro del usuario
+    	if ( username == null ) {
+			throw new PMCException(ErrorEnum.ERR_RECUPERACION_PASSWORD, getClass().getName(), "No existe usuario.");
+    	}
+    	
+    	if ( password == null || password.isEmpty()) {
+    		throw new PMCException(ErrorEnum.ERR_RECUPERACION_PASSWORD, getClass().getName(), "Especificar el password");
+    	}
+    	
+    	if ( confirmation == null || confirmation.isEmpty()) {
+    		throw new PMCException(ErrorEnum.ERR_RECUPERACION_PASSWORD, getClass().getName(), "Especificar la confirmación");
+    	}
+		
+    	if ( !confirmation.equals(password) ) {
+    		throw new PMCException(ErrorEnum.ERR_RECUPERACION_PASSWORD, getClass().getName(), "Password y cofirmación deben ser identicos.");
+    	}
+    	
+    	if ( !PasswordHelper.passwordIsValid(password) ) {
+			throw new PMCException(ErrorEnum.ERR_INVALID_PASSWORD, getClass().getName());
+    	}
+	}
+    
 	public void validaRegistroUsuario( final UserDTO userDTO ) throws PMCException {
 		
     	if ( userDTO.getUsername() == null || userDTO.getUsername().isEmpty() ) {
