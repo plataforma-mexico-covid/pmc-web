@@ -141,7 +141,7 @@ export class RegistroInicioComponent {
   private validarContrasena(control: AbstractControl) {
     const contrasena = control.value;
     let error = null;
-    const regex = new RegExp(/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/);
+    const regex = new RegExp(/^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[-*_#@().!%&])[a-zA-Z0-9!@#\$%^&*](?=\S+$).{8,15}$/);
     if (!regex.test(contrasena)) {
       error = 'La contraseña debe tener al entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula, al menos una mayúscula y al menos un caracter no alfanumérico';
     }
