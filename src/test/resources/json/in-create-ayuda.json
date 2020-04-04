@@ -3,7 +3,7 @@
     "contactos": [
       {
         "contacto": "5536762551",
-        "tipoContacto": "TELEFONO"
+        "tipoContacto": "TELEFONO_FIJO"
       }
     ],
     "materno": "ANGELES",
