@@ -9,4 +9,6 @@ public interface MailService {
     void sendValidTokenUser(User user, Map<String, Object> hTemplateVariables) throws MessagingException;
     void sendAyudaConfirm(User user, Map<String, Object> hTemplateVariables) throws MessagingException;
     void sendAyudaMatchConfirm(User user, User requester, Map<String, Object> hTemplateVariables) throws MessagingException;
+    void sendRecoveryPassword(User user, Map<String, Object> hTemplateVariables) throws MessagingException;
+    
 }

@@ -1,6 +1,7 @@
 package mx.mexicocovid19.plataforma.controller;
 
 import mx.mexicocovid19.plataforma.ApiController;
+import mx.mexicocovid19.plataforma.controller.dto.ChangePasswordDTO;
 import mx.mexicocovid19.plataforma.controller.dto.UserDTO;
 import mx.mexicocovid19.plataforma.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -20,17 +21,36 @@ public class UserRestController {
         this.userService = userService;
     }
 
+    
     @PostMapping( produces = {"application/json;charset=UTF-8"}, headers = "Accept=" + MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> registerUser(final @RequestBody UserDTO userDTO, HttpServletRequest request) throws Exception {
         userService.registerUser(userDTO, request.getContextPath());
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    
     @GetMapping( value = { "/confirm" }, produces = {"application/json;charset=UTF-8"},
             headers = "Accept=" + MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> confirmUser(@RequestParam(value = "token") final String token) throws Exception {
         userService.confirmUser(token);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+    
+    
+    @GetMapping( value = { "/recovery_password" }, produces = {"application/json;charset=UTF-8"},
+            headers = "Accept=" + MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Void> recoveryPassword(@RequestParam(value = "username") final String username,
+			HttpServletRequest request) throws Exception {
+        userService.recoveryPassword(username, request.getContextPath());
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    
+	@PostMapping(value = { "/change_password" }, produces = { "application/json;charset=UTF-8" }, headers = "Accept="
+			+ MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> changePassword(final @RequestBody ChangePasswordDTO changePasswordDTO) throws Exception {
+        userService.changePassword(changePasswordDTO);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
 }

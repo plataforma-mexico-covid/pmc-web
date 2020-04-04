@@ -78,4 +78,11 @@ public class VelocityMailServiceImpl implements MailService {
         mailSender.send(preparator);
     }
 
+	@Override
+	public void sendRecoveryPassword(User user, Map<String, Object> hTemplateVariables) throws MessagingException {
+        templateMessage.setTo(user.getUsername());
+        templateMessage.setCc(user.getUsername());
+        send(templateMessage, convertToVelocityContext(hTemplateVariables), "email/recoveryPassword.vm");
+	}
+
 }
