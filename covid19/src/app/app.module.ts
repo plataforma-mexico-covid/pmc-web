@@ -15,6 +15,7 @@ import { GlobalsComponent } from './componentes/global/global.component';
 import { LoadingComponent } from './componentes/loading/loading.component';
 import { ConstantsService } from './componentes/global/constants.service';
 import { ListaAyudaComponent } from './componentes/lista-ayuda/lista-ayuda.component';
+import { WelcomeComponent } from './componentes/welcome/welcome.component';
 import { ConfirmacionComponent } from './estaticas/confirmacion/confirmacion.component';
 import { MapsMainComponent } from './estaticas/maps-main/maps-main.component';
 
@@ -28,6 +29,7 @@ import { MapsMainComponent } from './estaticas/maps-main/maps-main.component';
     AyudaComponent,
     LoadingComponent,
     ListaAyudaComponent,
+    WelcomeComponent,
     ConfirmacionComponent,
     MapsMainComponent
   ],

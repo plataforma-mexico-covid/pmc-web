@@ -3,7 +3,6 @@ import { MapaComponent } from 'src/app/componentes/mapa/mapa.component';
 import { ConstantsService } from 'src/app/componentes/global/constants.service';
 import { ServiciosService } from 'src/app/componentes/servicios.service';
 
-
 @Component({
   selector: 'app-maps-main',
   templateUrl: './maps-main.component.html',

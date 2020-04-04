@@ -8,6 +8,7 @@
         </app-registro-inicio>
         <app-ayuda [tipoAyuda]='tipoAyuda' [provincias]='lista_provincias' (actualizaMapa)='actualizaPosicion()'>
         </app-ayuda>
+        <app-welcome></app-welcome>
         <app-loading *ngIf="constantes.isLoading"></app-loading>
     </div>
 </ng-container>
