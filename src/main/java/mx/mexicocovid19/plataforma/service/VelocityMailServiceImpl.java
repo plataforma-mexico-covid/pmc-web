@@ -1,5 +1,10 @@
 package mx.mexicocovid19.plataforma.service;
 
+import java.io.StringWriter;
+import java.util.Map;
+
+import javax.mail.MessagingException;
+
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -10,10 +15,6 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
-
-import javax.mail.MessagingException;
-import java.io.StringWriter;
-import java.util.Map;
 
 @Service
 @Profile("mailon")
@@ -63,5 +64,4 @@ public class VelocityMailServiceImpl implements MailService {
 
         mailSender.send(preparator);
     }
-
 }

@@ -4,6 +4,8 @@ import mx.mexicocovid19.plataforma.model.entity.User;
 import mx.mexicocovid19.plataforma.model.entity.UserToken;
 import mx.mexicocovid19.plataforma.model.repository.UserRepository;
 import mx.mexicocovid19.plataforma.model.repository.UserTokenRepository;
+import mx.mexicocovid19.plataforma.service.enums.EnumTokenType;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,17 +47,18 @@ public class DefaultUserTokenService implements UserTokenService {
     }
 
     @Override
-    public UserToken createUserTokenByUser(User user) {
-        return userTokenRepository.save(generateTokenByUserAndTipo(user));
+    public UserToken createUserTokenByUser(User user, EnumTokenType type) {
+        return userTokenRepository.save(generateTokenByUserAndTipo(user, type));
     }
 
-    private UserToken generateTokenByUserAndTipo(User user) {
+    private UserToken generateTokenByUserAndTipo(User user, EnumTokenType type) {
         UserToken token = new UserToken();
         Calendar fechaVigencia = Calendar.getInstance();
         fechaVigencia.add(Calendar.DAY_OF_MONTH, PROPERTY_TOKEN_VIGENCIA_DAYS);
         token.setToken(UUID.randomUUID().toString());
         token.setUser(user);
         token.setExpirationDate(fechaVigencia.getTime());
+        token.setType(type.name());
         return token;
     }
 }

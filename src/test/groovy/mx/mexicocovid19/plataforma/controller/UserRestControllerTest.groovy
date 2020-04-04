@@ -39,6 +39,6 @@ class UserRestControllerTest extends Specification {
         0       | "in-create-user.json" 					| HttpStatus.CREATED
         1       | "in-create-user-invalid-password.json" 	| HttpStatus.BAD_REQUEST
 		2       | "in-create-user-sin-info-contacto.json" 	| HttpStatus.BAD_REQUEST
-        
     }
+	
 }
