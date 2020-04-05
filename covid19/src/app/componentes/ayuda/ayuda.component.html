@@ -3,8 +3,18 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-
-      <h5>{{ _constantes.origen_ayudar === 'SOLICITA' ?  'Necesito ayuda' : 'Ofrecer ayuda' }}</h5>
+        <div class="row align-items-center h-100">  
+          <div class="iconFlecha text-center w-100" *ngIf="_constantes.origen_ayudar === 'SOLICITA'" >
+            <img class="iconFlecha" [src]="'../../../assets/imgs/pedir.png'"/>
+          </div>
+          <div class="iconFlecha text-center w-100" *ngIf="_constantes.origen_ayudar !== 'SOLICITA'" >
+            <img class="iconFlecha" [src]="'../../../assets/imgs/dar.png'"/>
+          </div>
+            <h5 [ngClass]="{
+              'text-danger letters': _constantes.origen_ayudar === 'SOLICITA',
+              'text-primary letters':   _constantes.origen_ayudar !== 'SOLICITA'
+            }" style="margin-top: 8px;">{{ _constantes.origen_ayudar === 'SOLICITA' ?  'SOLICITAR AYUDA' : 'OFRECER MI AYUDA' }}</h5>
+        </div>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -12,58 +22,13 @@
       <div class="modal-body">
         <form [formGroup]='formulario'>
           <div class="row">
-            <div class="col-md-6">
-
+            <div class="col-md-12">
               <div class="form-group">
-                {{globales.usuario.fullname}}
                 <label for="nombre">Nombre</label>
                 <input type="email" autocomplete="new-password" class="form-control form-control-sm" id="nombre"
-                  name="username" aria-describedby="emailHelp" placeholder="Ingresa tu Nombre"
+                  name="username" aria-describedby="emailHelp" placeholder="Ingresa tu nombre"
                   [(ngModel)]="globales.usuario.fullname" readonly  formControlName='nombre'>
               </div>
-
-              <div class="form-group">
-                <label for="descripcion">Descripcion</label>
-                <input type="text" class="form-control form-control-sm" id="descripcion" placeholder="Descripción"
-                  name="descripcion" [(ngModel)]="ayuda.descripcion" formControlName='descripcion'>
-              </div>
-
-              <div class="form-group">
-                <label for="direccion">Dirección</label>
-                <input type="text" class="form-control form-control-sm" id="direccion" placeholder="Dirección"
-                  name="direccion" [(ngModel)]="ayuda.ubicacion.calle" formControlName='direccion'>
-              </div>
-
-              <div class="form-group">
-                <label for="estado">Estado</label>
-                <select class="form-control form-control-sm" name="estado" id="estado" formControlName='estado'
-                  (change)="cargaMunicipios($event)" [(ngModel)]="ayuda.ubicacion.idEstado">
-                  <option *ngFor="let item of provincias" [value]='item.id'> {{item.name}} </option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label for="cp">Código Postal</label>
-                <input type="text" class="form-control form-control-sm" id="cp" placeholder="Código Postal" name="cp"
-                  [(ngModel)]="ayuda.ubicacion.codigoPostal" formControlName='codigo_postal'>
-              </div>
-
-            </div>
-
-            <div class="col-md-6">
-
-              <!-- <div class="form-group row">
-                <div class="col-md-6">
-                  <label for="apellidos">Paterno</label>
-                  <input type="text" class="form-control form-control-sm" id="apellidos" name="apellidos"
-                    aria-describedby="apellidos" placeholder="Apellidos" [(ngModel)]="ayuda.ciudadano.paterno">
-                </div>
-                <div class="col-md-6">
-                  <label for="materno">Materno</label>
-                  <input type="text" class="form-control form-control-sm" id="materno" name="materno"
-                    aria-describedby="materno" placeholder="materno" [(ngModel)]="ayuda.ciudadano.materno">
-                </div>
-              </div> -->
 
               <div class="form-group">
                 <label for="tipo-ayuda">Tipo de ayuda</label>
@@ -74,40 +39,16 @@
               </div>
 
               <div class="form-group">
-                <label for="colonia">Colonia</label>
-                <input type="text" class="form-control form-control-sm" id="colonia" placeholder="Colonia"
-                  name="colonia" [(ngModel)]="ayuda.ubicacion.colonia" formControlName='colonia'>
-              </div>
-
-              <div class="form-group">
-                <label for="municipio">Municipio</label>
-                <select class="form-control form-control-sm" name="municipio" id="municipio" formControlName='municipio'
-                  [(ngModel)]="ayuda.ubicacion.idMunicipio" (change)='actualizaMunicipio($event)'>
-                  <option *ngFor="let item of lista_municipios" [value]='item.id'> {{item.fullname}} </option>
-                </select>
-              </div>
-
-              <div class="form-group row">
-                <div class="col-md-6">
-                  <label for="exterior">Número Exterior</label>
-                  <input type="text" class="form-control form-control-sm" id="exterior" placeholder="Número exterior"
-                    name="exterior" [(ngModel)]="ayuda.ubicacion.noExterior" formControlName='numero_exterior'>
-                </div>
-                <div class="col-md-6">
-                  <label for="interior">Número Interior</label>
-                  <input type="text" class="form-control form-control-sm" id="interior" placeholder="Número Interior"
-                    name="intrior" [(ngModel)]="ayuda.ubicacion.noInterior" formControlName='numero_interior'>
-                </div>
-
-              </div>
-
-
+                <label for="descripcion" class="col-form-label">Detalle</label>
+                <textarea maxlength="240" class="form-control" id="descripcion"
+                  name="descripcion" [(ngModel)]="ayuda.descripcion" formControlName='descripcion'></textarea>
+              </div>            
             </div>
           </div>
-          <div class="row my-3">
-            <button class="btn btn-primary btn-sm float-right mb-2 "
+          <div> 
+            <button class="btn btn-primary btn-sm mb-2"
             [disabled]='!formulario.valid'
-            (click)="enviarAyuda()">Enviar</button>
+            (click)="enviarAyuda()"> Enviar </button>
           </div>
         </form>
       </div>
