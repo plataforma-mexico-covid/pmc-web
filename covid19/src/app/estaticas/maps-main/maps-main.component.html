@@ -6,6 +6,8 @@
         <app-registro-inicio [origen_contactar]="origen_contactar" (loginCorrecto)="loginCorrecto()"
             (cargaAyudas)='getTiposAyuda()'>
         </app-registro-inicio>
+        <app-registro>
+        </app-registro>
         <app-ayuda [tipoAyuda]='tipoAyuda' [provincias]='lista_provincias' (actualizaMapa)='actualizaPosicion()'>
         </app-ayuda>
         <app-welcome></app-welcome>

@@ -1,45 +1,17 @@
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
+<div class="modal fade" id="registroModal" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="registroModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">
-          {{ constantes.origen_ayudar === 'SOLICITA' ?  'Necesito ayuda' : 'Ofrecer ayuda' }}</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <h5 class="modal-title" id="registroModalLabel">Registrar usuario</h5>
       </div>
       <div class="modal-body row">
-        <div class="col-md-6">
-          <form name="fomulario_inicio_session" [formGroup]='fomulario_inicio_session'>
-            <h4>Si ya tienes usuario</h4>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Email</label>
-              <input type="email" autocomplete="new-password" class="form-control form-control"
-                id="exampleInputEmail1" name="username" aria-describedby="emailHelp" placeholder="Enter email"
-                [(ngModel)]="usuario.username" formControlName='username'>
-            </div>
-            <div class="form-group">
-              <label for="passnew">Password</label>
-              <input autocomplete="new-password" type="password" class="form-control form-control" id="passnew"
-                placeholder="Password" name="password" [(ngModel)]="usuario.password" formControlName='password'>
-            </div>
-          </form>
-          <button type="submit" class="btn btn-primary btn-sm float-right" (click)="iniciarSession()"
-            [disabled]='(!fomulario_inicio_session.valid)'>Iniciar sesión</button>
-        </div>
-
-        <div class="col-md-6">
+        <div class="col-md-12">
           <form [formGroup]='formulario_crear_usuario'>
-            <div class="card-header">
-              <h4 class="mb-0">Crear usuario</h4>
-            </div>
             <div class="card-body">
               <div class="form-group row">
                 <label class="col-lg-4 col-form-label form-control-label">Email</label>
                 <div class="col-lg-8">
-                  <input type="email" autocomplete="new-password" class="form-control"
-                    id="exampleInputEmail2" name="email-registro" aria-describedby="emailHelp"
+                  <input type="email" autocomplete="new-password" class="form-control" name="email-registro" aria-describedby="emailHelp"
                     [(ngModel)]="usuario.username_n" formControlName='username_n'>
                 </div>
               </div>
@@ -52,13 +24,13 @@
                         <a [ngClass]="{
                           'text-danger': !this.formulario_crear_usuario.get('password2').valid,
                           'text-primary':   this.formulario_crear_usuario.get('password2').valid
-                       }" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">?</a>
+                       }" data-toggle="collapse" href="#passwordInfoCollapse" role="button" aria-expanded="false" aria-controls="passwordInfoCollapse">?</a>
                       </div>
                     </div>
                     <input type="password" autocomplete="new-password" class="form-control" id="passnewc"
                       [(ngModel)]="usuario.password2" name="password-registro" formControlName='password2'>
                   </div>
-                  <div class="collapse multi-collapse" id="multiCollapseExample1">
+                  <div class="collapse" id="passwordInfoCollapse">
                     <div class="alert alert-warning" role="alert">
                       <small id="format-pass">
                         La contraseña debe cumplir: <br>
@@ -127,14 +99,15 @@
               </div> 
             </div>
           </form>
-          <br>
-          <br>
-          <button type="submit" class="btn btn-primary btn-sm float-right" (click)="registro()"
-          [disabled]='(!formulario_crear_usuario.valid)
-          ||
-          (usuario.password2 !==  usuario.password_confirm)'
-          >Registrarme</button>
         </div>
+      </div>
+      <div class="modal-footer without-border">
+        <button type="submit" class="btn btn-danger float-right" data-dismiss="modal" (click)="openWelcomeModal()">Cancelar</button>
+        <button type="submit" class="btn btn-primary float-right" (click)="registro()"
+        [disabled]='(!formulario_crear_usuario.valid)
+        ||
+        (usuario.password2 !==  usuario.password_confirm)'
+        >Enviar</button>
       </div>
     </div>
   </div>
