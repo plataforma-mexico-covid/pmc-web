@@ -1,0 +1,40 @@
+<div class="modal fade" id="inicioModal" tabindex="-1" data-keyboard="false" data-backdrop="static" role="dialog" aria-labelledby="inicioModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="inicioModalLabel" align="center">Bienvenido</h5>
+      </div>
+      <div class="modal-body row">
+        <div class="col-md-12">
+          <form name="fomulario_inicio_session" [formGroup]='fomulario_inicio_session'>
+            <label class="sr-only" for="exampleInputEmail1">nombre@ejemplo.com</label>
+              <div class="input-group mb-2 mr-sm-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">@</div>
+                </div>
+                <input type="email" autocomplete="new-password" class="form-control form-control"
+                id="exampleInputEmail1" name="username" aria-describedby="emailHelp" placeholder="nombre@ejemplo.com"
+                [(ngModel)]="usuario.username" formControlName='username'>
+              </div>
+              <div class="form-group input-group mb-2 mr-sm-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><svg class="bi bi-lock" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M11.5 8h-7a1 1 0 00-1 1v5a1 1 0 001 1h7a1 1 0 001-1V9a1 1 0 00-1-1zm-7-1a2 2 0 00-2 2v5a2 2 0 002 2h7a2 2 0 002-2V9a2 2 0 00-2-2h-7zm0-3a3.5 3.5 0 117 0v3h-1V4a2.5 2.5 0 00-5 0v3h-1V4z" clip-rule="evenodd"/>
+                </svg></div>
+                </div>
+              <input autocomplete="new-password" type="password" class="form-control form-control" id="passnew"
+                placeholder="Password" name="password" [(ngModel)]="usuario.password" formControlName='password'>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer without-border">
+        <button type="submit" class="btn btn-danger float-right" data-dismiss="modal">Cancelar</button> 
+        <button type="submit" class="btn btn-success float-right" data-dismiss="modal" (click)="iniciarSession()"
+              [disabled]='(!fomulario_inicio_session.valid)'>Iniciar sesión</button>     
+      </div>
+    </div>
+  </div>
+</div>
+

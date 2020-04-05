@@ -36,3 +36,8 @@ button.btn.btn-primary.btn-sm.float-right {
 .pmc-gray {
   color: #E4DCD5;
 }
+
+.without-border{
+  border-top: 0px !important;
+  border-bottom: 0px !important;
+}

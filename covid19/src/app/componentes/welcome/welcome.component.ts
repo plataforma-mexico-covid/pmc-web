@@ -25,4 +25,9 @@ export class WelcomeComponent implements OnInit {
     }
   }
 
+  openModal(tipo: string) {
+    console.log(this.globales);
+    $('#' + tipo).modal('show');
+  }
+
 }
