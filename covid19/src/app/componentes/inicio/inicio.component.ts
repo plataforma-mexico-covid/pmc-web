@@ -81,6 +81,11 @@ export class InicioComponent {
     );
   }
 
+  openWelcomeModal() {
+    console.log(this.globales);
+    $('#welcomeModal').modal('show');
+  }
+
   registro() {
     this.constantes.isLoading = true;
     const aux = {

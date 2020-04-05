@@ -9,6 +9,7 @@ import { HeaderComponent } from './componentes/header/header.component';
 import { FooterComponent } from './componentes/footer/footer.component';
 import { RegistroInicioComponent } from './componentes/registro-inicio/registro-inicio.component';
 import { InicioComponent } from './componentes/inicio/inicio.component';
+import { RegistroComponent } from './componentes/registro/registro.component';
 import { ServiciosService } from './componentes/servicios.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AyudaComponent } from './componentes/ayuda/ayuda.component';
@@ -28,6 +29,7 @@ import { MapsMainComponent } from './estaticas/maps-main/maps-main.component';
     FooterComponent,
     RegistroInicioComponent,
     InicioComponent,
+    RegistroComponent,
     AyudaComponent,
     LoadingComponent,
     ListaAyudaComponent,
