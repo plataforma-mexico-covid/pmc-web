@@ -3,9 +3,6 @@
         <app-header (tipoAyudaCambio)="actualizarTipoAyuda($event)" class="container"></app-header>
         <app-mapa #mapaComponent (setOrigenContactar)="setOrigenContactar($event)"></app-mapa>
         <app-footer class="container" (setOrigenContactar)="setOrigenContactar($event)"></app-footer>
-        <app-registro-inicio [origen_contactar]="origen_contactar" (loginCorrecto)="loginCorrecto()"
-            (cargaAyudas)='getTiposAyuda()'>
-        </app-registro-inicio>
         <app-inicio (loginCorrecto)="loginCorrecto()">
         </app-inicio>
         <app-registro></app-registro>

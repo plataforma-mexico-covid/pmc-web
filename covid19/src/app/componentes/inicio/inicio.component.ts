@@ -45,17 +45,17 @@ export class InicioComponent {
           this.loginCorrecto.emit();
         } else {
           Swal.fire({
-            title: 'Error!',
+            title: '¡Error!',
             text: 'Ocurrio un problema al iniciar sessión',
             icon: 'error',
             confirmButtonText: 'Entendido'
-          });
+          });         
         }
       },
       (error) => {
         this.constantes.isLoading = false;
         Swal.fire({
-          title: 'Error!',
+          title: '¡Error!',
           text: 'Ocurrio un problema al iniciar sessión',
           icon: 'error',
           confirmButtonText: 'Entendido'
