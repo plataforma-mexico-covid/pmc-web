@@ -20,6 +20,7 @@ import { ListaAyudaComponent } from './componentes/lista-ayuda/lista-ayuda.compo
 import { WelcomeComponent } from './componentes/welcome/welcome.component';
 import { ConfirmacionComponent } from './estaticas/confirmacion/confirmacion.component';
 import { MapsMainComponent } from './estaticas/maps-main/maps-main.component';
+import { SesionComponent } from './componentes/sesion/sesion.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { MapsMainComponent } from './estaticas/maps-main/maps-main.component';
     ListaAyudaComponent,
     WelcomeComponent,
     ConfirmacionComponent,
-    MapsMainComponent
+    MapsMainComponent,
+    SesionComponent
   ],
   imports: [
     BrowserModule,

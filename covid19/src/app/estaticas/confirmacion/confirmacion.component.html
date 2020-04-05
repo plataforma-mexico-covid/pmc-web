@@ -6,12 +6,12 @@
             <div class="col sm-4 text-center py-3">
                 <ng-container *ngIf="validacion_correcta; else elseTemplate">
                     <div class="alert alert-success" role="alert">
-                        A simple success alert with <a [routerLink]="[ '/maps' ]" class="alert-link">an example link</a>. Give it a click if you like.
+                        Gracias tu correo electronico ha sido validado, ya puedes iniciar sesion en <a [routerLink]="[ '/maps' ]" class="alert-link">link</a>.
                     </div>
                 </ng-container>
                 <ng-template #elseTemplate>
                     <div class="alert alert-danger" role="alert">
-                        A simple success alert with <a [routerLink]="[ '/maps' ]" class="alert-link">an example link</a>. Give it a click if you like.
+                        Lo sentimos el token que estas intentando validar ya fue utilizado, intenta iniciar sesion en <a [routerLink]="[ '/maps' ]" class="alert-link">link</a>.
                     </div>
                 </ng-template>
             </div>
@@ -21,15 +21,3 @@
         <app-footer class="container" (setOrigenContactar)="setOrigenContactar($event)"></app-footer>
     </div>
 </ng-container>
-
-
-
-<!--div class="alert alert-success m-lg-5 my-5 max-width " role="alert">
-    <h4 class="alert-heading">¡Bienvenido!</h4>
-    <p>Su correo ha sido validado correctamente.</p>
-    <hr>
-    <p class="mb-0">Ahora puede iniciar sesión, para solicitar/ofrecer ayuda.</p>
-    <p class="mb-0">
-        <button [routerLink]="[ '/maps' ]" type="button" class="btn btn-outline-success my-3">Acceder</button>
-    </p>
-</div-->

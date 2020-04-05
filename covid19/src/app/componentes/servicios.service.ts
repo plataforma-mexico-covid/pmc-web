@@ -8,6 +8,8 @@ declare const RUTAS: any;
 @Injectable()
 export class ServiciosService {
   public rutas;
+  private isUserLoggedIn: boolean = false;
+
   constructor(private http: HttpClient, private globales: GlobalsComponent ) {
     this.rutas = RUTAS();
   }
