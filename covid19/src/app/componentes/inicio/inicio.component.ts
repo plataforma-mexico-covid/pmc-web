@@ -51,7 +51,6 @@ export class InicioComponent {
             confirmButtonText: 'Entendido'
           });
         }
-        this.origen_contactar = false;
       },
       (error) => {
         this.constantes.isLoading = false;
