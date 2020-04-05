@@ -1,5 +1,5 @@
 function RUTAS() {
   return {
-    endpoint: 'http://ayudando.me'
+    endpoint: 'https://beta.ayudando.me'
   }
 }
