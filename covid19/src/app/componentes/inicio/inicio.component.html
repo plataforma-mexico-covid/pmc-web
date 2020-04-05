@@ -36,7 +36,7 @@
       </div>
       <div class="modal-footer without-border">
         <button type="submit" class="btn btn-danger float-right" data-dismiss="modal" (click)="openWelcomeModal()">Cancelar</button> 
-        <button type="submit" class="btn btn-success float-right" data-dismiss="modal" (click)="iniciarSession()"
+        <button type="submit" class="btn btn-success float-right" (click)="iniciarSession()"
               [disabled]='(!fomulario_inicio_session.valid)'>Iniciar sesión</button>     
       </div>
     </div>

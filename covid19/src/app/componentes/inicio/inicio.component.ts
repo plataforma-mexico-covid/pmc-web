@@ -1,5 +1,5 @@
 import { Component, Output, EventEmitter, Input } from '@angular/core';
-import { ServiciosService } from '../servicios.service';
+import { AuthService } from '../../services/auth.service';
 import { ContactInfos, Usuario } from 'src/app/entidades';
 import Swal from 'sweetalert2';
 import { GlobalsComponent } from '../global/global.component';
@@ -23,7 +23,7 @@ export class InicioComponent {
     password: new FormControl('', Validators.required)
   });
 
-  constructor(private _servicio: ServiciosService,
+  constructor(private _authService: AuthService,
     public constantes: ConstantsService,
     private globales: GlobalsComponent) {
     this.usuario.contactInfos.push(new ContactInfos());
@@ -35,14 +35,11 @@ export class InicioComponent {
 
   iniciarSession() {
     this.constantes.isLoading = true;
-    this._servicio.iniciarSession(this.usuario).subscribe(
-      (data: any) => {
-        // localStorage.setItem('token', data.token);
+    this._authService.login(this.usuario)
+      .then((data: any) => {
         if (data.token) {
-          $('#exampleModal').modal('hide');
           this.constantes.isLoading = false;
-          this.globales.usuario = data;
-          this.loginCorrecto.emit();
+          $('#inicioModal').modal('hide');
         } else {
           Swal.fire({
             title: '¡Error!',
@@ -51,8 +48,8 @@ export class InicioComponent {
             confirmButtonText: 'Entendido'
           });         
         }
-      },
-      (error) => {
+      })
+      .catch((error) => {
         this.constantes.isLoading = false;
         Swal.fire({
           title: '¡Error!',

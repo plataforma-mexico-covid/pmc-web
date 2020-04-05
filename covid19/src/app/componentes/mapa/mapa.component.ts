@@ -1,5 +1,6 @@
 import { ConstantsService } from './../global/constants.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
 import { ServiciosService } from '../servicios.service';
 import { Ayuda } from 'src/app/entidades';
 import Swal from 'sweetalert2';
@@ -34,6 +35,7 @@ export class MapaComponent implements OnInit {
 
   constructor(
     private _servicio: ServiciosService,
+    private _authService :AuthService,
     private _constantes: ConstantsService,
     private _globales: GlobalsComponent
   ) { }
@@ -69,15 +71,15 @@ export class MapaComponent implements OnInit {
     } else {
       alert('No hay soporte para la geolocalización: podemos desistir o utilizar algún método alternativo');
     }
-    console.log('WELCOME ' + $('#welcomeModal'));
-    $('#welcomeModal').modal('show');
+    if (!this._authService.isLoggedIn()){
+      $('#welcomeModal').modal('show');
+    }
   }
 
   cambioTipoAyuda(tipo_ayuda) {
     this.tipo_ayuda = tipo_ayuda;
     this.actualizarRegistros(this.initial_lng, this.initial_lat, this.zoom);
   }
-
 
   actualizarRegistros(longitud?, latitud?, zoom?) {
     // ayuda
