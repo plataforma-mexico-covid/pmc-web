@@ -69,6 +69,7 @@ export class MapaComponent implements OnInit {
     } else {
       alert('No hay soporte para la geolocalización: podemos desistir o utilizar algún método alternativo');
     }
+    console.log('WELCOME ' + $('#welcomeModal'));
     $('#welcomeModal').modal('show');
   }
 

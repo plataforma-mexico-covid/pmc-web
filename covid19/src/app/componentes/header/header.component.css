@@ -1,4 +1,4 @@
-.over-map {
+/*.over-map {
     position: absolute;
     z-index: 6;
     margin: 10px 5px;
@@ -16,4 +16,15 @@ hr{
     border: 1;
     width: 100%;
     border: 0.5px solid rgba(154, 157, 160, 0.15);
+}*/
+
+.bg-cone{
+    background-color: #ffffff;
+}
+.border-bottomone{
+    border-bottom: 5px solid #86cdcd;
+}
+
+.size-img{
+    width: 70%;
 }
