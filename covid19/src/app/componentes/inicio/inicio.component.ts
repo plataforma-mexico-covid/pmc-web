@@ -61,6 +61,11 @@ export class InicioComponent {
     );
   }
 
+  cerrarModal() {
+    this.fomulario_inicio_session.reset();
+    this.openWelcomeModal();
+  }
+
   openWelcomeModal() {
     console.log(this.globales);
     $('#welcomeModal').modal('show');

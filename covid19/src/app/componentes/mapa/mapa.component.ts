@@ -5,6 +5,8 @@ import { ServiciosService } from '../servicios.service';
 import { Ayuda } from 'src/app/entidades';
 import Swal from 'sweetalert2';
 import { GlobalsComponent } from '../global/global.component';
+import { MouseEvent as AGMMouseEvent, MapsAPILoader } from '@agm/core';
+
 declare var $: any;
 @Component({
   selector: 'app-mapa',
@@ -23,6 +25,7 @@ export class MapaComponent implements OnInit {
   contador_movimiento: any;
   mi_posicion = { longitud: null, latitud: null };
   ayuda_id: number;
+  private geoCoder;
 
   icons = {
     1: '/assets/imgs/comida_50_50.png',
@@ -34,6 +37,7 @@ export class MapaComponent implements OnInit {
   }
 
   constructor(
+    private mapsAPILoader: MapsAPILoader,
     private _servicio: ServiciosService,
     private _authService :AuthService,
     private _constantes: ConstantsService,
@@ -43,6 +47,9 @@ export class MapaComponent implements OnInit {
   ngOnInit() {
     if (navigator.geolocation) {
       this.soporta_geolocacion = true;
+      this.mapsAPILoader.load().then(() => {
+        this.geoCoder = new google.maps.Geocoder;
+      });
       navigator.geolocation.getCurrentPosition((objPosition) => {
         this.initial_lng = objPosition.coords.longitude;
         this.initial_lat = objPosition.coords.latitude;
@@ -99,12 +106,33 @@ export class MapaComponent implements OnInit {
   clickedMarker(ayuda: any) {
   }
 
-  markerDragEnd(dato1, dato2) {
-
+  markerDragEnd(ayuda :any, $event: AGMMouseEvent) {
+    console.log($event);
+    this.getAddress($event.coords.lat, $event.coords.lng);
   }
+
+  getAddress(latitude, longitude) {
+    this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
+      console.log(results);
+      console.log(status);
+      if (status === 'OK') {
+        if (results[0]) {
+          this.zoom = 12;
+          //this.address = results[0].formatted_address;
+        } else {
+          window.alert('No results found');
+        }
+      } else {
+        window.alert('Geocoder failed due to: ' + status);
+      }
+
+    });
+  }
+
 
   mapClicked(posicion: any) {
     console.log(this.mi_posicion);
+    console.log(posicion);
 
     Swal.fire({
       title: '¿Quieres indicar este punto como origen para  Solicitar/Ofrecer ayuda?',
@@ -119,6 +147,7 @@ export class MapaComponent implements OnInit {
       if (result.value) {
         this.mi_posicion.longitud = posicion.coords.lng;
         this.mi_posicion.latitud = posicion.coords.lat;
+        this.getAddress(posicion.coords.lat, posicion.coords.lng);
       }
     });
     this._constantes.latitud = posicion.coords.lat;

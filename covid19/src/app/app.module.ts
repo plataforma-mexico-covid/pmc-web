@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { AgmCoreModule } from '@agm/core';
 import { MapaComponent } from './componentes/mapa/mapa.component';
 import { HeaderComponent } from './componentes/header/header.component';
+import { HeaderEstaticoComponent } from './componentes/header-estatico/header-estatico.component';
 import { FooterComponent } from './componentes/footer/footer.component';
 import { InicioComponent } from './componentes/inicio/inicio.component';
 import { RegistroComponent } from './componentes/registro/registro.component';
@@ -26,6 +27,7 @@ import { SesionComponent } from './componentes/sesion/sesion.component';
     AppComponent,
     MapaComponent,
     HeaderComponent,
+    HeaderEstaticoComponent,
     FooterComponent,
     InicioComponent,
     RegistroComponent,

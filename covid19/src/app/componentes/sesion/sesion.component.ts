@@ -20,7 +20,10 @@ export class SesionComponent implements OnInit {
   ngOnInit() {
     this.isSesionActive = this._authService.isLoggedIn();
     this.name = this._authService.getNameAlreadyLoggedIn();
-    this._authService.isLoggedInObservable().subscribe((isLoggedIn) => {this.isSesionActive = isLoggedIn});
+    this._authService.isLoggedInObservable().subscribe((isLoggedIn) => {
+      this.isSesionActive = isLoggedIn;
+      this.name = this._authService.getNameAlreadyLoggedIn();
+    });
   }
 
   logout() {

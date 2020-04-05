@@ -35,8 +35,12 @@ export class RegistroComponent {
   }
 
   openWelcomeModal() {
-    console.log(this.globales);
     $('#welcomeModal').modal('show');
+  }
+
+  cerrarModal() {
+    this.formulario_crear_usuario.reset();
+    this.openWelcomeModal();
   }
 
   registro() {

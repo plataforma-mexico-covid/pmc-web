@@ -5,15 +5,15 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-            <li class="nav-item" [ngClass]="{'active': opcion=='OFRECE'}" (click)="actualizarTipoAyuda('OFRECE')"
+            <li class="nav-item" 
                 data-toggle="collapse" data-target="#navbarNav">
                 <a class="nav-link">Ayuda </a>
             </li>
-            <li class="nav-item" [ngClass]="{'active': opcion=='SOLICITA'}" (click)="actualizarTipoAyuda('SOLICITA')"
-                data-toggle="collapse" data-target="#navbarNav">
+            <li class="nav-item" 
+                            data-toggle="collapse" data-target="#navbarNav">
                 <a class="nav-link"> Necesidades</a>
             </li>
-            <li class="nav-item" [ngClass]="{'active': opcion=='AMBOS'}" (click)="actualizarTipoAyuda('AMBOS')"
+            <li class="nav-item" 
                 data-toggle="collapse" data-target="#navbarNav">
                 <a class="nav-link">Ambos</a>
             </li>
