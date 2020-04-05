@@ -82,7 +82,7 @@ public class SessionRestController {
         	
         } else {
         	// ciudadano
-        	token = jwtTokenUtil.generateToken(usuario.getUsername(), ciudadano.getNombreCompleto(), device, roles);
+        	token = jwtTokenUtil.generateToken(usuario.getUsername(), ciudadano.getNombre(), device, roles);
         	return createSessionDTO(usuario.getUsername(), ciudadano.getNombreCompleto(), roles, token);
         }
     }
