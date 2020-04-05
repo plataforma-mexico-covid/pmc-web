@@ -7,7 +7,6 @@ import { AgmCoreModule } from '@agm/core';
 import { MapaComponent } from './componentes/mapa/mapa.component';
 import { HeaderComponent } from './componentes/header/header.component';
 import { FooterComponent } from './componentes/footer/footer.component';
-import { RegistroInicioComponent } from './componentes/registro-inicio/registro-inicio.component';
 import { InicioComponent } from './componentes/inicio/inicio.component';
 import { RegistroComponent } from './componentes/registro/registro.component';
 import { ServiciosService } from './componentes/servicios.service';
@@ -27,7 +26,6 @@ import { MapsMainComponent } from './estaticas/maps-main/maps-main.component';
     MapaComponent,
     HeaderComponent,
     FooterComponent,
-    RegistroInicioComponent,
     InicioComponent,
     RegistroComponent,
     AyudaComponent,
