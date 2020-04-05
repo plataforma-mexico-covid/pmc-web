@@ -8,6 +8,7 @@
       <div class="modal-body row">
         <div class="col-md-12">
           <form name="fomulario_inicio_session" [formGroup]='fomulario_inicio_session'>
+            <div class="card-body">
             <label class="sr-only" for="exampleInputEmail1">nombre@ejemplo.com</label>
               <div class="input-group mb-2 mr-sm-2">
                 <div class="input-group-prepend">
@@ -26,6 +27,7 @@
               <input autocomplete="new-password" type="password" class="form-control form-control" id="passnew"
                 placeholder="Password" name="password" [(ngModel)]="usuario.password" formControlName='password'>
             </div>
+          </div>
           </form>
         </div>
       </div>
