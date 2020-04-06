@@ -42,12 +42,12 @@
                     <input type="password" autocomplete="new-password" class="form-control" id="passnewc"
                       [(ngModel)]="usuario.password2" name="password-registro" formControlName='password2'>
                   </div>
-                  <div class="collapse" id="passwordInfoCollapse">
+                  <div id="passwordInfoCollapse">
                     <div class="alert alert-warning" role="alert">
                       <small id="format-pass">
                         La contraseña debe cumplir: <br>
                         1. Entre 8 y 16 caracteres. <br>
-                        2. Al menos una letra minúscula. <br> 
+                        2. Al menos una letra minúscula. <br>
                         3. Al menos una letra mayúscula. <br>
                         4. Al menos un caracter de la lista [-*_#@().!%&]. <br>
                       </small>
@@ -67,7 +67,7 @@
                       </div>
                     </div>
                   </div>
-              </div> 
+              </div>
               <div class="form-group row">
                 <label class="col-lg-4 col-form-label form-control-label">Nombre(s)</label>
                 <div class="col-lg-8">
@@ -108,7 +108,7 @@
                   <input type="text" class="form-control form-control" id="tel"
                     [(ngModel)]="usuario.contactInfos[0].contacto" name="contacto" formControlName='contacto' >
                 </div>
-              </div> 
+              </div>
             </div>
           </form>
         </div>
