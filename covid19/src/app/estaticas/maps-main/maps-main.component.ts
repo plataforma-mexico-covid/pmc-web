@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MapaComponent } from 'src/app/componentes/mapa/mapa.component';
 import { ConstantsService } from 'src/app/componentes/global/constants.service';
 import { ServiciosService } from 'src/app/componentes/servicios.service';
+import { typeWithParameters } from '@angular/compiler/src/render3/util';
 
 @Component({
   selector: 'app-maps-main',
@@ -46,7 +47,7 @@ export class MapsMainComponent implements OnInit {
         this.tipoAyuda = data;
       },
       (error) => {
-
+        console.log(error);
       }
     );
   }
@@ -64,6 +65,9 @@ export class MapsMainComponent implements OnInit {
   }
 
   setOrigenContactar(contactar) {
+    if ( !this.tipoAyuda ) {
+      this.getTiposAyuda();
+    }
     this.origen_contactar = contactar;
   }
 }

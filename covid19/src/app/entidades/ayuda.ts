@@ -40,6 +40,7 @@ export class Ayuda {
     origenAyuda: OrigenesAyuda | string;
     tipoAyuda: TipoAyuda;
     ubicacion: Ubicacion;
+    direccion: string;
 }
 
 

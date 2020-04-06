@@ -15,6 +15,7 @@ declare var $: any;
 export class InicioComponent {
 
   public usuario = new Usuario();
+  @Output() actualizaAyuda = new EventEmitter();
 
   public fomulario_inicio_session = new FormGroup({
     username: new FormControl('', [Validators.required, Validators.email]),
@@ -38,13 +39,14 @@ export class InicioComponent {
         if (data.token) {
           this.constantes.isLoading = false;
           $('#inicioModal').modal('hide');
+          this.actualizaAyuda.emit();
         } else {
           Swal.fire({
             title: '¡Error!',
             text: 'Ocurrio un problema al iniciar sessión',
             icon: 'error',
             confirmButtonText: 'Entendido'
-          });         
+          });
         }
       })
       .catch((error) => {

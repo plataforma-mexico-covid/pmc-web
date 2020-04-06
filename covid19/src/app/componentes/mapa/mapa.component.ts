@@ -40,7 +40,7 @@ export class MapaComponent implements OnInit {
   constructor(
     private mapsAPILoader: MapsAPILoader,
     private _servicio: ServiciosService,
-    private _authService :AuthService,
+    private _authService: AuthService,
     private _constantes: ConstantsService,
     private _globales: GlobalsComponent
   ) { }
@@ -79,7 +79,7 @@ export class MapaComponent implements OnInit {
     } else {
       alert('No hay soporte para la geolocalización: podemos desistir o utilizar algún método alternativo');
     }
-    if (!this._authService.isLoggedIn()){
+    if (!this._authService.isLoggedIn()) {
       $('#welcomeModal').modal('show');
     }
   }
@@ -107,7 +107,7 @@ export class MapaComponent implements OnInit {
   clickedMarker(ayuda: any) {
   }
 
-  markerDragEnd(ayuda :any, $event: AGMMouseEvent) {
+  markerDragEnd(ayuda: any, $event: AGMMouseEvent) {
     console.log($event);
     this.getAddress($event.coords.lat, $event.coords.lng);
   }
@@ -118,7 +118,8 @@ export class MapaComponent implements OnInit {
       console.log(status);
       if (status === 'OK') {
         if (results[0]) {
-          this.zoom = 12;
+          console.log(results[0].formatted_address);
+          this._constantes.direccion =  results[0].formatted_address;
           //this.address = results[0].formatted_address;
         } else {
           window.alert('No results found');
@@ -131,31 +132,35 @@ export class MapaComponent implements OnInit {
   }
 
   mapClicked(posicion: any) {
-    console.log(this.mi_posicion);
-    console.log(posicion);
-
+    this.mi_posicion.longitud = posicion.coords.lng;
+    this.mi_posicion.latitud = posicion.coords.lat;
     Swal.fire({
       title: 'Registrar ayuda',
       text: '¿Deseas registrar una ayuda en esta ubicacion?',
       icon: 'info',
       showCancelButton: true,
+      showCloseButton: true,
+      allowOutsideClick: false,
       confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
+      cancelButtonColor: '#44ac34',
       confirmButtonText: 'Ofrecer',
       cancelButtonText: 'Solicitar'
-    }).then((result) => {
+    }).then((result: any) => {
       if (result.value) {
-        alert('Ofrecer');
-        this.mi_posicion.longitud = posicion.coords.lng;
-        this.mi_posicion.latitud = posicion.coords.lat;
         this.getAddress(posicion.coords.lat, posicion.coords.lng);
+        this.setOrigenContactar.emit();
+        this._constantes.origen_ayudar = 'OFRECE';
+        $('#ayudaModal').modal('show');
       } else {
-        alert('Solicitar');
+        if ( result.dismiss === 'cancel'  ) {
+          this.getAddress(posicion.coords.lat, posicion.coords.lng);
+          this.setOrigenContactar.emit();
+          this._constantes.origen_ayudar = 'SOLICITA';
+          $('#ayudaModal').modal('show');
+        }
+
       }
     });
-    this._constantes.latitud = posicion.coords.lat;
-    this._constantes.longitud = posicion.coords.lng;
-    // console.log(posicion.coords.lat, posicion.coords.lng);
   }
 
   cambioZoom(zoom) {
