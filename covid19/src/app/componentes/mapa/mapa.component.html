@@ -23,21 +23,6 @@
                         {{ ayuda.ciudadano.materno }} </p>
                     <p> <strong> Origen: </strong> {{ ayuda.origenAyuda }} </p>
                     <p> <strong> Descripción: </strong> {{ ayuda.descripcion }} </p>
-
-                    <ng-container *ngIf="booleanA; then caseA; else caseB">
-                    </ng-container>
-                    <ng-template #caseA>
-                        <span>1</span>
-                        <span>2</span>
-                    </ng-template>
-                    <ng-template #caseB>
-                        <div *ngIf="booleanB">
-                            <span>3</span>
-                            <span>4</span>
-                            <span>5</span>
-                        </div>
-                    </ng-template>
-
                     <p class="text-center">
                         <ng-container *ngIf="ayuda.isUserLogIn;">
                             <div class="alert alert-success" role="alert">
