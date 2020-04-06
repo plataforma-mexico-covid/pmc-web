@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { GlobalsComponent } from '../global/global.component';
 import { ConstantsService } from '../global/constants.service';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
+import {Router} from '@angular/router';
 
 declare var $: any;
 @Component({
@@ -22,7 +23,8 @@ export class InicioComponent {
     password: new FormControl('', Validators.required)
   });
 
-  constructor(private _authService: AuthService,
+  constructor(private router: Router,
+    private _authService: AuthService,
     public constantes: ConstantsService,
     private globales: GlobalsComponent) {
     this.usuario.contactInfos.push(new ContactInfos());
@@ -40,6 +42,7 @@ export class InicioComponent {
           this.constantes.isLoading = false;
           $('#inicioModal').modal('hide');
           this.actualizaAyuda.emit();
+          this.router.navigateByUrl('/maps');
         } else {
           Swal.fire({
             title: '¡Error!',

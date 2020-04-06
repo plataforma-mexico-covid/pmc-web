@@ -26,13 +26,14 @@ export class MapaComponent implements OnInit {
   mi_posicion = { longitud: null, latitud: null };
   ayuda_id: number;
   private geoCoder;
+  isSesionActive: any;
 
   icons = {
-    1: '/assets/imgs/comida_50_50.png',
-    2: '/assets/imgs/envios_50_50.png',
-    3: '/assets/imgs/taxi_50_50.png',
-    4: '/assets/imgs/psicologico_50_50.png',
-    5: '/assets/imgs/legal_50_50.png',
+    1: '/assets/imgs/ub_comida_25_35.png',
+    2: '/assets/imgs/ub_envios_25_35.png',
+    3: '/assets/imgs/ub_farmacia_25_35.png',
+    4: '/assets/imgs/ub_cruz_25_35.png',
+    5: '/assets/imgs/ub_legal_25_35.png',
     6: '/assets/imgs/posicion_50.png',
     7: '/assets/imgs/beachflag.png',
   }
@@ -79,7 +80,9 @@ export class MapaComponent implements OnInit {
     } else {
       alert('No hay soporte para la geolocalización: podemos desistir o utilizar algún método alternativo');
     }
-    if (!this._authService.isLoggedIn()) {
+    this.isSesionActive = this._authService.isLoggedIn();
+    this._authService.isLoggedInObservable().subscribe((isLoggedIn) => this.isSesionActive = isLoggedIn);
+    if (!this.isSesionActive) {
       $('#welcomeModal').modal('show');
     }
   }
@@ -101,7 +104,6 @@ export class MapaComponent implements OnInit {
 
       }
     );
-
   }
 
   clickedMarker(ayuda: any) {
@@ -114,12 +116,11 @@ export class MapaComponent implements OnInit {
 
   getAddress(latitude, longitude) {
     this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
-      console.log(results);
-      console.log(status);
       if (status === 'OK') {
         if (results[0]) {
           console.log(results[0].formatted_address);
           this._constantes.direccion =  results[0].formatted_address;
+          console.log(results);
           //this.address = results[0].formatted_address;
         } else {
           window.alert('No results found');
@@ -134,6 +135,16 @@ export class MapaComponent implements OnInit {
   mapClicked(posicion: any) {
     this.mi_posicion.longitud = posicion.coords.lng;
     this.mi_posicion.latitud = posicion.coords.lat;
+    this._constantes.longitud = posicion.coords.lng;
+    this._constantes.latitud = posicion.coords.lat;
+    if (this.isSesionActive) {
+      this.createAyuda(posicion);
+    } else {
+      this.createAyudaInvitado();
+    }
+  }
+
+  createAyuda(posicion: any){
     Swal.fire({
       title: 'Registrar ayuda',
       text: '¿Deseas registrar una ayuda en esta ubicacion?',
@@ -159,6 +170,24 @@ export class MapaComponent implements OnInit {
           $('#ayudaModal').modal('show');
         }
 
+      }
+    });
+  }
+
+  createAyudaInvitado(){
+    Swal.fire({
+      title: 'Registrar ayuda',
+      text: '¿Deseas registrar una ayuda en esta ubicacion?',
+      icon: 'info',
+      showCancelButton: false,
+      showCloseButton: true,
+      allowOutsideClick: false,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#44ac34',
+      confirmButtonText: 'Iniciar Sesion',
+    }).then((result: any) => {
+      if (result.value) {
+        $('#inicioModal').modal('show');
       }
     });
   }
@@ -206,6 +235,10 @@ export class MapaComponent implements OnInit {
       this.setOrigenContactar.emit(true);
       $('#exampleModal').modal('show');
     }
+  }
+
+  iniciarSesion() {
+    $('#inicioModal').modal('show');
   }
 
 }

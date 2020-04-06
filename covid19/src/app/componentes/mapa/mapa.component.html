@@ -15,7 +15,7 @@
                 }" [iconUrl]="{
                   url: icons[ayuda.tipoAyuda.id],
                   scaledSize:
-                    { width: 50, height: 50, anchor : {x:5, y:10} }
+                    { width: 25, height: 35, anchor : {x:5, y:10} }
                     , labelOrigin:{x:30,y:57}
                 }" (dragEnd)='markerDragEnd(ayuda, $event)'>
                 <agm-info-window>
@@ -23,9 +23,35 @@
                         {{ ayuda.ciudadano.materno }} </p>
                     <p> <strong> Origen: </strong> {{ ayuda.origenAyuda }} </p>
                     <p> <strong> Descripción: </strong> {{ ayuda.descripcion }} </p>
+
+                    <ng-container *ngIf="booleanA; then caseA; else caseB">
+                    </ng-container>
+                    <ng-template #caseA>
+                        <span>1</span>
+                        <span>2</span>
+                    </ng-template>
+                    <ng-template #caseB>
+                        <div *ngIf="booleanB">
+                            <span>3</span>
+                            <span>4</span>
+                            <span>5</span>
+                        </div>
+                    </ng-template>
+
                     <p class="text-center">
-                        <button class="btn btn-outline-info mx-auto" (click)="contactarUsuario(ayuda.id)"> Contactar
-                        </button>
+                        <ng-container *ngIf="ayuda.isUserLogIn;">
+                            <div class="alert alert-success" role="alert">
+                                ¡Gracias por sumar!
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="!ayuda.isUserLogIn && isSesionActive; else elseTemplate">
+                            <button class="btn btn-outline-info mx-auto" (click)="contactarUsuario(ayuda.id)"> Contactar
+                            </button>
+                        </ng-container>
+                        <ng-template #elseTemplate>
+                            <button class="btn btn-outline-info mx-auto" (click)="iniciarSesion()"> Iniciar Sesion
+                            </button>
+                        </ng-template>
                     </p>
                 </agm-info-window>
             </agm-marker>

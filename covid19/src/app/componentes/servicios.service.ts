@@ -29,7 +29,9 @@ export class ServiciosService {
 
   ayuda(tipo: 'AMBOS' | 'OFRECE' | 'SOLICITA', longitude: number, latitude: number, kilometers: string) {
     // tslint:disable-next-line: max-line-length
-    return this.http.get(`${this.rutas.endpoint}/api/v1/public/ayuda/?origenAyuda=${tipo}&longitude=${longitude}&latitude=${latitude}&kilometers=${kilometers}`);
+    const token = this.globales.usuario.token ? this.globales.usuario.token : '';
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'X-Auth-Token': token });
+    return this.http.get(`${this.rutas.endpoint}/api/v1/public/ayuda/?origenAyuda=${tipo}&longitude=${longitude}&latitude=${latitude}&kilometers=${kilometers}`, { headers } );
   }
 
   getTiposAyuda() {

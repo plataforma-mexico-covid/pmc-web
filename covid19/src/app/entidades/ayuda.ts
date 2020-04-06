@@ -41,6 +41,7 @@ export class Ayuda {
     tipoAyuda: TipoAyuda;
     ubicacion: Ubicacion;
     direccion: string;
+    isUserLogIn: boolean;
 }
 
 
