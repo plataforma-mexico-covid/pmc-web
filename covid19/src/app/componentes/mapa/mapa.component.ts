@@ -34,6 +34,7 @@ export class MapaComponent implements OnInit {
     4: '/assets/imgs/psicologico_50_50.png',
     5: '/assets/imgs/legal_50_50.png',
     6: '/assets/imgs/posicion_50.png',
+    7: '/assets/imgs/beachflag.png',
   }
 
   constructor(
@@ -129,25 +130,27 @@ export class MapaComponent implements OnInit {
     });
   }
 
-
   mapClicked(posicion: any) {
     console.log(this.mi_posicion);
     console.log(posicion);
 
     Swal.fire({
-      title: '¿Quieres indicar este punto como origen para  Solicitar/Ofrecer ayuda?',
-      text: '',
-      icon: 'warning',
+      title: 'Registrar ayuda',
+      text: '¿Deseas registrar una ayuda en esta ubicacion?',
+      icon: 'info',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Si',
-      cancelButtonText: 'No'
+      confirmButtonText: 'Ofrecer',
+      cancelButtonText: 'Solicitar'
     }).then((result) => {
       if (result.value) {
+        alert('Ofrecer');
         this.mi_posicion.longitud = posicion.coords.lng;
         this.mi_posicion.latitud = posicion.coords.lat;
         this.getAddress(posicion.coords.lat, posicion.coords.lng);
+      } else {
+        alert('Solicitar');
       }
     });
     this._constantes.latitud = posicion.coords.lat;

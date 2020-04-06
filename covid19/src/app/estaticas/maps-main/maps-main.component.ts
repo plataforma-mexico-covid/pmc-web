@@ -66,8 +66,4 @@ export class MapsMainComponent implements OnInit {
   setOrigenContactar(contactar) {
     this.origen_contactar = contactar;
   }
-
-  loginCorrecto() {
-    this.mapaComponent.contactarUsuario();
-  }
 }

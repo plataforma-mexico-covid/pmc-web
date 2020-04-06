@@ -15,8 +15,6 @@ declare var $: any;
 export class InicioComponent {
 
   public usuario = new Usuario();
-  @Output() loginCorrecto = new EventEmitter();
-
 
   public fomulario_inicio_session = new FormGroup({
     username: new FormControl('', [Validators.required, Validators.email]),
