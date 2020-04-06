@@ -1,5 +1,5 @@
 .logotipo-pmc {
-  width: 330px; height: 106px;
+  width: auto; height: auto;
   align-self: center;
   margin: 40px 0px 40px 0px;
 }
@@ -26,10 +26,6 @@
 
 @media (min-width: 576px){
   .modal-dialog {
-    max-width: 80% !important;
+    max-width: 60% !important;
   }
-}
-
-.modal-dialog {
-  max-width: 1200px !important;
 }

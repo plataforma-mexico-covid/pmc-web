@@ -1,6 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import '~animate.css/animate.min';
+.pointer {
+    cursor: pointer;
+}
+
 html,
 body {
     height: 100%;
@@ -46,6 +50,7 @@ button.btn.btn-primary.btn-sm.float-right {
     border-bottom: 0px !important;
 }
 
-.pointer {
-    cursor: pointer;
+.modal-body {
+    max-height: calc(100vh - 210px);
+    overflow-y: auto;
 }

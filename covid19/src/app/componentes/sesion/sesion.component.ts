@@ -28,6 +28,7 @@ export class SesionComponent implements OnInit {
 
   logout() {
     this._authService.logout();
+    window.location.reload();
   }
 
   openModal(tipo: string) {

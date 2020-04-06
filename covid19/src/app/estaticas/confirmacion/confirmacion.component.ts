@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ServiciosService } from 'src/app/componentes/servicios.service';
-
 @Component({
   selector: 'app-confirmacion',
   templateUrl: './confirmacion.component.html',
   styleUrls: ['./confirmacion.component.css']
 })
-export class ConfirmacionComponent implements OnInit {
 
-
+export class ConfirmacionComponent {
   validacion_correcta = false;
   token: string;
 
@@ -17,13 +15,11 @@ export class ConfirmacionComponent implements OnInit {
     private _activatedRoute: ActivatedRoute,
     private _servicios: ServiciosService
   ) {
-    this._activatedRoute.queryParams.subscribe((params) => {
-      this.token = params['token'];
+    debugger
+    this._activatedRoute.params.subscribe(token => {
+      this.token = token['token'];
+      this.validarCorreo();
     });
-  }
-
-  ngOnInit() {
-    this.validarCorreo();
   }
 
   validarCorreo() {

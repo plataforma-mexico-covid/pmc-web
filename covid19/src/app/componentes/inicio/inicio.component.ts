@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { GlobalsComponent } from '../global/global.component';
 import { ConstantsService } from '../global/constants.service';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
+import {Router} from '@angular/router';
 
 declare var $: any;
 @Component({
@@ -15,13 +16,15 @@ declare var $: any;
 export class InicioComponent {
 
   public usuario = new Usuario();
+  @Output() actualizaAyuda = new EventEmitter();
 
   public fomulario_inicio_session = new FormGroup({
     username: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', Validators.required)
   });
 
-  constructor(private _authService: AuthService,
+  constructor(private router: Router,
+    private _authService: AuthService,
     public constantes: ConstantsService,
     private globales: GlobalsComponent) {
     this.usuario.contactInfos.push(new ContactInfos());
@@ -38,13 +41,15 @@ export class InicioComponent {
         if (data.token) {
           this.constantes.isLoading = false;
           $('#inicioModal').modal('hide');
+          this.actualizaAyuda.emit();
+          this.router.navigateByUrl('/maps');
         } else {
           Swal.fire({
             title: '¡Error!',
             text: 'Ocurrio un problema al iniciar sessión',
             icon: 'error',
             confirmButtonText: 'Entendido'
-          });         
+          });
         }
       })
       .catch((error) => {
