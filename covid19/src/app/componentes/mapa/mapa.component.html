@@ -29,14 +29,15 @@
                                 ¡Gracias por sumar!
                             </div>
                         </ng-container>
-                        <ng-container *ngIf="!ayuda.isUserLogIn && isSesionActive; else elseTemplate">
+                        <ng-container *ngIf="!ayuda.isUserLogIn && isSesionActive;">
                             <button class="btn btn-outline-info mx-auto" (click)="contactarUsuario(ayuda.id)"> Contactar
                             </button>
                         </ng-container>
-                        <ng-template #elseTemplate>
-                            <button class="btn btn-outline-info mx-auto" (click)="iniciarSesion()"> Iniciar Sesion
-                            </button>
-                        </ng-template>
+                        <ng-container *ngIf="!ayuda.isUserLogIn && !isSesionActive;">
+                            <div class="alert alert-success" role="alert">
+                                ¡Gracias por sumar!
+                            </div>
+                        </ng-container>
                     </p>
                 </agm-info-window>
             </agm-marker>
