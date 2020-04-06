@@ -21,10 +21,22 @@
                   <div class="input-group">
                     <div class="input-group-prepend">
                       <div class="input-group-text">
-                        <a [ngClass]="{
-                          'text-danger': !this.formulario_crear_usuario.get('password2').valid,
-                          'text-primary':   this.formulario_crear_usuario.get('password2').valid
-                       }" data-toggle="collapse" href="#passwordInfoCollapse" role="button" aria-expanded="false" aria-controls="passwordInfoCollapse">?</a>
+                        <ng-container *ngIf="!this.formulario_crear_usuario.get('password2').valid; else elseTemplate">
+                          <a class="text-danger" data-toggle="collapse" href="#passwordInfoCollapse" role="button" aria-expanded="false" aria-controls="passwordInfoCollapse">
+                            <svg class="bi bi-lock-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                              <rect width="11" height="9" x="2.5" y="7" rx="2"/>
+                              <path fill-rule="evenodd" d="M4.5 4a3.5 3.5 0 117 0v3h-1V4a2.5 2.5 0 00-5 0v3h-1V4z" clip-rule="evenodd"/>
+                            </svg>
+                          </a>
+                        </ng-container>
+                        <ng-template #elseTemplate>
+                          <a class="text-success" data-toggle="collapse" href="#passwordInfoCollapse" role="button" aria-expanded="false" aria-controls="passwordInfoCollapse">
+                            <svg class="bi bi-lock-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                              <rect width="11" height="9" x="2.5" y="7" rx="2"/>
+                              <path fill-rule="evenodd" d="M4.5 4a3.5 3.5 0 117 0v3h-1V4a2.5 2.5 0 00-5 0v3h-1V4z" clip-rule="evenodd"/>
+                            </svg>
+                          </a>
+                        </ng-template>
                       </div>
                     </div>
                     <input type="password" autocomplete="new-password" class="form-control" id="passnewc"
