@@ -69,4 +69,13 @@ export class InicioComponent {
     $('#welcomeModal').modal('show');
   }
 
+  openRecuperacionModal() {
+
+    // Cierra el modal para inicio de sesion
+    $('#inicioModal').modal('hide');
+
+    // Abre el modal para recuperacion de password
+    $('#recuperacionModal').modal('show');
+  }
+
 }

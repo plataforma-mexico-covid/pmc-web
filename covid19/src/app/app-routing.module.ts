@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule, ExtraOptions } from '@angular/router';
 import { ConfirmacionComponent } from './estaticas/confirmacion/confirmacion.component';
 import { MapsMainComponent } from './estaticas/maps-main/maps-main.component';
+import { CambiaPasswordComponent } from './estaticas/cambia-password/cambia-password.component';
 
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
   {
     path: 'confirmacion', component: ConfirmacionComponent
   },
+  { path: 'cambia_password', component: CambiaPasswordComponent },
   { path: '**', redirectTo: 'maps', pathMatch: 'full' },
 ];
 
