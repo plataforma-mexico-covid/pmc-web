@@ -10,4 +10,5 @@ export class ConstantsService {
   puntos_marcados = new Array<Ayuda>();
   longitud = 0;
   latitud = 0;
+  direccion: string;
 }

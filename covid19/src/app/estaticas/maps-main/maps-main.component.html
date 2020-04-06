@@ -3,8 +3,7 @@
         <app-header class="container"></app-header>
         <app-mapa #mapaComponent (setOrigenContactar)="setOrigenContactar($event)"></app-mapa>
         <app-footer class="container" (setOrigenContactar)="setOrigenContactar($event)"></app-footer>
-        <app-inicio (loginCorrecto)="loginCorrecto()">
-        </app-inicio>
+        <app-inicio (actualizaAyuda)='getTiposAyuda()' > </app-inicio>
         <app-registro></app-registro>
         <app-ayuda [tipoAyuda]='tipoAyuda' [provincias]='lista_provincias' (actualizaMapa)='actualizaPosicion()'>
         </app-ayuda>
