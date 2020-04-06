@@ -8,17 +8,12 @@ import java.util.Optional;
 
 import javax.mail.MessagingException;
 
+import mx.mexicocovid19.plataforma.model.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.log4j.Log4j2;
 import mx.mexicocovid19.plataforma.exception.PMCException;
-import mx.mexicocovid19.plataforma.model.entity.Ayuda;
-import mx.mexicocovid19.plataforma.model.entity.Ciudadano;
-import mx.mexicocovid19.plataforma.model.entity.GeoLocation;
-import mx.mexicocovid19.plataforma.model.entity.OrigenAyuda;
-import mx.mexicocovid19.plataforma.model.entity.Peticion;
-import mx.mexicocovid19.plataforma.model.entity.User;
 import mx.mexicocovid19.plataforma.model.repository.AyudaRepository;
 import mx.mexicocovid19.plataforma.model.repository.CiudadanoRepository;
 import mx.mexicocovid19.plataforma.model.repository.GeoLocationRepository;
@@ -87,7 +82,7 @@ public class DefaultAyudaService implements AyudaService {
         	ayuda.setCiudadano(ciudadano);
         	
         	if ( !GroseriasHelper.evaluarTexto(ayuda.getDescripcion()) ) {
-        		
+                ayuda.setEstatusAyuda(EstatusAyuda.NUEVA);
         		Ayuda ayudaTmp = ayudaRepository.save(ayuda);
 
         		// Envia notificacion por correo electronic
@@ -119,6 +114,8 @@ public class DefaultAyudaService implements AyudaService {
         peticion.setCiudadano(ciudadano);
         peticion.setFechaPeticion(LocalDateTime.now());
         peticionRepository.save(peticion);
+        ayuda.setEstatusAyuda(EstatusAyuda.EN_PROGRESO);
+        ayudaRepository.save(ayuda);
         Map<String, Object> props = createInfoToEmail(ayuda, ciudadanoAyuda.get(), ciudadano);
         mailService.send(ciudadanoAyuda.get().getUser().getUsername(), user.getUsername(), props, MATCH_AYUDA);
     }

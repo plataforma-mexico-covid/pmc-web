@@ -48,11 +48,11 @@ public class AyudaRestController {
     public List<AyudaDTO> readAyudas(@RequestParam(value = "origenAyuda", defaultValue = "AMBOS") final String origenAyuda,
                                      @RequestParam(value = "longitude") final Double longitude,
                                      @RequestParam(value = "latitude") final Double latitude,
-                                     @RequestParam(value = "kilometers") final Integer kilometers) {
-    	
-    	
-    	
-        return AyudaMapper.from(ayudaService.readAyudas(origenAyuda, longitude, latitude, kilometers));
+                                     @RequestParam(value = "kilometers") final Integer kilometers,
+                                     HttpServletRequest httpRequest) {
+        String token = httpRequest.getHeader(this.tokenHeader);
+        String username = jwtTokenUtil.getUsernameFromToken(token);
+        return AyudaMapper.fromAndMarkByUser(ayudaService.readAyudas(origenAyuda, longitude, latitude, kilometers), username);
     }
 
     @ResponseBody
