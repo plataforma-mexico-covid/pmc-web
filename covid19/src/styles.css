@@ -41,3 +41,8 @@ button.btn.btn-primary.btn-sm.float-right {
   border-top: 0px !important;
   border-bottom: 0px !important;
 }
+
+.modal-body {
+  max-height: calc(100vh - 210px);
+  overflow-y: auto;
+}
