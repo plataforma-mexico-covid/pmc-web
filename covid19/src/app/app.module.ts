@@ -6,8 +6,10 @@ import { AppComponent } from './app.component';
 import { AgmCoreModule } from '@agm/core';
 import { MapaComponent } from './componentes/mapa/mapa.component';
 import { HeaderComponent } from './componentes/header/header.component';
+import { HeaderEstaticoComponent } from './componentes/header-estatico/header-estatico.component';
 import { FooterComponent } from './componentes/footer/footer.component';
-import { RegistroInicioComponent } from './componentes/registro-inicio/registro-inicio.component';
+import { InicioComponent } from './componentes/inicio/inicio.component';
+import { RegistroComponent } from './componentes/registro/registro.component';
 import { ServiciosService } from './componentes/servicios.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AyudaComponent } from './componentes/ayuda/ayuda.component';
@@ -15,21 +17,27 @@ import { GlobalsComponent } from './componentes/global/global.component';
 import { LoadingComponent } from './componentes/loading/loading.component';
 import { ConstantsService } from './componentes/global/constants.service';
 import { ListaAyudaComponent } from './componentes/lista-ayuda/lista-ayuda.component';
+import { WelcomeComponent } from './componentes/welcome/welcome.component';
 import { ConfirmacionComponent } from './estaticas/confirmacion/confirmacion.component';
 import { MapsMainComponent } from './estaticas/maps-main/maps-main.component';
+import { SesionComponent } from './componentes/sesion/sesion.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MapaComponent,
     HeaderComponent,
+    HeaderEstaticoComponent,
     FooterComponent,
-    RegistroInicioComponent,
+    InicioComponent,
+    RegistroComponent,
     AyudaComponent,
     LoadingComponent,
     ListaAyudaComponent,
+    WelcomeComponent,
     ConfirmacionComponent,
-    MapsMainComponent
+    MapsMainComponent,
+    SesionComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -6,16 +6,11 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  @Output() tipoAyudaCambio = new EventEmitter();
-  opcion = 'AMBOS';
+  @Input() tipo: any;
+
   constructor() { }
 
   ngOnInit() {
+    console.log("TIPOOOOO" + this.tipo);
   }
-
-  actualizarTipoAyuda(tipo_ayuda) {
-    this.opcion = tipo_ayuda;
-    this.tipoAyudaCambio.emit(tipo_ayuda);
-  }
-
 }

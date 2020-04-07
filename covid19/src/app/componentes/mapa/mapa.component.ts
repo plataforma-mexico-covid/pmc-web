@@ -1,9 +1,12 @@
 import { ConstantsService } from './../global/constants.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
 import { ServiciosService } from '../servicios.service';
 import { Ayuda } from 'src/app/entidades';
 import Swal from 'sweetalert2';
 import { GlobalsComponent } from '../global/global.component';
+import { MouseEvent as AGMMouseEvent, MapsAPILoader } from '@agm/core';
+
 declare var $: any;
 @Component({
   selector: 'app-mapa',
@@ -22,18 +25,23 @@ export class MapaComponent implements OnInit {
   contador_movimiento: any;
   mi_posicion = { longitud: null, latitud: null };
   ayuda_id: number;
+  private geoCoder;
+  isSesionActive: any;
 
   icons = {
-    1: '/assets/imgs/comida_50_50.png',
-    2: '/assets/imgs/envios_50_50.png',
-    3: '/assets/imgs/taxi_50_50.png',
-    4: '/assets/imgs/psicologico_50_50.png',
-    5: '/assets/imgs/legal_50_50.png',
+    1: '/assets/imgs/ub_comida_25_35.png',
+    2: '/assets/imgs/ub_envios_25_35.png',
+    3: '/assets/imgs/ub_farmacia_25_35.png',
+    4: '/assets/imgs/ub_cruz_25_35.png',
+    5: '/assets/imgs/ub_legal_25_35.png',
     6: '/assets/imgs/posicion_50.png',
+    7: '/assets/imgs/beachflag.png',
   }
 
   constructor(
+    private mapsAPILoader: MapsAPILoader,
     private _servicio: ServiciosService,
+    private _authService: AuthService,
     private _constantes: ConstantsService,
     private _globales: GlobalsComponent
   ) { }
@@ -41,6 +49,9 @@ export class MapaComponent implements OnInit {
   ngOnInit() {
     if (navigator.geolocation) {
       this.soporta_geolocacion = true;
+      this.mapsAPILoader.load().then(() => {
+        this.geoCoder = new google.maps.Geocoder;
+      });
       navigator.geolocation.getCurrentPosition((objPosition) => {
         this.initial_lng = objPosition.coords.longitude;
         this.initial_lat = objPosition.coords.latitude;
@@ -69,13 +80,17 @@ export class MapaComponent implements OnInit {
     } else {
       alert('No hay soporte para la geolocalización: podemos desistir o utilizar algún método alternativo');
     }
+    this.isSesionActive = this._authService.isLoggedIn();
+    this._authService.isLoggedInObservable().subscribe((isLoggedIn) => this.isSesionActive = isLoggedIn);
+    if (!this.isSesionActive) {
+      $('#welcomeModal').modal('show');
+    }
   }
 
   cambioTipoAyuda(tipo_ayuda) {
     this.tipo_ayuda = tipo_ayuda;
     this.actualizarRegistros(this.initial_lng, this.initial_lat, this.zoom);
   }
-
 
   actualizarRegistros(longitud?, latitud?, zoom?) {
     // ayuda
@@ -89,37 +104,92 @@ export class MapaComponent implements OnInit {
 
       }
     );
-
   }
 
   clickedMarker(ayuda: any) {
   }
 
-  markerDragEnd(dato1, dato2) {
+  markerDragEnd(ayuda: any, $event: AGMMouseEvent) {
+    console.log($event);
+    this.getAddress($event.coords.lat, $event.coords.lng);
+  }
 
+  getAddress(latitude, longitude) {
+    this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
+      if (status === 'OK') {
+        if (results[0]) {
+          console.log(results[0].formatted_address);
+          this._constantes.direccion =  results[0].formatted_address;
+          console.log(results);
+          //this.address = results[0].formatted_address;
+        } else {
+          window.alert('No results found');
+        }
+      } else {
+        window.alert('Geocoder failed due to: ' + status);
+      }
+
+    });
   }
 
   mapClicked(posicion: any) {
-    console.log(this.mi_posicion);
+    this.mi_posicion.longitud = posicion.coords.lng;
+    this.mi_posicion.latitud = posicion.coords.lat;
+    this._constantes.longitud = posicion.coords.lng;
+    this._constantes.latitud = posicion.coords.lat;
+    if (this.isSesionActive) {
+      this.createAyuda(posicion);
+    } else {
+      this.createAyudaInvitado();
+    }
+  }
 
+  createAyuda(posicion: any){
     Swal.fire({
-      title: '¿Quieres indicar este punto como origen para  Solicitar/Ofrecer ayuda?',
-      text: '',
-      icon: 'warning',
+      title: 'Registrar ayuda',
+      text: '¿Deseas registrar una ayuda en esta ubicacion?',
+      icon: 'info',
       showCancelButton: true,
+      showCloseButton: true,
+      allowOutsideClick: false,
       confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Si',
-      cancelButtonText: 'No'
-    }).then((result) => {
+      cancelButtonColor: '#44ac34',
+      confirmButtonText: 'Ofrecer',
+      cancelButtonText: 'Solicitar'
+    }).then((result: any) => {
       if (result.value) {
-        this.mi_posicion.longitud = posicion.coords.lng;
-        this.mi_posicion.latitud = posicion.coords.lat;
+        this.getAddress(posicion.coords.lat, posicion.coords.lng);
+        this.setOrigenContactar.emit();
+        this._constantes.origen_ayudar = 'OFRECE';
+        $('#ayudaModal').modal('show');
+      } else {
+        if ( result.dismiss === 'cancel'  ) {
+          this.getAddress(posicion.coords.lat, posicion.coords.lng);
+          this.setOrigenContactar.emit();
+          this._constantes.origen_ayudar = 'SOLICITA';
+          $('#ayudaModal').modal('show');
+        }
+
       }
     });
-    this._constantes.latitud = posicion.coords.lat;
-    this._constantes.longitud = posicion.coords.lng;
-    // console.log(posicion.coords.lat, posicion.coords.lng);
+  }
+
+  createAyudaInvitado(){
+    Swal.fire({
+      title: 'Registrar ayuda',
+      text: '¿Deseas registrar una ayuda en esta ubicacion?',
+      icon: 'info',
+      showCancelButton: false,
+      showCloseButton: true,
+      allowOutsideClick: false,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#44ac34',
+      confirmButtonText: 'Iniciar Sesion',
+    }).then((result: any) => {
+      if (result.value) {
+        $('#inicioModal').modal('show');
+      }
+    });
   }
 
   cambioZoom(zoom) {
@@ -165,6 +235,10 @@ export class MapaComponent implements OnInit {
       this.setOrigenContactar.emit(true);
       $('#exampleModal').modal('show');
     }
+  }
+
+  iniciarSesion() {
+    $('#inicioModal').modal('show');
   }
 
 }

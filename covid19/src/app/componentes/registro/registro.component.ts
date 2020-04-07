@@ -8,16 +8,13 @@ import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/fo
 
 declare var $: any;
 @Component({
-  selector: 'app-registro-inicio',
-  templateUrl: './registro-inicio.component.html',
-  styleUrls: ['./registro-inicio.component.css']
+  selector: 'app-registro',
+  templateUrl: './registro.component.html',
+  styleUrls: ['./registro.component.css']
 })
-export class RegistroInicioComponent {
+export class RegistroComponent {
 
   public usuario = new Usuario();
-  @Output() cargaAyudas = new EventEmitter();
-  @Output() loginCorrecto = new EventEmitter();
-  @Input() origen_contactar = false;
 
   public formulario_crear_usuario = new FormGroup({
     username_n: new FormControl('', [Validators.required, Validators.email]),
@@ -29,56 +26,21 @@ export class RegistroInicioComponent {
     tipoContacto: new FormControl('', Validators.required),
     contacto: new FormControl('', Validators.required)
   });
-  public fomulario_inicio_session = new FormGroup({
-    username: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', Validators.required)
-  });
 
   constructor(private _servicio: ServiciosService,
     public constantes: ConstantsService,
     private globales: GlobalsComponent) {
     this.usuario.contactInfos.push(new ContactInfos());
     this.usuario.contactInfos[0].tipoContacto = '';
-    this.usuario.email = '';
-    this.usuario.username = '';
-    this.usuario.password = '';
   }
 
-  iniciarSession() {
-    this.constantes.isLoading = true;
-    this._servicio.iniciarSession(this.usuario).subscribe(
-      (data: any) => {
-        // localStorage.setItem('token', data.token);
-        if (data.token) {
-          $('#exampleModal').modal('hide');
-          this.constantes.isLoading = false;
-          this.globales.usuario = data;
-          this.cargaAyudas.emit();
-          if (!this.origen_contactar) {
-            $('#ayudaModal').modal('show');
-          } else {
-            this.loginCorrecto.emit();
-          }
-        } else {
-          Swal.fire({
-            title: 'Error!',
-            text: 'Ocurrio un problema al iniciar sessión',
-            icon: 'error',
-            confirmButtonText: 'Entendido'
-          });
-        }
-        this.origen_contactar = false;
-      },
-      (error) => {
-        this.constantes.isLoading = false;
-        Swal.fire({
-          title: 'Error!',
-          text: 'Ocurrio un problema al iniciar sessión',
-          icon: 'error',
-          confirmButtonText: 'Entendido'
-        });
-      }
-    );
+  openWelcomeModal() {
+    $('#welcomeModal').modal('show');
+  }
+
+  cerrarModal() {
+    this.formulario_crear_usuario.reset();
+    this.openWelcomeModal();
   }
 
   registro() {
@@ -123,17 +85,6 @@ export class RegistroInicioComponent {
 
         this.constantes.isLoading = false;
         console.log(error);
-      }
-    );
-  }
-
-  getTiposAyuda() {
-    this._servicio.getTiposAyuda().subscribe(
-      (data) => {
-        console.log(data);
-      },
-      (error) => {
-
       }
     );
   }

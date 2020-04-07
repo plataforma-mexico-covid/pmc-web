@@ -15,17 +15,6 @@ html, body {
     width: 49%;
 }
 
-@media (min-width: 576px){
-  .modal-dialog {
-    max-width: 80% !important;
-  }
-}
-
-.modal-dialog {
-  max-width: 1200px !important;
-}
-
-
 button.btn.btn-primary.btn-sm.float-right {
   bottom: 0px;
   position: absolute;
@@ -34,4 +23,26 @@ button.btn.btn-primary.btn-sm.float-right {
 
 .gmnoprint{
   display: none;
+}
+
+.pmc-blue {
+  color: #007FA3;
+}
+
+.pmc-green {
+  color: #53BAAD;
+}
+
+.pmc-gray {
+  color: #E4DCD5;
+}
+
+.without-border{
+  border-top: 0px !important;
+  border-bottom: 0px !important;
+}
+
+.modal-body {
+  max-height: calc(100vh - 210px);
+  overflow-y: auto;
 }

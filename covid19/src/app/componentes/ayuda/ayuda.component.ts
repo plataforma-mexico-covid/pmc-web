@@ -1,6 +1,6 @@
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ConstantsService } from './../global/constants.service';
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Ayuda, Ciudadano, Ubicacion, TipoAyuda, Contacto } from 'src/app/entidades';
 import { ServiciosService } from '../servicios.service';
 import Swal from 'sweetalert2';
@@ -11,7 +11,7 @@ declare var $: any;
   templateUrl: './ayuda.component.html',
   styleUrls: ['./ayuda.component.css']
 })
-export class AyudaComponent {
+export class AyudaComponent implements OnInit {
 
   @Input() tipoAyuda: any;
   @Input() provincias: any;
@@ -21,14 +21,14 @@ export class AyudaComponent {
   public formulario = new FormGroup({
     nombre: new FormControl(this.globales.usuario.fullname, Validators.required),
     descripcion: new FormControl(this.ayuda.descripcion, Validators.required),
-    direccion: new FormControl('', Validators.required),
-    estado: new FormControl('', Validators.required),
-    codigo_postal: new FormControl('', Validators.required),
+    direccion: new FormControl(''),
+    estado: new FormControl(''),
+    codigo_postal: new FormControl(''),
     tipo_ayuda: new FormControl('', Validators.required),
-    colonia: new FormControl('', Validators.required),
-    municipio: new FormControl('', Validators.required),
-    numero_exterior: new FormControl('', Validators.required),
-    numero_interior: new FormControl('', [Validators.required])
+    colonia: new FormControl(''),
+    municipio: new FormControl(''),
+    numero_exterior: new FormControl(''),
+    numero_interior: new FormControl('',)
   });
 
   constructor(
@@ -84,6 +84,12 @@ export class AyudaComponent {
     }
   }
 
+  ngOnInit() {
+    if ( localStorage.getItem('loggedUser') ) {
+      this.globales.usuario = JSON.parse(localStorage.getItem('loggedUser'));
+    }
+  }
+
 
   enviarAyuda() {
     if (this._constantes.latitud) {
@@ -94,6 +100,7 @@ export class AyudaComponent {
     }
     this._constantes.isLoading = true;
     this.ayuda.origenAyuda = this._constantes.origen_ayudar;
+    this.ayuda.direccion = this._constantes.direccion;
     console.log(this.ayuda);
     this._servicio.guardarAyuda(this.ayuda).subscribe(
       (data) => {
