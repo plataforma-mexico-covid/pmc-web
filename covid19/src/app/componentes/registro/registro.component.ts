@@ -60,7 +60,7 @@ export class RegistroComponent {
       (data: any) => {
         Swal.fire(
           '!Completado!',
-          'Te hemos enviado un correo eletrónico de confirmación.',
+          '<h3>Te hemos enviado un <strong class="alert-success">correo eletrónico</strong> de confirmación.</h3>',
           'success'
         );
         this.constantes.isLoading = false;
