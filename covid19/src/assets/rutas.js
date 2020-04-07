@@ -1,5 +1,5 @@
 function RUTAS() {
   return {
-    endpoint: 'https://beta.ayudando.me'
+    endpoint: 'https://beta.mexicovscovid191.mx'
   }
 }
