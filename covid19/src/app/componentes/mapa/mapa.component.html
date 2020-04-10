@@ -34,9 +34,8 @@
                             </button>
                         </ng-container>
                         <ng-container *ngIf="!ayuda.isUserLogIn && !isSesionActive;">
-                            <div class="alert alert-success" role="alert">
-                                ¡Gracias por sumar!
-                            </div>
+                            <button class="btn btn-outline-info mx-auto" (click)="iniciarSesion()"> Iniciar Sesion
+                            </button>
                         </ng-container>
                     </p>
                 </agm-info-window>
