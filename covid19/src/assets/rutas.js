@@ -1,5 +1,5 @@
 function RUTAS() {
   return {
-    endpoint: 'https://beta.mexicovscovid191.mx'
+    endpoint: 'http://localhost:8090'
   }
 }
