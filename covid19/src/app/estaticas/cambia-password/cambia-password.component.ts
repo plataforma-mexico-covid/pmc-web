@@ -22,11 +22,11 @@ export class CambiaPasswordComponent implements OnInit {
     confirmation: new FormControl('', Validators.required)
   });
 
-  constructor( private activatedRoute: ActivatedRoute,
+  constructor( private _activatedRoute: ActivatedRoute,
                public constantes: ConstantsService,
                private presentationServices: ServiciosService ) {
 
-    this.activatedRoute.queryParams.subscribe(params => {
+    this._activatedRoute.params.subscribe(params => {
       this.cambioPassword.token = params['token'];
     });
   }

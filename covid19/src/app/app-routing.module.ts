@@ -7,13 +7,9 @@ import { CambiaPasswordComponent } from './estaticas/cambia-password/cambia-pass
 
 const routes: Routes = [
   // { path: '', redirectTo: 'maps', pathMatch: 'full' },
-  {
-    path: 'maps', component: MapsMainComponent
-  },
-  {
-    path: 'confirmacion/:token', component: ConfirmacionComponent
-  },
-  { path: 'cambia_password', component: CambiaPasswordComponent },
+  { path: 'maps', component: MapsMainComponent },
+  { path: 'confirmacion/:token', component: ConfirmacionComponent },
+  { path: 'cambia_password/:token', component: CambiaPasswordComponent },
   { path: '**', redirectTo: 'maps', pathMatch: 'full' },
 ];
 
