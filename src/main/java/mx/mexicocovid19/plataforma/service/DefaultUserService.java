@@ -92,7 +92,7 @@ public class DefaultUserService implements UserService {
     private void sendMailRecoveryPasswordToken(UserToken userToken, String urlConfirmToken, String nombre) throws MessagingException {
         Map<String, Object> props = new HashMap<>();
         props.put("nombre", nombre);
-        props.put("link", urlConfirmToken + "?token=" + userToken.getToken());
+        props.put("link", urlConfirmToken + "/" + userToken.getToken());
         mailService.send(userToken.getUser().getUsername(), userToken.getUser().getUsername(), props, RECUPERACION_PASSWORD);
     }
     

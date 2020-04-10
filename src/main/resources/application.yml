@@ -60,7 +60,7 @@ plataforma:
     hoursToWaitRegister: 1
     registerAvailablePeruser: 10
   url.confirm.token: http://localhost:4200/#/confirmacion
-  url.change.password: http://localhost:8090/api/v1/public/users/change_password
+  url.change.password: http://localhost:4200/#/recuperar
 ---
 spring:
   profiles: mailon
