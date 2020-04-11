@@ -9,7 +9,7 @@ const routes: Routes = [
   // { path: '', redirectTo: 'maps', pathMatch: 'full' },
   { path: 'maps', component: MapsMainComponent },
   { path: 'confirmacion/:token', component: ConfirmacionComponent },
-  { path: 'cambia_password/:token', component: CambiaPasswordComponent },
+  { path: 'recuperar/:token', component: CambiaPasswordComponent },
   { path: '**', redirectTo: 'maps', pathMatch: 'full' },
 ];
 
