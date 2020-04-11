@@ -1,48 +1,56 @@
 /* You can add global styles to this file, and also import other style files */
-html, body {
+
+@import '~animate.css/animate.min';
+.pointer {
+    cursor: pointer;
+}
+
+html,
+body {
     height: 100%;
     font-family: Cantarell, Arial, Helvetica, sans-serif;
 }
+
 .contenedor-header {
-  margin: 0 15px;
-  padding: 10px 0;
-  background-color: #00000052;
-  border-radius: 5px;
+    margin: 0 15px;
+    padding: 10px 0;
+    background-color: #00000052;
+    border-radius: 5px;
 }
 
-.col-6{
+.col-6 {
     display: inline-block;
     width: 49%;
 }
 
 button.btn.btn-primary.btn-sm.float-right {
-  bottom: 0px;
-  position: absolute;
-  right: 13px;
+    bottom: 0px;
+    position: absolute;
+    right: 13px;
 }
 
-.gmnoprint{
-  display: none;
+.gmnoprint {
+    display: none;
 }
 
 .pmc-blue {
-  color: #007FA3;
+    color: #007FA3;
 }
 
 .pmc-green {
-  color: #53BAAD;
+    color: #53BAAD;
 }
 
 .pmc-gray {
-  color: #E4DCD5;
+    color: #E4DCD5;
 }
 
-.without-border{
-  border-top: 0px !important;
-  border-bottom: 0px !important;
+.without-border {
+    border-top: 0px !important;
+    border-bottom: 0px !important;
 }
 
 .modal-body {
-  max-height: calc(100vh - 210px);
-  overflow-y: auto;
+    max-height: calc(100vh - 210px);
+    overflow-y: auto;
 }

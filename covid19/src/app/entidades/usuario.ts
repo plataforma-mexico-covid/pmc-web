@@ -44,3 +44,9 @@ export class UsuarioActivo {
   token: string;
   fullname: string;
 }
+
+export class CambioPassword {
+  token: string;
+  password: string;
+  confirmation: string;
+}

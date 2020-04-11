@@ -21,6 +21,8 @@ import { WelcomeComponent } from './componentes/welcome/welcome.component';
 import { ConfirmacionComponent } from './estaticas/confirmacion/confirmacion.component';
 import { MapsMainComponent } from './estaticas/maps-main/maps-main.component';
 import { SesionComponent } from './componentes/sesion/sesion.component';
+import { RecuperacionPasswordComponent } from './estaticas/recuperacion/recuperacion-password.component';
+import { CambiaPasswordComponent } from './estaticas/cambia-password/cambia-password.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { SesionComponent } from './componentes/sesion/sesion.component';
     WelcomeComponent,
     ConfirmacionComponent,
     MapsMainComponent,
-    SesionComponent
+    SesionComponent,
+    RecuperacionPasswordComponent,
+    CambiaPasswordComponent
   ],
   imports: [
     BrowserModule,

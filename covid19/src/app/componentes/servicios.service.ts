@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Usuario } from '../entidades/usuario';
+import { Usuario, CambioPassword } from '../entidades/usuario';
 import { GlobalsComponent } from './global/global.component';
 import { Ayuda } from '../entidades';
 declare const RUTAS: any;
@@ -20,6 +20,15 @@ export class ServiciosService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const aux = { password: usuario.password, username: usuario.username };
     return this.http.post(`${this.rutas.endpoint}/api/v1/public/login`, aux, { headers });
+  }
+
+  recuperacionPassword(username: string) {
+    return this.http.get(`${this.rutas.endpoint}/api/v1/public/users/recovery_password?username=${username}`);
+  }
+
+  cambioPassword(cambioPassword: CambioPassword) {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post(`${this.rutas.endpoint}/api/v1/public/users/change_password`, cambioPassword, { headers });
   }
 
   registro(usuario: any) {
