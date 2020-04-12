@@ -70,6 +70,17 @@ public class AyudaRestController {
     }
 
     @ResponseBody
+    @PostMapping(value = { ApiController.API_PATH_PRIVATE + "/ayuda_ciudadano" }, produces = {"application/json;charset=UTF-8"})
+    public ResponseEntity<AyudaDTO> createAyudaWithCiudadano(@RequestBody AyudaDTO ayudaDTO) throws PMCException {
+        ResponseEntity<AyudaDTO> response = new ResponseEntity<AyudaDTO>(HttpStatus.BAD_REQUEST);
+
+        Ayuda createAyuda = ayudaService.createAyudaAndCiudadano(AyudaMapper.from(ayudaDTO));
+        response = new ResponseEntity<AyudaDTO>(AyudaMapper.from(createAyuda), HttpStatus.OK);
+
+        return response;
+    }
+
+    @ResponseBody
     @PostMapping(
             value = { ApiController.API_PATH_PRIVATE + "/ayuda/{ayuda}/match" },
             produces = {"application/json;charset=UTF-8"})
