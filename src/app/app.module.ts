@@ -50,9 +50,10 @@ import { CambiaPasswordComponent } from './estaticas/cambia-password/cambia-pass
     FormsModule,
     ReactiveFormsModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDHZ2GpuEYGqIQGoIyRSUqN1mPwkUtuf6k'
+      apiKey: 'AIzaSyAScZb_sTW_vToyo58fXKBKp1dPaPeM_fQ'
     })
   ],
+  // AIzaSyDHZ2GpuEYGqIQGoIyRSUqN1mPwkUtuf6k
   // AIzaSyAPj6sW4vJZ4q-cqREHWcbIDRHB3Rk8hoo
   providers: [
     ServiciosService,
