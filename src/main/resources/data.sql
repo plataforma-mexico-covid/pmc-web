@@ -1,5 +1,6 @@
 INSERT INTO USUARIO (USERNAME, PASSWORD, ENABLED, VALIDATED) VALUES
 ('admin@pmc.mx', '$2a$10$Zah8wiwQ4lo9ZoGubLjQSOsPj7KTahQcTqJV0U6J/iLqOmmYfbG96', 1, 1),
+('vol1@pmc.mx', '$2a$10$Zah8wiwQ4lo9ZoGubLjQSOsPj7KTahQcTqJV0U6J/iLqOmmYfbG96', 1, 1),
 ('citizen_uno@pmc.mx', '$2a$10$Zah8wiwQ4lo9ZoGubLjQSOsPj7KTahQcTqJV0U6J/iLqOmmYfbG96', 1, 1),
 ('citizen_dos@pmc.mx', '$2a$10$Zah8wiwQ4lo9ZoGubLjQSOsPj7KTahQcTqJV0U6J/iLqOmmYfbG96', 1, 1),
 ('contacto@pmc.mx', 'p4Ssword', 0, 0);
@@ -8,7 +9,9 @@ INSERT INTO USER_ROLE (ID, USERNAME, ROLE) VALUES
 (1, 'admin@pmc.mx', 'ADMIN'),
 (2, 'admin@pmc.mx', 'CITIZEN'),
 (3, 'citizen_uno@pmc.mx', 'CITIZEN'),
-(4, 'citizen_dos@pmc.mx', 'CITIZEN');
+(4, 'citizen_dos@pmc.mx', 'CITIZEN'),
+(5, 'vol1@pmc.mx', 'CITIZEN'),
+(6, 'vol1@pmc.mx', 'VOLUNTARY');
 
 INSERT INTO PROVINCE (ID, NOMBRE, ABREVIATURA) VALUES
 (1, 'Aguascalientes', 'AGS'),
@@ -114,12 +117,14 @@ INSERT INTO TIPO_AYUDA (ID, NOMBRE, ACTIVE) VALUES
 
 INSERT INTO CIUDADANO (ID, NOMBRE, PATERNO, MATERNO, USERNAME, ACTIVE) VALUES
 (1, 'Jorge', 'Cruz', 'Lopez', 'citizen_uno@pmc.mx', 1),
-(2, 'Jose', 'Soto', 'Torres', 'citizen_dos@pmc.mx', 1);
+(2, 'Jose', 'Soto', 'Torres', 'citizen_dos@pmc.mx', 1),
+(3, 'Pepe', 'Torres', 'Lopez', 'vol1@pmc.mx', 1);
 
 INSERT INTO CIUDADANO_CONTACTO (ID, CIUDADANO_ID, TIPO_CONTACTO, CONTACTO) VALUES
 (1, 1, 'TELEFONO_FIJO', '5544332211'),
 (2, 1, 'TWITTER', '@Jorge'),
-(3, 2, 'TELEFONO_MOVIL', '4477558899');
+(3, 2, 'TELEFONO_MOVIL', '4477558899'),
+(4, 3, 'TELEFONO_MOVIL', '5544332212');
 
 INSERT INTO GEO_LOCATION (ID, CALLE, NO_EXTERIOR, NO_INTERIOR, COLONIA, CODIGO_POSTAL, MUNICIPALITY_ID, LATITUDE, LONGITUDE) VALUES
 (1, 'CALLE VIENA', '16', '', 'Col Juarez', '06600', 273, 19.430268, -99.157720);

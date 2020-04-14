@@ -12,7 +12,8 @@ public interface AyudaRepository extends JpaRepository<Ayuda, Integer> {
     @Query("select ayuda " +
             " FROM Ayuda ayuda" +
             " where " +
-            "   ( 6371 * " +
+            "   ayuda.estatusAyuda in ('NUEVA', 'EN_PROGRESO') " +
+            "   and ( 6371 * " +
             "      acos ( " +
             "         cos ( radians ( :latitudeRef ) ) " +
             "         * cos ( radians ( ayuda.ubicacion.latitude ) ) " +
@@ -29,6 +30,7 @@ public interface AyudaRepository extends JpaRepository<Ayuda, Integer> {
             " FROM Ayuda ayuda" +
             " where " +
             "   ayuda.origenAyuda = :origenAyuda " +
+            "   and ayuda.estatusAyuda in ('NUEVA', 'EN_PROGRESO') " +
             "   and ( 6371 * " +
             "      acos ( " +
             "         cos ( radians ( :latitudeRef ) ) " +

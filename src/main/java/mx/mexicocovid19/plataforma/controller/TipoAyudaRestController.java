@@ -16,7 +16,7 @@ import java.util.List;
  * Created by betuzo on 14/05/15.
  */
 @Controller
-@RequestMapping(ApiController.API_PATH_PRIVATE + "/tipoAyuda")
+@RequestMapping(ApiController.API_PATH_PUBLIC + "/tipoAyuda")
 public class TipoAyudaRestController {
 
     @Autowired
