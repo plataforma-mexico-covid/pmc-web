@@ -23,6 +23,7 @@ import { MapsMainComponent } from './estaticas/maps-main/maps-main.component';
 import { SesionComponent } from './componentes/sesion/sesion.component';
 import { RecuperacionPasswordComponent } from './estaticas/recuperacion/recuperacion-password.component';
 import { CambiaPasswordComponent } from './estaticas/cambia-password/cambia-password.component';
+import { AyudaCiudadanoComponent } from './componentes/ayuda-ciudadano/ayuda-ciudadano.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { CambiaPasswordComponent } from './estaticas/cambia-password/cambia-pass
     MapsMainComponent,
     SesionComponent,
     RecuperacionPasswordComponent,
-    CambiaPasswordComponent
+    CambiaPasswordComponent,
+    AyudaCiudadanoComponent
   ],
   imports: [
     BrowserModule,
@@ -53,6 +55,7 @@ import { CambiaPasswordComponent } from './estaticas/cambia-password/cambia-pass
       apiKey: 'AIzaSyDHZ2GpuEYGqIQGoIyRSUqN1mPwkUtuf6k'
     })
   ],
+  // AIzaSyDHZ2GpuEYGqIQGoIyRSUqN1mPwkUtuf6k
   // AIzaSyAPj6sW4vJZ4q-cqREHWcbIDRHB3Rk8hoo
   providers: [
     ServiciosService,

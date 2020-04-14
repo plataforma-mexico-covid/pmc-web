@@ -27,6 +27,7 @@ export class MapaComponent implements OnInit {
   ayuda_id: number;
   private geoCoder;
   isSesionActive: any;
+  roles: string[];
 
   icons = {
     1: '/assets/imgs/ub_comida_25_35.png',
@@ -82,6 +83,11 @@ export class MapaComponent implements OnInit {
     }
     this.isSesionActive = this._authService.isLoggedIn();
     this._authService.isLoggedInObservable().subscribe((isLoggedIn) => this.isSesionActive = isLoggedIn);
+    this.roles = this._authService.getRolesAlreadyLoggedIn();
+    this._authService.isLoggedInObservable().subscribe((isLoggedIn) => {
+      this.isSesionActive = isLoggedIn;
+      this.roles = this._authService.getRolesAlreadyLoggedIn();
+    });
     if (!this.isSesionActive) {
       $('#welcomeModal').modal('show');
     }
@@ -161,15 +167,22 @@ export class MapaComponent implements OnInit {
         this.getAddress(posicion.coords.lat, posicion.coords.lng);
         this.setOrigenContactar.emit();
         this._constantes.origen_ayudar = 'OFRECE';
-        $('#ayudaModal').modal('show');
+        if (this.roles.includes('VOLUNTARY')) {
+          $('#ayudaCiudadanoModal').modal('show');
+        } else {
+          $('#ayudaModal').modal('show');
+        } 
       } else {
         if ( result.dismiss === 'cancel'  ) {
           this.getAddress(posicion.coords.lat, posicion.coords.lng);
           this.setOrigenContactar.emit();
           this._constantes.origen_ayudar = 'SOLICITA';
-          $('#ayudaModal').modal('show');
+          if (this.roles.includes('VOLUNTARY')) {
+            $('#ayudaCiudadanoModal').modal('show');
+          } else {
+            $('#ayudaModal').modal('show');
+          } 
         }
-
       }
     });
   }

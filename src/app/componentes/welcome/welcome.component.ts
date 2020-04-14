@@ -17,7 +17,6 @@ export class WelcomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log("WELCOME MODAL: " + $('#welcomwModal'));
     if (this.globales.usuario.token) {
       this.modeWelcome = "ONLY-WELCOME";
     } else {

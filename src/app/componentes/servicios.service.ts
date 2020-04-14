@@ -44,8 +44,8 @@ export class ServiciosService {
   }
 
   getTiposAyuda() {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'X-Auth-Token': this.globales.usuario.token });
-    return this.http.get(`${this.rutas.endpoint}/api/v1/private/tipoAyuda/`, { headers });
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.get(`${this.rutas.endpoint}/api/v1/public/tipoAyuda/`, { headers });
   }
 
   getProvincias() {
@@ -59,6 +59,11 @@ export class ServiciosService {
   }
 
   guardarAyuda(ayuda: Ayuda) {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'X-Auth-Token': this.globales.usuario.token });
+    return this.http.post(`${this.rutas.endpoint}/api/v1/private/ayuda`, ayuda, { headers });
+  }
+
+  guardarAyudaCiudadano(ayuda: Ayuda) {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'X-Auth-Token': this.globales.usuario.token });
     return this.http.post(`${this.rutas.endpoint}/api/v1/private/ayuda`, ayuda, { headers });
   }
