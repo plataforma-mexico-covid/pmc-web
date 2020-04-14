@@ -1,0 +1,1 @@
+docker rmi gcr.io/plataforma-mexico-covid19/pmcwebcovid19:$1
