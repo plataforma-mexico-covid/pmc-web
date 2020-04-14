@@ -35,7 +35,6 @@ export class AyudaComponent implements OnInit {
     private _servicio: ServiciosService,
     public globales: GlobalsComponent,
     public _constantes: ConstantsService
-
   ) {
     this.inicializaVariables();
     if (navigator.geolocation) {

@@ -41,6 +41,12 @@ export class AuthService {
     return this.isAlreadyLoggedIn() ? this.getAlreadyLoggedIn().fullname : "";
   }
 
+  public getRolesAlreadyLoggedIn(): string[] {
+    return this.isAlreadyLoggedIn() ? this.getAlreadyLoggedIn().roles.map(function(obj) { 
+            return obj.authority;
+          }) : [];
+  }
+
   public isLoggedInObservable(): Observable<boolean> {
     return this.observable;
   }

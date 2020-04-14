@@ -11,6 +11,5 @@ export class HeaderComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log("TIPOOOOO" + this.tipo);
   }
 }

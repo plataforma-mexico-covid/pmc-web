@@ -29,6 +29,7 @@ export class MapsMainComponent implements OnInit {
     if (navigator.geolocation) {
       this.soporta_geolocacion = true;
     }
+    this.getTiposAyuda();
   }
   actualizarTipoAyuda(tipo_ayuda) {
     this.mapaComponent.cambioTipoAyuda(tipo_ayuda);
@@ -64,9 +65,6 @@ export class MapsMainComponent implements OnInit {
   }
 
   setOrigenContactar(contactar) {
-    if ( !this.tipoAyuda ) {
-      this.getTiposAyuda();
-    }
     this.origen_contactar = contactar;
   }
 }
