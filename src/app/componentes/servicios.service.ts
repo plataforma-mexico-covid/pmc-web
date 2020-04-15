@@ -65,7 +65,7 @@ export class ServiciosService {
 
   guardarAyudaCiudadano(ayuda: Ayuda) {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'X-Auth-Token': this.globales.usuario.token });
-    return this.http.post(`${this.rutas.endpoint}/api/v1/private/ayuda`, ayuda, { headers });
+    return this.http.post(`${this.rutas.endpoint}/api/v1/private/ayuda_ciudadano`, ayuda, { headers });
   }
 
   valdiarTokenCorreo(token: string) {
