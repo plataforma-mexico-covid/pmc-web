@@ -35,8 +35,10 @@ export class MapaComponent implements OnInit {
     3: '/assets/imgs/ub_farmacia_25_35.png',
     4: '/assets/imgs/ub_cruz_25_35.png',
     5: '/assets/imgs/ub_legal_25_35.png',
-    6: '/assets/imgs/posicion_50.png',
-    7: '/assets/imgs/beachflag.png',
+    6: '/assets/imgs/ub_apoyo_25_35.png',
+    7: '/assets/imgs/ub_otros_25_35.png',
+    8: '/assets/imgs/posicion_50.png',
+    9: '/assets/imgs/beachflag.png',
   }
 
   constructor(
