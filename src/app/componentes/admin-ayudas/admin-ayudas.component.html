@@ -1,0 +1,27 @@
+<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Fecha Registro</th>
+        <th>Solicita / Ofrece</th>
+        <th>Tipo Ayuda</th>
+        <th>Descripcion</th>
+        <th>Ciudadano</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ayuda of ayudas">
+        <td>{{ ayuda.id }}</td>
+        <td>{{ ayuda.fechaRegistro }}</td>
+        <td [ngClass]="{
+          'my-custom-cell-solicita': ayuda.origenAyuda === 'SOLICITA',
+          'my-custom-cell-ofrece':   ayuda.origenAyuda !== 'SOLICITA'
+        }">{{ ayuda.origenAyuda }}</td>
+        <td>{{ ayuda.tipoAyuda.nombre }}</td>
+        <td>{{ ayuda.descripcion }}</td>
+        <td>{{ ayuda.ciudadano.nombre + ' ' + ayuda.ciudadano.paterno + ' ' + ayuda.ciudadano.materno }}</td>
+        <td>{{ ayuda.estatusAyuda }}</td>
+      </tr>
+    </tbody>
+    </table>

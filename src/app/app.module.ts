@@ -24,6 +24,9 @@ import { SesionComponent } from './componentes/sesion/sesion.component';
 import { RecuperacionPasswordComponent } from './estaticas/recuperacion/recuperacion-password.component';
 import { CambiaPasswordComponent } from './estaticas/cambia-password/cambia-password.component';
 import { AyudaCiudadanoComponent } from './componentes/ayuda-ciudadano/ayuda-ciudadano.component';
+import { DataTablesModule } from 'angular-datatables';
+import { ManagerComponent } from './estaticas/manager/manager.component';
+import { AdminAyudasComponent } from './componentes/admin-ayudas/admin-ayudas.component';
 declare const GOOGLE_MAPS_APIKEY: any;
 
 @NgModule({
@@ -44,7 +47,9 @@ declare const GOOGLE_MAPS_APIKEY: any;
     SesionComponent,
     RecuperacionPasswordComponent,
     CambiaPasswordComponent,
-    AyudaCiudadanoComponent
+    AyudaCiudadanoComponent,
+    ManagerComponent,
+    AdminAyudasComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +57,7 @@ declare const GOOGLE_MAPS_APIKEY: any;
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    DataTablesModule,
     AgmCoreModule.forRoot({
       apiKey: GOOGLE_MAPS_APIKEY()
     })

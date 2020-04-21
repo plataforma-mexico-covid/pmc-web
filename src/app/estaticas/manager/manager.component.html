@@ -1,0 +1,11 @@
+<ng-container *ngIf="soporta_geolocacion; else noSoporta">
+    <div class="background">
+        <app-header class="container"></app-header>
+        <app-admin-ayudas></app-admin-ayudas>
+        <app-footer class="container" (setOrigenContactar)="setOrigenContactar($event)"></app-footer>
+    </div>
+</ng-container>
+<ng-template #noSoporta>
+    <h1>Este navegador no soporta geolocación, para una mejor experiencia utilice la ultima versión de Google Chrome.
+    </h1>
+</ng-template>

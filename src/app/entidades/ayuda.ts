@@ -41,9 +41,16 @@ export class Ayuda {
     tipoAyuda: TipoAyuda;
     ubicacion: Ubicacion;
     direccion: string;
+    estatusAyuda: EstatusAyuda | string;
+    campana: string;
+    medio: string;
+    origen: string;
     isUserLogIn: boolean;
 }
 
+enum EstatusAyuda {
+    "NUEVA", "PENDIENTE", "EN_PROGRESO", "CANCELADA", "COMPLETEDA"
+}
 
 enum OrigenesAyuda {
     "OFRECE", "SOLICITA"
