@@ -24,6 +24,7 @@ import { SesionComponent } from './componentes/sesion/sesion.component';
 import { RecuperacionPasswordComponent } from './estaticas/recuperacion/recuperacion-password.component';
 import { CambiaPasswordComponent } from './estaticas/cambia-password/cambia-password.component';
 import { AyudaCiudadanoComponent } from './componentes/ayuda-ciudadano/ayuda-ciudadano.component';
+declare const GOOGLE_MAPS_APIKEY: any;
 
 @NgModule({
   declarations: [
@@ -52,11 +53,9 @@ import { AyudaCiudadanoComponent } from './componentes/ayuda-ciudadano/ayuda-ciu
     FormsModule,
     ReactiveFormsModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDHZ2GpuEYGqIQGoIyRSUqN1mPwkUtuf6k'
+      apiKey: GOOGLE_MAPS_APIKEY()
     })
   ],
-  // AIzaSyDHZ2GpuEYGqIQGoIyRSUqN1mPwkUtuf6k
-  // AIzaSyAPj6sW4vJZ4q-cqREHWcbIDRHB3Rk8hoo
   providers: [
     ServiciosService,
     ConstantsService,
@@ -65,6 +64,3 @@ import { AyudaCiudadanoComponent } from './componentes/ayuda-ciudadano/ayuda-ciu
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
-
-// AIzaSyAPj6sW4vJZ4q-cqREHWcbIDRHB3Rk8hoo
