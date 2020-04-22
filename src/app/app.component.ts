@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ConstantsService } from './componentes/global/constants.service';
 import { MapaComponent } from './componentes/mapa/mapa.component';
-import { ServiciosService } from './componentes/servicios.service';
 
 @Component({
   selector: 'app-root',
@@ -17,8 +16,7 @@ export class AppComponent implements OnInit {
   lista_provincias: any;
 
   constructor(
-    public constantes: ConstantsService,
-    private _servicio: ServiciosService
+    public constantes: ConstantsService
   ) {
     this.constantes.isLoading = false;
   }
@@ -28,33 +26,8 @@ export class AppComponent implements OnInit {
       this.soporta_geolocacion = true;
     }
   }
+  
   actualizarTipoAyuda(tipo_ayuda) {
     this.mapaComponent.cambioTipoAyuda(tipo_ayuda);
   }
-
-  getTiposAyuda() {
-    this._servicio.getTiposAyuda().subscribe(
-      (data) => {
-        console.log(data);
-        this.getProvincias();
-        this.tipoAyuda = data;
-      },
-      (error) => {
-
-      }
-    );
-  }
-
-  getProvincias() {
-    this._servicio.getProvincias().subscribe(
-      (data) => {
-        console.log(data);
-        this.lista_provincias = data;
-      },
-      (error) => {
-
-      }
-    );
-  }
-
 }

@@ -11,4 +11,5 @@ export class ConstantsService {
   longitud = 0;
   latitud = 0;
   direccion: string;
+  tipos_ayudas : any;
 }

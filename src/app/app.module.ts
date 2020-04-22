@@ -1,9 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AgmCoreModule } from '@agm/core';
+import { AgmCoreModule, LAZY_MAPS_API_CONFIG, LazyMapsAPILoaderConfigLiteral } from '@agm/core';
 import { MapaComponent } from './componentes/mapa/mapa.component';
 import { HeaderComponent } from './componentes/header/header.component';
 import { HeaderEstaticoComponent } from './componentes/header-estatico/header-estatico.component';
@@ -11,7 +11,7 @@ import { FooterComponent } from './componentes/footer/footer.component';
 import { InicioComponent } from './componentes/inicio/inicio.component';
 import { RegistroComponent } from './componentes/registro/registro.component';
 import { ServiciosService } from './componentes/servicios.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { AyudaComponent } from './componentes/ayuda/ayuda.component';
 import { GlobalsComponent } from './componentes/global/global.component';
 import { LoadingComponent } from './componentes/loading/loading.component';
@@ -27,7 +27,16 @@ import { AyudaCiudadanoComponent } from './componentes/ayuda-ciudadano/ayuda-ciu
 import { DataTablesModule } from 'angular-datatables';
 import { ManagerComponent } from './estaticas/manager/manager.component';
 import { AdminAyudasComponent } from './componentes/admin-ayudas/admin-ayudas.component';
-declare const GOOGLE_MAPS_APIKEY: any;
+import { map } from 'rxjs/operators';
+
+export function agmConfigFactory(http: HttpClient, config: LazyMapsAPILoaderConfigLiteral) {
+  return () => http.get<{GOOGLE_MAPS_APIKEY: string}>('assets/config.json').pipe(
+    map(response => {
+        config.apiKey = response.GOOGLE_MAPS_APIKEY;
+        return response;
+    })
+  ).toPromise();
+}
 
 @NgModule({
   declarations: [
@@ -59,13 +68,18 @@ declare const GOOGLE_MAPS_APIKEY: any;
     ReactiveFormsModule,
     DataTablesModule,
     AgmCoreModule.forRoot({
-      apiKey: GOOGLE_MAPS_APIKEY()
+      apiKey: 'API_KEY'
     })
   ],
   providers: [
     ServiciosService,
     ConstantsService,
-    GlobalsComponent
+    GlobalsComponent,
+    {
+      provide: APP_INITIALIZER, 
+      useFactory: agmConfigFactory, 
+      deps: [HttpClient, LAZY_MAPS_API_CONFIG], 
+      multi: true} 
   ],
   bootstrap: [AppComponent]
 })

@@ -3,20 +3,20 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Usuario, CambioPassword } from '../entidades/usuario';
 import { GlobalsComponent } from './global/global.component';
 import { Ayuda } from '../entidades';
+import { ConstantsService } from '../componentes/global/constants.service';
 declare const RUTAS: any;
+
 
 @Injectable()
 export class ServiciosService {
   public rutas;
   private isUserLoggedIn: boolean = false;
 
-  constructor(private http: HttpClient, private globales: GlobalsComponent ) {
+  constructor(private http: HttpClient, private globales: GlobalsComponent, public constantes: ConstantsService) {
     this.rutas = RUTAS();
   }
 
-
   iniciarSession(usuario: Usuario) {
-
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const aux = { password: usuario.password, username: usuario.username };
     return this.http.post(`${this.rutas.endpoint}/api/v1/public/login`, aux, { headers });
@@ -37,14 +37,12 @@ export class ServiciosService {
   }
 
   ayuda(tipo: 'AMBOS' | 'OFRECE' | 'SOLICITA', longitude: number, latitude: number, kilometers: string) {
-    // tslint:disable-next-line: max-line-length
     const token = this.globales.usuario.token ? this.globales.usuario.token : '';
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'X-Auth-Token': token });
     return this.http.get(`${this.rutas.endpoint}/api/v1/public/ayuda/?origenAyuda=${tipo}&longitude=${longitude}&latitude=${latitude}&kilometers=${kilometers}`, { headers } );
   }
   
   adminAyuda() {
-    // tslint:disable-next-line: max-line-length
     const token = this.globales.usuario.token ? this.globales.usuario.token : '';
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'X-Auth-Token': token });
     return this.http.get(`${this.rutas.endpoint}/api/v1/private/backoffice/ayuda/`, { headers } );

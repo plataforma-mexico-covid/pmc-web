@@ -21,7 +21,7 @@ export class AdminAyudasComponent implements OnDestroy, OnInit {
   ngOnInit(): void {
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 2
+      pageLength: 10
     };
     this._servicio.adminAyuda().subscribe(
       (data: any[]) => {
