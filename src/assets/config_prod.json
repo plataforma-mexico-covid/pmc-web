@@ -1,3 +1,4 @@
 {
-    "GOOGLE_MAPS_APIKEY": "AIzaSyDHZ2GpuEYGqIQGoIyRSUqN1mPwkUtuf6k"
+    "GOOGLE_MAPS_APIKEY": "AIzaSyDHZ2GpuEYGqIQGoIyRSUqN1mPwkUtuf6k",
+    "endpoint": "https://beta.mexicovscovid191.mx"
 }

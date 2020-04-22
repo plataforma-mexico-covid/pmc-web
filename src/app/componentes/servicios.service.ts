@@ -4,7 +4,7 @@ import { Usuario, CambioPassword } from '../entidades/usuario';
 import { GlobalsComponent } from './global/global.component';
 import { Ayuda } from '../entidades';
 import { ConstantsService } from '../componentes/global/constants.service';
-declare const RUTAS: any;
+//declare const RUTAS: any;
 
 
 @Injectable()
@@ -13,8 +13,17 @@ export class ServiciosService {
   private isUserLoggedIn: boolean = false;
 
   constructor(private http: HttpClient, private globales: GlobalsComponent, public constantes: ConstantsService) {
-    this.rutas = RUTAS();
+    //this.rutas = RUTAS();
   }
+
+  public load(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.get('assets/config.json').subscribe((response: any) => {
+          this.rutas = response;
+          resolve(true);
+    });
+  });
+}
 
   iniciarSession(usuario: Usuario) {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });

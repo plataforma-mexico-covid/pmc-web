@@ -1,3 +1,4 @@
 {
-    "GOOGLE_MAPS_APIKEY": "AIzaSyAScZb_sTW_vToyo58fXKBKp1dPaPeM_fQ"
+    "GOOGLE_MAPS_APIKEY": "AIzaSyAScZb_sTW_vToyo58fXKBKp1dPaPeM_fQ",
+    "endpoint": "http://localhost:8090"
 }

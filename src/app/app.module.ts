@@ -38,6 +38,10 @@ export function agmConfigFactory(http: HttpClient, config: LazyMapsAPILoaderConf
   ).toPromise();
 }
 
+export function init_app(serviciosService: ServiciosService) {
+  return () => serviciosService.load();
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -79,7 +83,14 @@ export function agmConfigFactory(http: HttpClient, config: LazyMapsAPILoaderConf
       provide: APP_INITIALIZER, 
       useFactory: agmConfigFactory, 
       deps: [HttpClient, LAZY_MAPS_API_CONFIG], 
-      multi: true} 
+      multi: true
+    },
+    { 
+      provide: APP_INITIALIZER, 
+      useFactory: init_app, 
+      deps: [ ServiciosService ], 
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
