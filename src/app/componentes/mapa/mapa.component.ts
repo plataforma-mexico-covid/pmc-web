@@ -30,15 +30,23 @@ export class MapaComponent implements OnInit {
   roles: string[];
 
   icons = {
-    1: '/assets/imgs/ub_comida_25_35.png',
-    2: '/assets/imgs/ub_envios_25_35.png',
-    3: '/assets/imgs/ub_farmacia_25_35.png',
-    4: '/assets/imgs/ub_cruz_25_35.png',
-    5: '/assets/imgs/ub_legal_25_35.png',
-    6: '/assets/imgs/ub_apoyo_25_35.png',
-    7: '/assets/imgs/ub_otros_25_35.png',
-    8: '/assets/imgs/posicion_50.png',
-    9: '/assets/imgs/beachflag.png',
+    '1-SOLICITA': '/assets/imgs/icon-maps/ub_comida_solicita_25_35.png',
+    '1-OFRECE': '/assets/imgs/icon-maps/ub_comida_ofrece_25_35.png',
+    '2-SOLICITA': '/assets/imgs/icon-maps/ub_envios_solicita_25_35.png',
+    '2-OFRECE': '/assets/imgs/icon-maps/ub_envios_ofrece_25_35.png',
+    '3-SOLICITA': '/assets/imgs/icon-maps/ub_farmacia_solicita_25_35.png',
+    '3-OFRECE': '/assets/imgs/icon-maps/ub_farmacia_ofrece_25_35.png',
+    '4-SOLICITA': '/assets/imgs/icon-maps/ub_psicologico_solicita_25_35.png.png',
+    '4-OFRECE': '/assets/imgs/icon-maps/ub_psicologico_ofrece_25_35.png',
+    '5-SOLICITA': '/assets/imgs/icon-maps/ub_legal_solicita_25_35.png',
+    '5-OFRECE': '/assets/imgs/icon-maps/ub_legal_ofrece_25_35.png',
+    '6-SOLICITA': '/assets/imgs/icon-maps/ub_apoyo_solicita_25_35.png',
+    '6-OFRECE': '/assets/imgs/icon-maps/ub_apoyo_ofrece_25_35.png',
+    '7-SOLICITA': '/assets/imgs/icon-maps/ub_otros_solicita_25_35.png',
+    '7-OFRECE': '/assets/imgs/icon-maps/ub_otros_ofrece_25_35.png',
+    '8-SOLICITA': '/assets/imgs/icon-maps/ub_trabajo_solicita_25_35.png',
+    '8-OFRECE': '/assets/imgs/icon-maps/ub_trabajo_ofrece_25_35.png',
+    '9-ubicacion': '/assets/imgs/beachflag.png',
   }
 
   constructor(
