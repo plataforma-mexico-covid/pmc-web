@@ -231,6 +231,30 @@ export class MapaComponent implements OnInit {
     }, 500);
   }
 
+  finalizarAyuda(ayuda_id?) {
+    this.ayuda_id = ayuda_id ? ayuda_id : this.ayuda_id;
+
+    Swal.fire({
+      title: '¿Quieres finalizar tu ayuda?',
+      text: '',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value) {
+        this._servicio.finalizarAyuda(this.ayuda_id).subscribe((data: any) => {
+          Swal.fire('¡Exito!', 'Gracias por sumar, esperamos saber de ti pronto.', 'success');
+          this.actualizarRegistros();
+        }, error => {
+          Swal.fire('!Error¡', 'No se pudo realizar la operación', 'error');
+        });
+      }
+    });
+  }
+
   contactarUsuario(ayuda_id?) {
     this.ayuda_id = ayuda_id ? ayuda_id : this.ayuda_id;
     if (this._globales.usuario.token) {

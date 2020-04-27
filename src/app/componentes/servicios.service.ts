@@ -92,6 +92,11 @@ export class ServiciosService {
     return this.http.post(`${this.rutas.endpoint}/api/v1/private/ayuda/${idAyuda}/match`, { idAyuda, username }, { headers });
   }
 
+  finalizarAyuda(idAyuda: number) {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'X-Auth-Token': this.globales.usuario.token });
+    return this.http.post(`${this.rutas.endpoint}/api/v1/private/ayuda/${idAyuda}/finish`, { }, { headers });
+  }
+
   get(url) {
     return this.http.get(url, {});
   }
