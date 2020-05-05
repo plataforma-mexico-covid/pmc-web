@@ -1,5 +1,4 @@
 import { GlobalsComponent } from './../componentes/global/global.component';
-import { ConstantsService } from './../componentes/global/constants.service';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { ServiciosService } from '../componentes/servicios.service';

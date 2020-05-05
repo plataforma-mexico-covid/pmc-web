@@ -4,16 +4,15 @@ import { Usuario, CambioPassword } from '../entidades/usuario';
 import { GlobalsComponent } from './global/global.component';
 import { Ayuda, DataTablesResponse } from '../entidades';
 import { ConstantsService } from '../componentes/global/constants.service';
-//declare const RUTAS: any;
-
 
 @Injectable()
 export class ServiciosService {
   public rutas;
   private isUserLoggedIn: boolean = false;
 
-  constructor(private http: HttpClient, private globales: GlobalsComponent, public constantes: ConstantsService) {
-    //this.rutas = RUTAS();
+  constructor(private http: HttpClient, 
+              private globales: GlobalsComponent, 
+              public constantes: ConstantsService) {
   }
 
   public load(): Promise<any> {
@@ -21,9 +20,9 @@ export class ServiciosService {
       this.get('assets/config.json').subscribe((response: any) => {
           this.rutas = response;
           resolve(true);
+      });
     });
-  });
-}
+  }
 
   iniciarSession(usuario: Usuario) {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
@@ -52,7 +51,7 @@ export class ServiciosService {
   }
   
   adminAyuda(dataTablesParameters: DataTablesResponse) {
-    const token = this.globales.usuario.token ? this.globales.usuario.token : '';
+    const token = this.globales.getTokenAlreadyLoggedIn() ? this.globales.getTokenAlreadyLoggedIn() : '';
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'X-Auth-Token': token });
     return this.http.post(`${this.rutas.endpoint}/api/v1/private/backoffice/ayuda/`, dataTablesParameters, { headers } );
   }
