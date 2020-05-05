@@ -92,7 +92,8 @@ export class ServiciosService {
   }
 
   finalizarAyuda(idAyuda: number) {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'X-Auth-Token': this.globales.usuario.token });
+    const token = this.globales.getTokenAlreadyLoggedIn() ? this.globales.getTokenAlreadyLoggedIn() : '';
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'X-Auth-Token': token });
     return this.http.post(`${this.rutas.endpoint}/api/v1/private/ayuda/${idAyuda}/finish`, { }, { headers });
   }
 

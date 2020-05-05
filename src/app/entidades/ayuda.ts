@@ -35,6 +35,7 @@ export class Ciudadano {
 export class Ayuda {
     ciudadano: Ciudadano;
     descripcion: string;
+    descCorta: string;
     fechaRegistro: string;
     id: number;
     origenAyuda: OrigenesAyuda | string;

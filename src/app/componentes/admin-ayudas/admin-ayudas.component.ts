@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { AuthService } from '../../services/auth.service';
+import Swal from 'sweetalert2';
 import { ServiciosService } from '../servicios.service';
 import { Ayuda } from 'src/app/entidades';
 
@@ -13,6 +13,7 @@ declare var $: any;
 export class AdminAyudasComponent implements OnDestroy, OnInit {
   dtOptions: DataTables.Settings = {};
   ayudas: Ayuda[] = [];
+  ayuda_id: number;
   dtTrigger: Subject<Object> = new Subject<Object>();
 
   constructor(
@@ -20,7 +21,6 @@ export class AdminAyudasComponent implements OnDestroy, OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log("asdasdasdasdasd");
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10,
@@ -49,5 +49,27 @@ export class AdminAyudasComponent implements OnDestroy, OnInit {
 
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
+  }
+
+  finalizarAyuda(ayuda_id?) {
+    this.ayuda_id = ayuda_id ? ayuda_id : this.ayuda_id;
+    Swal.fire({
+      title: '¿Quieres finalizar esta ayuda?',
+      text: '',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value) {
+        this._servicio.finalizarAyuda(this.ayuda_id).subscribe((data: any) => {
+          Swal.fire('¡Exito!', 'Se finalizo la ayuda correctamente.', 'success');
+        }, error => {
+          Swal.fire('!Error¡', 'No se pudo realizar la operación', 'error');
+        });
+      }
+    });
   }
 }
