@@ -48,6 +48,13 @@ export class Ayuda {
     isUserLogIn: boolean;
 }
 
+export class DataTablesResponse {
+    data: any[];
+    draw: number;
+    recordsFiltered: number;
+    recordsTotal: number;
+  }
+
 enum EstatusAyuda {
     "NUEVA", "PENDIENTE", "EN_PROGRESO", "CANCELADA", "COMPLETEDA"
 }

@@ -4,6 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { ServiciosService } from '../servicios.service';
 import { Ayuda } from 'src/app/entidades';
 
+declare var $: any;
 @Component({
   selector: 'app-admin-ayudas',
   templateUrl: './admin-ayudas.component.html',
@@ -19,19 +20,31 @@ export class AdminAyudasComponent implements OnDestroy, OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log("asdasdasdasdasd");
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 10
-    };
-    this._servicio.adminAyuda().subscribe(
-      (data: any[]) => {
-        this.ayudas = data;
-        this.dtTrigger.next();
+      pageLength: 5,
+      serverSide: true,
+      processing: true,
+      ajax: (dataTablesParameters: any, callback) => {
+        this._servicio.adminAyuda(dataTablesParameters)
+        .subscribe(
+          (resp: any) => {
+            this.ayudas = resp.data;
+            callback({
+              recordsTotal: resp.recordsTotal,
+              recordsFiltered: resp.recordsFiltered,
+              data: []
+            });
+            //this.dtTrigger.next();
+          },
+          (error) => {
+            console.log("ERROR: " + error);
+          }
+        );
       },
-      (error) => {
-
-      }
-    );
+      columns: [{ data: 'id' }, { data: 'firstName' }, { data: 'lastName' }]
+    };
   }
 
   ngOnDestroy(): void {

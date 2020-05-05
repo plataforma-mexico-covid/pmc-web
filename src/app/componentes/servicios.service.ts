@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Usuario, CambioPassword } from '../entidades/usuario';
 import { GlobalsComponent } from './global/global.component';
-import { Ayuda } from '../entidades';
+import { Ayuda, DataTablesResponse } from '../entidades';
 import { ConstantsService } from '../componentes/global/constants.service';
 //declare const RUTAS: any;
 
@@ -51,10 +51,10 @@ export class ServiciosService {
     return this.http.get(`${this.rutas.endpoint}/api/v1/public/ayuda/?origenAyuda=${tipo}&longitude=${longitude}&latitude=${latitude}&kilometers=${kilometers}`, { headers } );
   }
   
-  adminAyuda() {
+  adminAyuda(dataTablesParameters: DataTablesResponse) {
     const token = this.globales.usuario.token ? this.globales.usuario.token : '';
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'X-Auth-Token': token });
-    return this.http.get(`${this.rutas.endpoint}/api/v1/private/backoffice/ayuda/`, { headers } );
+    return this.http.post(`${this.rutas.endpoint}/api/v1/private/backoffice/ayuda/`, dataTablesParameters, { headers } );
   }
 
   getTiposAyuda() {
