@@ -23,7 +23,7 @@ export class AdminAyudasComponent implements OnDestroy, OnInit {
     console.log("asdasdasdasdasd");
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 5,
+      pageLength: 10,
       serverSide: true,
       processing: true,
       ajax: (dataTablesParameters: any, callback) => {
