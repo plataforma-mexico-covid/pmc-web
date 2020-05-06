@@ -8,6 +8,10 @@
                 <span class="pmc-blue">{{ name }}</span>
             </button>
             <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                <ng-container *ngIf="isSesionActive && roles.includes('MANAGER');">
+                    <a class="dropdown-item" href="#/admin">Admin</a>
+                    <a class="dropdown-item" href="#/maps">Mapa</a>
+                </ng-container>
               <a class="dropdown-item" href="#" (click)="logout()">Salir</a>
             </div>
         </div>

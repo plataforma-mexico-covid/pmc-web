@@ -11,6 +11,7 @@ declare var $: any;
 export class SesionComponent implements OnInit {
   isSesionActive: any;
   name: string;
+  roles: string[];
 
   constructor(
     private globales: GlobalsComponent,
@@ -20,9 +21,11 @@ export class SesionComponent implements OnInit {
   ngOnInit() {
     this.isSesionActive = this._authService.isLoggedIn();
     this.name = this._authService.getNameAlreadyLoggedIn();
+    this.roles = this._authService.getRolesAlreadyLoggedIn();
     this._authService.isLoggedInObservable().subscribe((isLoggedIn) => {
       this.isSesionActive = isLoggedIn;
       this.name = this._authService.getNameAlreadyLoggedIn();
+      this.roles = this._authService.getRolesAlreadyLoggedIn();
     });
   }
 
