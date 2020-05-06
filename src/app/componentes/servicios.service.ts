@@ -76,6 +76,12 @@ export class ServiciosService {
     return this.http.post(`${this.rutas.endpoint}/api/v1/private/ayuda`, ayuda, { headers });
   }
 
+  actualizarAyuda(ayuda: Ayuda) {
+    const token = this.globales.getTokenAlreadyLoggedIn() ? this.globales.getTokenAlreadyLoggedIn() : '';
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'X-Auth-Token': token });
+    return this.http.put(`${this.rutas.endpoint}/api/v1/private/ayuda`, ayuda, { headers });
+  }
+
   guardarAyudaCiudadano(ayuda: Ayuda) {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'X-Auth-Token': this.globales.usuario.token });
     return this.http.post(`${this.rutas.endpoint}/api/v1/private/ayuda_ciudadano`, ayuda, { headers });

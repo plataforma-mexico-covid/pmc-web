@@ -30,6 +30,8 @@ export class Ciudadano {
     materno: string;
     nombre: string;
     paterno: string;
+    nombreCompleto: string;
+    username: string;
 }
 
 export class Ayuda {

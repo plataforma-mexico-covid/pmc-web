@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import Swal from 'sweetalert2';
 import { ServiciosService } from '../servicios.service';
+import { DataShareService } from '../../services/data-share.service';
 import { Ayuda } from 'src/app/entidades';
 
 declare var $: any;
@@ -17,7 +18,8 @@ export class AdminAyudasComponent implements OnDestroy, OnInit {
   dtTrigger: Subject<Object> = new Subject<Object>();
 
   constructor(
-    private _servicio: ServiciosService
+    private _servicio: ServiciosService,
+    private _dataShare: DataShareService
   ) { }
 
   ngOnInit(): void {
@@ -71,5 +73,10 @@ export class AdminAyudasComponent implements OnDestroy, OnInit {
         });
       }
     });
+  }
+
+  updateAyuda(ayuda) {
+    this._dataShare.changeAyuda(ayuda);
+    $('#ayudaUpdateModal').modal('show');
   }
 }

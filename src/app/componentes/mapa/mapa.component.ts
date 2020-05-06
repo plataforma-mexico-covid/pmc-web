@@ -46,6 +46,8 @@ export class MapaComponent implements OnInit {
     '7-OFRECE': '/assets/imgs/icon-maps/ub_otros_ofrece_25_35.png',
     '8-SOLICITA': '/assets/imgs/icon-maps/ub_trabajo_solicita_25_35.png',
     '8-OFRECE': '/assets/imgs/icon-maps/ub_trabajo_ofrece_25_35.png',
+    '9-SOLICITA': '/assets/imgs/icon-maps/ub_curso_solicita_25_35.png',
+    '9-OFRECE': '/assets/imgs/icon-maps/ub_curso_ofrece_25_35.png',
     '9-ubicacion': '/assets/imgs/icon-maps/beachflag.png',
   }
 

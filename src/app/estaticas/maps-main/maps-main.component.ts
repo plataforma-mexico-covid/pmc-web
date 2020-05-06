@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MapaComponent } from 'src/app/componentes/mapa/mapa.component';
 import { ConstantsService } from 'src/app/componentes/global/constants.service';
 import { ServiciosService } from 'src/app/componentes/servicios.service';
+import { DataShareService } from 'src/app/services/data-share.service';
 
 @Component({
   selector: 'app-maps-main',
@@ -19,7 +20,8 @@ export class MapsMainComponent implements OnInit {
 
   constructor(
     public constantes: ConstantsService,
-    private _servicio: ServiciosService
+    private _servicio: ServiciosService,
+    private _dataServicio: DataShareService
   ) {
     this.constantes.isLoading = false;
   }
@@ -44,6 +46,7 @@ export class MapsMainComponent implements OnInit {
         console.log(data);
         this.getProvincias();
         this.tipoAyuda = data;
+        this._dataServicio.changeTipoAyudas(this.tipoAyuda);
       },
       (error) => {
         console.log(error);

@@ -1,0 +1,69 @@
+<div class="modal fade" id="ayudaUpdateModal" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="ayudaUpdateModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+            <div class="row align-items-center h-100">  
+                <div class="iconFlecha text-center w-100" *ngIf="ayuda.origenAyuda === 'SOLICITA'" >
+                  <img class="iconFlecha" [src]="'../../../assets/imgs/pedir.png'"/>
+                </div>
+                <div class="iconFlecha text-center w-100" *ngIf="ayuda.origenAyuda !== 'SOLICITA'" >
+                  <img class="iconFlecha" [src]="'../../../assets/imgs/dar.png'"/>
+                </div>
+                  <h5 [ngClass]="{
+                    'text-danger letters': ayuda.origenAyuda === 'SOLICITA',
+                    'text-primary letters':   ayuda.origenAyuda !== 'SOLICITA'
+                  }" style="margin-top: 8px;">Actualizar Ayuda</h5>
+              </div>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body row">
+          <div class="col-md-12" *ngIf="ayuda.id > 0">
+            <form [formGroup]='form_update_ayuda'>
+              <div class="card-body">
+                <div class="form-group row">
+                    <label class="col-lg-4 col-form-label form-control-label">Nombre</label>
+                    <div class="col-lg-8">
+                        <input class="form-control" id="nombreCompleto" name="nombreCompleto" 
+                        [(ngModel)]="ayuda.ciudadano.nombreCompleto" formControlName='nombreCompleto' readonly/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-4 col-form-label form-control-label">Origen Ayuda</label>
+                    <div class="col-lg-8">
+                      <select class="form-control" name="origenAyuda" id="ayuda-u-origenAyuda" formControlName='origenAyuda'
+                        [(ngModel)]="ayuda.origenAyuda">
+                        <option value="OFRECE">OFRECE</option>
+                        <option value="SOLICITA">SOLICITA</option>
+                      </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-4 col-form-label form-control-label">Tipo Ayuda</label>
+                    <div class="col-lg-8">
+                        <select class="form-control" name="tipo-ayuda" id="ayuda-u-tipo-ayuda" formControlName='tipoAyuda'
+                        [(ngModel)]="ayuda.tipoAyuda.id" (change)='actualizaTipoAyuda($event)'>
+                        <option *ngFor="let item of tipoAyudas" [value]='item.id'> {{item.nombre}} </option>
+                      </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="descripcion" class="col-lg-4 col-form-label form-control-label">Detalle</label>
+                    <div class="col-lg-8">
+                        <textarea maxlength="720" rows="5" class="form-control" id="descripcion-update" name="descripcion" 
+                        [(ngModel)]="ayuda.descripcion" formControlName='descripcion'></textarea>
+                    </div>
+                </div>
+            </div>
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer without-border">
+          <button type="submit" class="btn btn-danger float-right" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary float-right" (click)="updateAyuda()" [disabled]='!form_update_ayuda.valid'>Actualizar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
