@@ -51,6 +51,21 @@ export class Ayuda {
     isUserLogIn: boolean;
 }
 
+export class Peticion {
+    id: number;
+    ayuda: Ayuda;
+    ciudadano: Ciudadano;
+    ayudaMatch: Ayuda;
+    tipoMatch: TipoMatch | string;
+    fechaPeticion: string;
+}
+
+export class InfoSensible {
+    username: string;
+    contactos: Contacto[];
+    matchs: Peticion[];
+}
+
 export class DataTablesResponse {
     data: any[];
     draw: number;
@@ -68,4 +83,8 @@ enum OrigenesAyuda {
 
 enum TiposContacto {
     "TELEFONO", "TWITTER", "FACEBOOK", "SKYPE", "OTRO"
+}
+
+enum TipoMatch {
+    "AUTOMATIC", "MANUAL"
 }

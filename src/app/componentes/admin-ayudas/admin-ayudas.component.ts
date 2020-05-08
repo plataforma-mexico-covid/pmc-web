@@ -75,6 +75,24 @@ export class AdminAyudasComponent implements OnDestroy, OnInit {
     });
   }
 
+  showSensitiveInfo(ayuda?) {
+    Swal.fire({
+      title: 'Vamos a mostrarte informacion sensible, se responsable por favor',
+      text: '',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Continuar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.value) {
+        this._dataShare.changeAyuda(ayuda);
+        $('#sensitiveInfoModal').modal('show');
+      }
+    });
+  }
+
   updateAyuda(ayuda) {
     this._dataShare.changeAyuda(ayuda);
     $('#ayudaUpdateModal').modal('show');

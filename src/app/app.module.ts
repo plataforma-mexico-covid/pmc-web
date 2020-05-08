@@ -29,6 +29,7 @@ import { ManagerComponent } from './estaticas/manager/manager.component';
 import { AdminAyudasComponent } from './componentes/admin-ayudas/admin-ayudas.component';
 import { map } from 'rxjs/operators';
 import { UpdateAyudaComponent } from './componentes/update-ayuda/update-ayuda.component';
+import { SensitiveInfoComponent } from './componentes/sensitive-info/sensitive-info.component';
 
 export function agmConfigFactory(http: HttpClient, config: LazyMapsAPILoaderConfigLiteral) {
   return () => http.get<{GOOGLE_MAPS_APIKEY: string}>('assets/config.json').pipe(
@@ -64,7 +65,8 @@ export function init_app(serviciosService: ServiciosService) {
     AyudaCiudadanoComponent,
     ManagerComponent,
     AdminAyudasComponent,
-    UpdateAyudaComponent
+    UpdateAyudaComponent,
+    SensitiveInfoComponent
   ],
   imports: [
     BrowserModule,

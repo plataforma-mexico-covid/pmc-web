@@ -56,6 +56,12 @@ export class ServiciosService {
     return this.http.post(`${this.rutas.endpoint}/api/v1/private/backoffice/ayuda/`, dataTablesParameters, { headers } );
   }
 
+  sensitiveInfoAyuda(idAyuda: number) {
+    const token = this.globales.getTokenAlreadyLoggedIn() ? this.globales.getTokenAlreadyLoggedIn() : '';
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'X-Auth-Token': token });
+    return this.http.get(`${this.rutas.endpoint}/api/v1/private/backoffice/ayuda/${idAyuda}/sensitive`, { headers });
+  }
+
   getTiposAyuda() {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.get(`${this.rutas.endpoint}/api/v1/public/tipoAyuda/`, { headers });

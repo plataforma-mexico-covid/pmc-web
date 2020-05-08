@@ -6,4 +6,6 @@ export { Ciudadano } from './ayuda';
 export { Ubicacion } from './ayuda';
 export { TipoAyuda } from './ayuda';
 export { Contacto } from './ayuda';
+export { InfoSensible } from './ayuda';
+export { Peticion } from './ayuda';
 export { DataTablesResponse } from './ayuda';
