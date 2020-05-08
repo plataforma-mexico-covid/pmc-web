@@ -35,6 +35,7 @@ export class SensitiveInfoComponent implements OnInit {
       this.infoSensible = data;
       this.isLoaded = true;
     }, error => {
+      this.isLoaded = false;
       Swal.fire('!Error¡', 'No se pudo realizar la operación', 'error');
       $('#sensitiveInfoModal').modal('hide');
     });
