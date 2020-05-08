@@ -29,7 +29,7 @@
           <div class="row" *ngIf="isLoaded">
             <div class="col-lg-12">
               <div class="accordion" id="accordionMatchs">
-                <div *ngFor="let match of infoSensible.matchs" class="card">
+                <div *ngFor="let match of infoSensible.matchs" class="card border-dark">
                   <div class="card-header" id="headingOne">
                     <h2 class="mb-0">
                       <button class="btn btn-link" type="button" data-toggle="collapse" [attr.data-target]="'#collapseMatch-' + match.id" aria-expanded="true" aria-controls="collapseOne">
@@ -38,10 +38,10 @@
                     </h2>
                   </div>
               
-                  <div id="{{ 'collapseMatch-' + match.id }}" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionMatchs">
+                  <div id="{{ 'collapseMatch-' + match.id }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionMatchs">
                     <div class="card-body">
                       {{ match.tipoMatch + ' - ' + match.fechaPeticion }}
-                      <hr>
+                      <hr *ngIf="match.tipoMatch !== 'MANUAL'">
                       {{ match.tipoMatch !== 'MANUAL' ? match.ayudaMatch.descripcion : '' }}
                     </div>
                   </div>
@@ -50,8 +50,10 @@
             </div>
           </div>
           <div class="row" *ngIf="!isLoaded">
-            <div class="alert alert-secondary" role="alert">
-              No hay informacion
+            <div class="col-lg-12">
+              <div class="alert alert-secondary" role="alert">
+                Cargando...
+              </div>
             </div>
           </div>
         </div>

@@ -31,6 +31,7 @@ export class SensitiveInfoComponent implements OnInit {
 
   showSensitiveInfo() {
     if (this.ayuda.id === undefined) return; 
+    this.isLoaded = false;
     this._servicio.sensitiveInfoAyuda(this.ayuda.id).subscribe((data: any) => {
       this.infoSensible = data;
       this.isLoaded = true;
