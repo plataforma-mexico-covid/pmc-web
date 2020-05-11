@@ -77,13 +77,13 @@ export class AdminAyudasComponent implements OnDestroy, OnInit {
 
   showSensitiveInfo(ayuda?) {
     Swal.fire({
-      title: 'Vamos a mostrarte informacion sensible, se responsable por favor',
-      text: '',
+      title: 'Información sensible',
+      text: 'Vamos a mostrarte información confidencial de usuarios dentro de la Plataforma México vs COVID 19. Al continuar, aceptas que esta información NO será compartida a terceros y que será de uso exclusivo para temas internos de la Plataforma México vs COVID 19.',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Continuar',
+      confirmButtonText: 'Continuar', 
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
