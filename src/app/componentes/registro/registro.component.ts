@@ -1,10 +1,11 @@
-import { Component, Output, EventEmitter, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ServiciosService } from '../servicios.service';
 import { ContactInfos, Usuario } from 'src/app/entidades';
 import Swal from 'sweetalert2';
 import { GlobalsComponent } from '../global/global.component';
 import { ConstantsService } from '../global/constants.service';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
+import { ValidarUsername, ValidarContrasena } from '../../utils/util';
 
 declare var $: any;
 @Component({
@@ -17,9 +18,9 @@ export class RegistroComponent {
   public usuario = new Usuario();
 
   public formulario_crear_usuario = new FormGroup({
-    username_n: new FormControl('', [Validators.required, Validators.email]),
-    password2: new FormControl('', [Validators.required, this.validarContrasena]),
-    password_confirm: new FormControl('', [Validators.required, this.validarContrasena]),
+    username_n: new FormControl('', [Validators.required, ValidarUsername]),
+    password2: new FormControl('', [Validators.required, ValidarContrasena]),
+    password_confirm: new FormControl('', [Validators.required, ValidarContrasena]),
     nombre: new FormControl('', Validators.required),
     paterno: new FormControl('', Validators.required),
     materno: new FormControl('', Validators.required),
@@ -87,16 +88,5 @@ export class RegistroComponent {
         console.log(error);
       }
     );
-  }
-
-  private validarContrasena(control: AbstractControl) {
-    const contrasena = control.value;
-    let error = null;
-    const regex = new RegExp(/^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[-*_#@().!%&])[a-zA-Z0-9!@#\$%^&*](?=\S+$).{8,15}$/);
-    if (!regex.test(contrasena)) {
-      error = 'La contraseña debe tener al entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula, al menos una mayúscula y al menos un caracter no alfanumérico';
-    }
-    console.log(error);
-    return error;
   }
 }

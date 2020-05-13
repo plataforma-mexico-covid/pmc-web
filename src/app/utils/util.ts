@@ -1,4 +1,6 @@
 import Swal from 'sweetalert2';
+import { Validators, AbstractControl } from '@angular/forms';
+
 export class NotificationMessage {
     code: string;
     message: string;
@@ -29,6 +31,30 @@ export const showNotification = (error: any): any => {
     });
 
     return notification;
+};
 
+export const ValidarUsername = (control: AbstractControl): any => {
+    const emailErrors = Validators.email(control)
+    if (!emailErrors){
+      return emailErrors;
+    }
+    const contrasena = control.value;
+    let error = null;
+    const regex = new RegExp(/^\d{10}$/);
+    if (!regex.test(contrasena)) {
+      error = 'El username debe ser email y/o numero de telefono';
+    }
+    console.log(error);
+    return error;
+  };
 
+export const ValidarContrasena = (control: AbstractControl): any => {
+    const contrasena = control.value;
+    let error = null;
+    const regex = new RegExp(/^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])[a-zA-Z0-9!@#\$%^&*](?=\S+$).{7,15}$/);
+    if (!regex.test(contrasena)) {
+        error = 'La contraseña debe tener al entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula, al menos una mayúscula y al menos un caracter no alfanumérico';
+    }
+    console.log(error);
+    return error;
 };

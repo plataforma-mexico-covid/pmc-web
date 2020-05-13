@@ -1,10 +1,11 @@
-import { Component, Output, EventEmitter, Input } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { ContactInfos, Usuario } from 'src/app/entidades';
 import Swal from 'sweetalert2';
 import { GlobalsComponent } from '../global/global.component';
 import { ConstantsService } from '../global/constants.service';
-import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ValidarUsername, ValidarContrasena } from '../../utils/util';
 import {Router} from '@angular/router';
 
 declare var $: any;
@@ -19,8 +20,8 @@ export class InicioComponent {
   @Output() actualizaAyuda = new EventEmitter();
 
   public fomulario_inicio_session = new FormGroup({
-    username: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', Validators.required)
+    username: new FormControl('', [Validators.required, ValidarUsername]),
+    password: new FormControl('', [Validators.required, ValidarContrasena])
   });
 
   constructor(private router: Router,
@@ -29,7 +30,6 @@ export class InicioComponent {
     private globales: GlobalsComponent) {
     this.usuario.contactInfos.push(new ContactInfos());
     this.usuario.contactInfos[0].tipoContacto = '';
-    this.usuario.email = '';
     this.usuario.username = '';
     this.usuario.password = '';
   }

@@ -9,9 +9,9 @@
           <form [formGroup]='formulario_crear_usuario'>
             <div class="card-body">
               <div class="form-group row">
-                <label class="col-lg-4 col-form-label form-control-label">Email</label>
+                <label class="col-lg-4 col-form-label form-control-label">Usuario</label>
                 <div class="col-lg-8">
-                  <input type="email" autocomplete="new-password" class="form-control" name="email-registro" aria-describedby="emailHelp"
+                  <input type="text" autocomplete="new-password" class="form-control" name="email-registro" aria-describedby="emailHelp"
                     [(ngModel)]="usuario.username_n" formControlName='username_n'>
                 </div>
               </div>
@@ -51,7 +51,6 @@
                           2. Al menos una letra minúscula. <br>
                           3. Al menos una letra mayúscula. <br>
                           4. Al menos un número. <br>
-                          5. Al menos un caracter de la lista [-*_#@().!%&]. <br>
                         </small>
                       </div>
                     </div>

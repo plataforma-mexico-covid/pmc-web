@@ -3,11 +3,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ConstantsService } from '../../componentes/global/constants.service';
 import { GlobalsComponent } from '../../componentes/global/global.component';
 import { ServiciosService } from '../../componentes/servicios.service';
-import { showNotification } from '../../utils/util';
+import { showNotification, ValidarUsername } from '../../utils/util';
 import { Usuario } from '../../entidades/usuario';
-import Swal from 'sweetalert2';
-
-
 
 // Referencia jQuery
 declare var $: any;
@@ -21,7 +18,7 @@ export class RecuperacionPasswordComponent implements OnInit {
   public recuperacionEnviada: boolean;
   public usuario = new Usuario();
   public form = new FormGroup({
-    username: new FormControl('', [Validators.required, Validators.email])
+    username: new FormControl('', [Validators.required, ValidarUsername])
   });
 
   constructor(

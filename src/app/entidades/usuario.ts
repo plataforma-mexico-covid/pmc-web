@@ -15,7 +15,6 @@ export class Usuario {
 
   constructor() {
     this.username = '';
-    this.email = '';
     this.password = '';
     this.password_confirm = '';
     this.nombre = '';
@@ -29,8 +28,6 @@ export class Usuario {
     this.paterno = '';
   }
 }
-
-
 
 export class ContactInfos {
   contacto: string;
