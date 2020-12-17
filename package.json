@@ -30,7 +30,7 @@
     "angular-datatables": "^9.0.1",
     "animate.css": "^3.7.2",
     "bootstrap": "^4.4.1",
-    "datatables.net": "^1.10.20",
+    "datatables.net": "^1.10.22",
     "datatables.net-dt": "^1.10.20",
     "express": "^4.17.1",
     "path": "^0.12.7",
